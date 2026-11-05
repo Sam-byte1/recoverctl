@@ -1,0 +1,822 @@
+/*
+ * Mounts a BitLocker Drive Encrypted (BDE) volume.
+ *
+ * Copyright (C) 2011-2026, Joachim Metz <joachim.metz@gmail.com>
+ *
+ * Refer to AUTHORS for acknowledgements.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
+#include <common.h>
+#include <file_stream.h>
+#include <memory.h>
+#include <system_string.h>
+#include <types.h>
+
+#include <stdio.h>
+
+#if defined( HAVE_FCNTL_H ) || defined( WINAPI )
+#include <fcntl.h>
+#endif
+
+#if defined( HAVE_IO_H ) || defined( WINAPI )
+#include <io.h>
+#endif
+
+#if defined( HAVE_STDLIB_H ) || defined( WINAPI )
+#include <stdlib.h>
+#endif
+
+#if defined( HAVE_UNISTD_H )
+#include <unistd.h>
+#endif
+
+#include "bdetools_getopt.h"
+#include "bdetools_i18n.h"
+#include "bdetools_libbde.h"
+#include "bdetools_libcerror.h"
+#include "bdetools_libclocale.h"
+#include "bdetools_libcnotify.h"
+#include "bdetools_output.h"
+#include "bdetools_signal.h"
+#include "bdetools_unused.h"
+#include "mount_dokan.h"
+#include "mount_fuse.h"
+#include "mount_handle.h"
+
+mount_handle_t *bdemount_mount_handle = NULL;
+int bdemount_abort                    = 0;
+
+/* Signal handler for bdemount
+ */
+void bdemount_signal_handler(
+      bdetools_signal_t signal BDETOOLS_ATTRIBUTE_UNUSED )
+{
+	libcerror_error_t *error = NULL;
+	static char *function    = "bdemount_signal_handler";
+
+	BDETOOLS_UNREFERENCED_PARAMETER( signal )
+
+	bdemount_abort = 1;
+
+	if( bdemount_mount_handle != NULL )
+	{
+		if( mount_handle_signal_abort(
+		     bdemount_mount_handle,
+		     &error ) != 1 )
+		{
+			libcnotify_printf(
+			 "%s: unable to signal mount handle to abort.\n",
+			 function );
+
+			libcnotify_print_error_backtrace(
+			 error );
+			libcerror_error_free(
+			 &error );
+		}
+	}
+	/* Force stdin to close otherwise any function reading it will remain blocked
+	 */
+#if defined( WINAPI ) && !defined( __CYGWIN__ )
+	if( _close(
+	     0 ) != 0 )
+#else
+	if( close(
+	     0 ) != 0 )
+#endif
+	{
+		libcnotify_printf(
+		 "%s: unable to close stdin.\n",
+		 function );
+	}
+}
+
+/* The main program
+ */
+#if defined( HAVE_WIDE_SYSTEM_CHARACTER )
+int wmain( int argc, wchar_t * const argv[] )
+#else
+int main( int argc, char * const argv[] )
+#endif
+{
+	const char *description = \
+		"Use bdemount to mount a BitLocker Drive Encrypted (BDE) volume.";
+
+	bdetools_option_t options[ ] = {
+		{ 'h', NULL, "shows this help" },
+		{ 'k', "keys", "specify the full volume encryption key and tweak key formatted in base16 and separated by a : character e.g. FVEK:TWEAK" },
+		{ 'o', "offset", "specify the volume offset in bytes" },
+		{ 'p', "password", "specify the password (or passphrase)" },
+		{ 'r', "recovery_password", "specify the recovery password (or passphrase)" },
+		{ 's', "startup_key_path", "specify the path of the file containing the startup key. Typically this file has the extension .BEK" },
+		{ 'u', NULL, "unattended mode (disables user interaction)" },
+		{ 'v', NULL, "verbose output to stderr, while bdemount will remain running in the foreground" },
+		{ 'V', NULL, "print version" },
+#if defined( HAVE_LIBFUSE ) || defined( HAVE_LIBFUSE3 ) || defined( HAVE_LIBOSXFUSE )
+		{ 'X', "extended_options", "extended options to pass to sub system" },
+#endif
+		{ 0, "volume", "a BitLocker Drive Encrypted (BDE) volume" },
+		{ 0, "mount_point", "the directory to serve as mount point" },
+	};
+	system_character_t options_string[ 32 ];
+
+	const system_character_t *path_prefix        = NULL;
+	libbde_error_t *error                        = NULL;
+	size_t path_prefix_size                      = 0;
+	system_character_t *option_keys              = NULL;
+	system_character_t *option_offset            = NULL;
+	system_character_t *option_password          = NULL;
+	system_character_t *option_recovery_password = NULL;
+	system_character_t *option_startup_key_path  = NULL;
+	system_character_t *source                   = NULL;
+	char *program                                = "bdemount";
+	system_integer_t option                      = 0;
+	int number_of_options                        = (int) ( sizeof( options ) / sizeof( bdetools_option_t ) );
+	int unattended_mode                          = 0;
+	int verbose                                  = 0;
+
+#if defined( HAVE_LIBFUSE ) || defined( HAVE_LIBFUSE3 ) || defined( HAVE_LIBOSXFUSE ) || defined( HAVE_LIBDOKAN )
+	system_character_t *mount_point              = NULL;
+	int result                                   = 0;
+#endif
+
+#if defined( HAVE_LIBFUSE ) || defined( HAVE_LIBFUSE3 ) || defined( HAVE_LIBOSXFUSE )
+	struct fuse_operations bdemount_fuse_operations;
+
+	system_character_t *option_extended_options  = NULL;
+
+#if defined( HAVE_LIBFUSE3 )
+	/* Need to set this to 1 even if there no arguments, otherwise this causes
+	 * fuse: empty argv passed to fuse_session_new()
+	 */
+	char *fuse_argv[ 2 ]                         = { program, NULL };
+	struct fuse_args bdemount_fuse_arguments     = FUSE_ARGS_INIT(1, fuse_argv);
+#else
+	struct fuse_args bdemount_fuse_arguments     = FUSE_ARGS_INIT(0, NULL);
+	struct fuse_chan *bdemount_fuse_channel      = NULL;
+#endif
+	struct fuse *bdemount_fuse_handle            = NULL;
+
+#elif defined( HAVE_LIBDOKAN )
+	DOKAN_OPERATIONS bdemount_dokan_operations;
+	DOKAN_OPTIONS bdemount_dokan_options;
+#endif
+
+#if defined( __MINGW32__ ) && defined( HAVE_MINGW_BINMODE )
+	_setmode( _fileno( stdout ), _O_BINARY );
+	_setmode( _fileno( stderr ), _O_BINARY );
+#endif
+
+	libcnotify_stream_set(
+	 stderr,
+	 NULL );
+	libcnotify_verbose_set(
+	 1 );
+
+	if( libclocale_initialize(
+	     "bdetools",
+	     &error ) != 1 )
+	{
+		fprintf(
+		 stderr,
+		 "Unable to initialize locale values.\n" );
+
+		goto on_error;
+	}
+	if( bdetools_output_initialize(
+	     _IONBF,
+	     &error ) != 1 )
+	{
+		fprintf(
+		 stderr,
+		 "Unable to initialize output settings.\n" );
+
+		goto on_error;
+	}
+	bdetools_output_version_fprint(
+	 stdout,
+	 program );
+
+	if( bdetools_getopt_get_options_string(
+	     options,
+	     number_of_options,
+	     options_string,
+	     32 ) != 1 )
+	{
+		fprintf(
+		 stderr,
+		 "Unable to determine options string.\n" );
+
+		goto on_error;
+	}
+	while( ( option = bdetools_getopt(
+	                   argc,
+	                   argv,
+	                   options_string ) ) != (system_integer_t) -1 )
+	{
+		switch( option )
+		{
+			case (system_integer_t) '?':
+			default:
+				fprintf(
+				 stderr,
+				 "Invalid argument: %" PRIs_SYSTEM "\n",
+				 argv[ optind - 1 ] );
+
+				bdetools_getopt_usage_fprint(
+				 stdout,
+				 program,
+				 description,
+				 options,
+				 number_of_options );
+
+				return( EXIT_FAILURE );
+
+			case (system_integer_t) 'h':
+				bdetools_getopt_usage_fprint(
+				 stdout,
+				 program,
+				 description,
+				 options,
+				 number_of_options );
+
+				return( EXIT_SUCCESS );
+
+			case (system_integer_t) 'k':
+				option_keys = optarg;
+
+				break;
+
+			case (system_integer_t) 'o':
+				option_offset = optarg;
+
+				break;
+
+			case (system_integer_t) 'p':
+				option_password = optarg;
+
+				break;
+
+			case (system_integer_t) 'r':
+				option_recovery_password = optarg;
+
+				break;
+
+			case (system_integer_t) 's':
+				option_startup_key_path = optarg;
+
+				break;
+
+			case (system_integer_t) 'u':
+				unattended_mode = 1;
+
+				break;
+
+			case (system_integer_t) 'v':
+				verbose = 1;
+
+				break;
+
+			case (system_integer_t) 'V':
+				bdetools_output_copyright_fprint(
+				 stdout );
+
+				return( EXIT_SUCCESS );
+
+#if defined( HAVE_LIBFUSE ) || defined( HAVE_LIBFUSE3 ) || defined( HAVE_LIBOSXFUSE )
+			case (system_integer_t) 'X':
+				option_extended_options = optarg;
+
+				break;
+#endif
+		}
+	}
+	if( optind == argc )
+	{
+		fprintf(
+		 stderr,
+		 "Missing source volume.\n" );
+
+		bdetools_getopt_usage_fprint(
+		 stdout,
+		 program,
+		 description,
+		 options,
+		 number_of_options );
+
+		return( EXIT_FAILURE );
+	}
+	source = argv[ optind++ ];
+
+	if( optind == argc )
+	{
+		fprintf(
+		 stderr,
+		 "Missing mount point.\n" );
+
+		bdetools_getopt_usage_fprint(
+		 stdout,
+		 program,
+		 description,
+		 options,
+		 number_of_options );
+
+		return( EXIT_FAILURE );
+	}
+#if defined( HAVE_LIBFUSE ) || defined( HAVE_LIBFUSE3 ) || defined( HAVE_LIBOSXFUSE ) || defined( HAVE_LIBDOKAN )
+	mount_point = argv[ optind ];
+#endif
+	libcnotify_verbose_set(
+	 verbose );
+	libbde_notify_set_stream(
+	 stderr,
+	 NULL );
+	libbde_notify_set_verbose(
+	 verbose );
+
+	if( mount_handle_initialize(
+	     &bdemount_mount_handle,
+	     unattended_mode,
+	     &error ) != 1 )
+	{
+		fprintf(
+		 stderr,
+		 "Unable to initialize mount handle.\n" );
+
+		goto on_error;
+	}
+	if( option_keys != NULL )
+	{
+		if( mount_handle_set_keys(
+		     bdemount_mount_handle,
+		     option_keys,
+		     &error ) != 1 )
+		{
+			fprintf(
+			 stderr,
+			 "Unable to set keys.\n" );
+
+			goto on_error;
+		}
+	}
+	if( option_offset != NULL )
+	{
+		if( mount_handle_set_offset(
+		     bdemount_mount_handle,
+		     option_offset,
+		     &error ) != 1 )
+		{
+			fprintf(
+			 stderr,
+			 "Unable to set volume offset.\n" );
+
+			goto on_error;
+		}
+	}
+	if( option_password != NULL )
+	{
+		if( mount_handle_set_password(
+		     bdemount_mount_handle,
+		     option_password,
+		     &error ) != 1 )
+		{
+			fprintf(
+			 stderr,
+			 "Unable to set password.\n" );
+
+			goto on_error;
+		}
+	}
+	if( option_recovery_password != NULL )
+	{
+		if( mount_handle_set_recovery_password(
+		     bdemount_mount_handle,
+		     option_recovery_password,
+		     &error ) != 1 )
+		{
+			fprintf(
+			 stderr,
+			 "Unable to set recovery password.\n" );
+
+			goto on_error;
+		}
+	}
+	if( option_startup_key_path != NULL )
+	{
+		if( mount_handle_set_startup_key(
+		     bdemount_mount_handle,
+		     option_startup_key_path,
+		     &error ) != 1 )
+		{
+			fprintf(
+			 stderr,
+			 "Unable to set startup key.\n" );
+
+			goto on_error;
+		}
+	}
+#if defined( WINAPI )
+	path_prefix = _SYSTEM_STRING( "\\BDE" );
+#else
+	path_prefix = _SYSTEM_STRING( "/bde" );
+#endif
+	path_prefix_size = 1 + system_string_length(
+	                        path_prefix );
+
+	if( mount_handle_set_path_prefix(
+	     bdemount_mount_handle,
+	     path_prefix,
+	     path_prefix_size,
+	     &error ) != 1 )
+	{
+		fprintf(
+		 stderr,
+		 "Unable to set path prefix.\n" );
+
+		goto on_error;
+	}
+	if( mount_handle_open(
+	     bdemount_mount_handle,
+	     source,
+	     &error ) != 1 )
+	{
+		fprintf(
+		 stderr,
+		 "Unable to open source volume\n" );
+
+		goto on_error;
+	}
+	if( mount_handle_is_locked(
+	     bdemount_mount_handle,
+	     &error ) != 0 )
+	{
+		fprintf(
+		 stderr,
+		 "Unable to unlock source volume\n" );
+
+		goto on_error;
+	}
+#if defined( HAVE_LIBFUSE ) || defined( HAVE_LIBFUSE3 ) || defined( HAVE_LIBOSXFUSE )
+	if( option_extended_options != NULL )
+	{
+#if defined( HAVE_LIBFUSE3 )
+		// fuse_opt_add_arg: Assertion `!args->argv || args->allocated' failed.
+		bdemount_fuse_arguments.argc = 0;
+		bdemount_fuse_arguments.argv = NULL;
+#endif
+		/* This argument is required but ignored
+		 */
+		if( fuse_opt_add_arg(
+		     &bdemount_fuse_arguments,
+		     "" ) != 0 )
+		{
+			fprintf(
+			 stderr,
+			 "Unable add fuse arguments.\n" );
+
+			goto on_error;
+		}
+		if( fuse_opt_add_arg(
+		     &bdemount_fuse_arguments,
+		     "-o" ) != 0 )
+		{
+			fprintf(
+			 stderr,
+			 "Unable add fuse arguments.\n" );
+
+			goto on_error;
+		}
+		if( fuse_opt_add_arg(
+		     &bdemount_fuse_arguments,
+		     option_extended_options ) != 0 )
+		{
+			fprintf(
+			 stderr,
+			 "Unable add fuse arguments.\n" );
+
+			goto on_error;
+		}
+	}
+	if( memory_set(
+	     &bdemount_fuse_operations,
+	     0,
+	     sizeof( struct fuse_operations ) ) == NULL )
+	{
+		fprintf(
+		 stderr,
+		 "Unable to clear fuse operations.\n" );
+
+		goto on_error;
+	}
+	bdemount_fuse_operations.open       = &mount_fuse_open;
+	bdemount_fuse_operations.read       = &mount_fuse_read;
+	bdemount_fuse_operations.release    = &mount_fuse_release;
+	bdemount_fuse_operations.opendir    = &mount_fuse_opendir;
+	bdemount_fuse_operations.readdir    = &mount_fuse_readdir;
+	bdemount_fuse_operations.releasedir = &mount_fuse_releasedir;
+	bdemount_fuse_operations.getattr    = &mount_fuse_getattr;
+	bdemount_fuse_operations.destroy    = &mount_fuse_destroy;
+
+#if defined( HAVE_LIBFUSE3 )
+	bdemount_fuse_handle = fuse_new(
+	                        &bdemount_fuse_arguments,
+	                        &bdemount_fuse_operations,
+	                        sizeof( struct fuse_operations ),
+	                        bdemount_mount_handle );
+
+	if( bdemount_fuse_handle == NULL )
+	{
+		fprintf(
+		 stderr,
+		 "Unable to create fuse handle.\n" );
+
+		goto on_error;
+	}
+	result = fuse_mount(
+	          bdemount_fuse_handle,
+	          mount_point );
+
+	if( result != 0 )
+	{
+		fprintf(
+		 stderr,
+		 "Unable to fuse mount file system.\n" );
+
+		goto on_error;
+	}
+#else
+	bdemount_fuse_channel = fuse_mount(
+	                         mount_point,
+	                         &bdemount_fuse_arguments );
+
+	if( bdemount_fuse_channel == NULL )
+	{
+		fprintf(
+		 stderr,
+		 "Unable to create fuse channel.\n" );
+
+		goto on_error;
+	}
+	bdemount_fuse_handle = fuse_new(
+	                        bdemount_fuse_channel,
+	                        &bdemount_fuse_arguments,
+	                        &bdemount_fuse_operations,
+	                        sizeof( struct fuse_operations ),
+	                        bdemount_mount_handle );
+
+	if( bdemount_fuse_handle == NULL )
+	{
+		fprintf(
+		 stderr,
+		 "Unable to create fuse handle.\n" );
+
+		goto on_error;
+	}
+#endif /* defined( HAVE_LIBFUSE3 ) */
+
+	if( verbose == 0 )
+	{
+		if( fuse_daemonize(
+		     0 ) != 0 )
+		{
+			fprintf(
+			 stderr,
+			 "Unable to daemonize fuse.\n" );
+
+			goto on_error;
+		}
+	}
+	result = fuse_loop(
+	          bdemount_fuse_handle );
+
+	if( result != 0 )
+	{
+		fprintf(
+		 stderr,
+		 "Unable to run fuse loop.\n" );
+
+		goto on_error;
+	}
+#if defined( HAVE_LIBFUSE3 )
+	fuse_unmount(
+	 bdemount_fuse_handle );
+#else
+	fuse_unmount(
+	 mount_point,
+	 bdemount_fuse_channel );
+#endif
+	fuse_destroy(
+	 bdemount_fuse_handle );
+
+	fuse_opt_free_args(
+	 &bdemount_fuse_arguments );
+
+	return( EXIT_SUCCESS );
+
+#elif defined( HAVE_LIBDOKAN )
+	if( memory_set(
+	     &bdemount_dokan_operations,
+	     0,
+	     sizeof( DOKAN_OPERATIONS ) ) == NULL )
+	{
+		fprintf(
+		 stderr,
+		 "Unable to clear dokan operations.\n" );
+
+		goto on_error;
+	}
+	if( memory_set(
+	     &bdemount_dokan_options,
+	     0,
+	     sizeof( DOKAN_OPTIONS ) ) == NULL )
+	{
+		fprintf(
+		 stderr,
+		 "Unable to clear dokan options.\n" );
+
+		goto on_error;
+	}
+	bdemount_dokan_options.Version    = DOKAN_VERSION;
+	bdemount_dokan_options.MountPoint = mount_point;
+
+#if DOKAN_MINIMUM_COMPATIBLE_VERSION >= 200
+	bdemount_dokan_options.SingleThread = TRUE;
+#else
+	bdemount_dokan_options.ThreadCount  = 0;
+#endif
+	if( verbose != 0 )
+	{
+		bdemount_dokan_options.Options |= DOKAN_OPTION_STDERR;
+#if defined( HAVE_DEBUG_OUTPUT )
+		bdemount_dokan_options.Options |= DOKAN_OPTION_DEBUG;
+#endif
+	}
+/* This will only affect the drive properties
+	bdemount_dokan_options.Options |= DOKAN_OPTION_REMOVABLE;
+*/
+
+#if ( DOKAN_VERSION >= 600 ) && ( DOKAN_VERSION < 800 )
+	bdemount_dokan_options.Options |= DOKAN_OPTION_KEEP_ALIVE;
+
+	bdemount_dokan_operations.CreateFile           = &mount_dokan_CreateFile;
+	bdemount_dokan_operations.OpenDirectory        = &mount_dokan_OpenDirectory;
+	bdemount_dokan_operations.CreateDirectory      = NULL;
+	bdemount_dokan_operations.Cleanup              = NULL;
+	bdemount_dokan_operations.CloseFile            = &mount_dokan_CloseFile;
+	bdemount_dokan_operations.ReadFile             = &mount_dokan_ReadFile;
+	bdemount_dokan_operations.WriteFile            = NULL;
+	bdemount_dokan_operations.FlushFileBuffers     = NULL;
+	bdemount_dokan_operations.GetFileInformation   = &mount_dokan_GetFileInformation;
+	bdemount_dokan_operations.FindFiles            = &mount_dokan_FindFiles;
+	bdemount_dokan_operations.FindFilesWithPattern = NULL;
+	bdemount_dokan_operations.SetFileAttributes    = NULL;
+	bdemount_dokan_operations.SetFileTime          = NULL;
+	bdemount_dokan_operations.DeleteFile           = NULL;
+	bdemount_dokan_operations.DeleteDirectory      = NULL;
+	bdemount_dokan_operations.MoveFile             = NULL;
+	bdemount_dokan_operations.SetEndOfFile         = NULL;
+	bdemount_dokan_operations.SetAllocationSize    = NULL;
+	bdemount_dokan_operations.LockFile             = NULL;
+	bdemount_dokan_operations.UnlockFile           = NULL;
+	bdemount_dokan_operations.GetFileSecurity      = NULL;
+	bdemount_dokan_operations.SetFileSecurity      = NULL;
+	bdemount_dokan_operations.GetDiskFreeSpace     = NULL;
+	bdemount_dokan_operations.GetVolumeInformation = &mount_dokan_GetVolumeInformation;
+	bdemount_dokan_operations.Unmount              = &mount_dokan_Unmount;
+
+#else
+	bdemount_dokan_operations.ZwCreateFile         = &mount_dokan_ZwCreateFile;
+	bdemount_dokan_operations.Cleanup              = NULL;
+	bdemount_dokan_operations.CloseFile            = &mount_dokan_CloseFile;
+	bdemount_dokan_operations.ReadFile             = &mount_dokan_ReadFile;
+	bdemount_dokan_operations.WriteFile            = NULL;
+	bdemount_dokan_operations.FlushFileBuffers     = NULL;
+	bdemount_dokan_operations.GetFileInformation   = &mount_dokan_GetFileInformation;
+	bdemount_dokan_operations.FindFiles            = &mount_dokan_FindFiles;
+	bdemount_dokan_operations.FindFilesWithPattern = NULL;
+	bdemount_dokan_operations.SetFileAttributes    = NULL;
+	bdemount_dokan_operations.SetFileTime          = NULL;
+	bdemount_dokan_operations.DeleteFile           = NULL;
+	bdemount_dokan_operations.DeleteDirectory      = NULL;
+	bdemount_dokan_operations.MoveFile             = NULL;
+	bdemount_dokan_operations.SetEndOfFile         = NULL;
+	bdemount_dokan_operations.SetAllocationSize    = NULL;
+	bdemount_dokan_operations.LockFile             = NULL;
+	bdemount_dokan_operations.UnlockFile           = NULL;
+	bdemount_dokan_operations.GetFileSecurity      = NULL;
+	bdemount_dokan_operations.SetFileSecurity      = NULL;
+	bdemount_dokan_operations.GetDiskFreeSpace     = NULL;
+	bdemount_dokan_operations.GetVolumeInformation = &mount_dokan_GetVolumeInformation;
+	bdemount_dokan_operations.Unmounted            = NULL;
+	bdemount_dokan_operations.FindStreams          = NULL;
+	bdemount_dokan_operations.Mounted              = NULL;
+
+#endif /* ( DOKAN_VERSION >= 600 ) && ( DOKAN_VERSION < 800 ) */
+
+#if DOKAN_MINIMUM_COMPATIBLE_VERSION >= 200
+	DokanInit();
+#endif
+	result = DokanMain(
+	          &bdemount_dokan_options,
+	          &bdemount_dokan_operations );
+
+#if DOKAN_MINIMUM_COMPATIBLE_VERSION >= 200
+	DokanShutdown();
+#endif
+	switch( result )
+	{
+		case DOKAN_SUCCESS:
+			break;
+
+		case DOKAN_ERROR:
+			fprintf(
+			 stderr,
+			 "Unable to run dokan main: generic error\n" );
+			break;
+
+		case DOKAN_DRIVE_LETTER_ERROR:
+			fprintf(
+			 stderr,
+			 "Unable to run dokan main: bad drive letter\n" );
+			break;
+
+		case DOKAN_DRIVER_INSTALL_ERROR:
+			fprintf(
+			 stderr,
+			 "Unable to run dokan main: unable to load driver\n" );
+			break;
+
+		case DOKAN_START_ERROR:
+			fprintf(
+			 stderr,
+			 "Unable to run dokan main: driver error\n" );
+			break;
+
+		case DOKAN_MOUNT_ERROR:
+			fprintf(
+			 stderr,
+			 "Unable to run dokan main: unable to assign drive letter\n" );
+			break;
+
+		case DOKAN_MOUNT_POINT_ERROR:
+			fprintf(
+			 stderr,
+			 "Unable to run dokan main: mount point error\n" );
+			break;
+
+		default:
+			fprintf(
+			 stderr,
+			 "Unable to run dokan main: unknown error: %d\n",
+			 result );
+			break;
+	}
+	return( EXIT_SUCCESS );
+
+#else
+	fprintf(
+	 stderr,
+	 "No sub system to mount BitLocker Drive Encryption (BDE) volume format.\n" );
+
+	return( EXIT_FAILURE );
+
+#endif /* defined( HAVE_LIBFUSE ) || defined( HAVE_LIBFUSE3 ) || defined( HAVE_LIBOSXFUSE ) */
+
+on_error:
+	if( error != NULL )
+	{
+		libcnotify_print_error_backtrace(
+		 error );
+		libcerror_error_free(
+		 &error );
+	}
+#if defined( HAVE_LIBFUSE ) || defined( HAVE_LIBFUSE3 ) || defined( HAVE_LIBOSXFUSE )
+	if( bdemount_fuse_handle != NULL )
+	{
+		fuse_destroy(
+		 bdemount_fuse_handle );
+	}
+	fuse_opt_free_args(
+	 &bdemount_fuse_arguments );
+#endif
+	if( bdemount_mount_handle != NULL )
+	{
+		mount_handle_free(
+		 &bdemount_mount_handle,
+		 NULL );
+	}
+	return( EXIT_FAILURE );
+}
+

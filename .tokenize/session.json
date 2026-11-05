@@ -1,0 +1,4721 @@
+{
+  "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+  "startedAt": "2026-11-04T13:19:01.363Z",
+  "updatedAt": "2026-11-05T10:36:26.586Z",
+  "events": [
+    {
+      "ts": "2026-11-04T13:19:01.363Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-04T13:19:16.805Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T13:45:25.937Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/ntfs-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-04T13:45:57.542Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/ntfs-basic-undelete/README.md"
+    },
+    {
+      "ts": "2026-11-04T13:46:30.440Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T13:52:41.457Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/undelete_detector.h"
+    },
+    {
+      "ts": "2026-11-04T13:52:52.820Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/undelete_detector.c"
+    },
+    {
+      "ts": "2026-11-04T13:53:02.510Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_framework.h"
+    },
+    {
+      "ts": "2026-11-04T13:53:23.009Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_undelete_detector.c"
+    },
+    {
+      "ts": "2026-11-04T13:53:30.413Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/build_and_run.sh"
+    },
+    {
+      "ts": "2026-11-04T13:53:48.111Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/undelete_scanner.h"
+    },
+    {
+      "ts": "2026-11-04T13:54:02.538Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-04T13:54:18.390Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-04T13:54:26.604Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/build_and_run.sh"
+    },
+    {
+      "ts": "2026-11-04T13:54:52.600Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T13:55:01.051Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/build.sh"
+    },
+    {
+      "ts": "2026-11-04T13:55:14.600Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/file_writer.h"
+    },
+    {
+      "ts": "2026-11-04T13:55:21.118Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/file_writer.c"
+    },
+    {
+      "ts": "2026-11-04T13:55:29.072Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T13:55:42.622Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T13:56:24.709Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-04T13:57:01.845Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T13:57:09.655Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-04T14:07:02.731Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-04T14:07:08.135Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-04T14:07:39.208Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T14:14:27.296Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/win-vm-work/get_msys2_url.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:15:04.957Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/install_msys2.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:15:33.984Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/msys2_help.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:15:45.582Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/run_msys2_install.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:15:55.464Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/run_msys2_install.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:17:04.355Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/pacman_update.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:18:10.893Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fix_mirror.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:18:33.793Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fix_mirror2.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:18:43.203Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/list_mirrors.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:18:56.028Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fix_mirror3.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:19:23.663Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/search_pkgs.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:19:45.643Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/install_toolchain.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:23:12.826Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/check_clang.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:23:50.501Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/copy_to_local.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:24:11.730Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/build_libfsntfs.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:25:18.568Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/configure_libfsntfs.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:25:30.806Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/configure_libfsntfs.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:30:21.603Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/make_libfsntfs.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:40:12.569Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/verify_build.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:40:34.377Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/build_recoverctl.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:40:54.614Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/run_scan_fixture.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:41:30.484Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T14:42:42.852Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/check_disks.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:45:25.531Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/format_disk.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:45:48.169Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/format_disk.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:46:23.759Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/check_admin.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:46:49.011Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/format_disk.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:46:58.853Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/run_elevated.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:47:08.148Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/copy_script_local.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:52:15.983Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/format_disk_elevated_trigger.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:52:45.219Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/check_format_log.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:53:23.775Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/prepare_test_files.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:53:38.908Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/scan_real_device.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:53:43.620Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/trigger_scan_elevated.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:53:49.837Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/copy_scan_script.ps1"
+    },
+    {
+      "ts": "2026-11-04T14:54:17.373Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/trigger_scan_elevated.ps1"
+    },
+    {
+      "ts": "2026-11-04T15:02:59.289Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/ntfs-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-04T15:03:05.511Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/ntfs-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-04T15:03:11.792Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/ntfs-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-04T15:03:48.697Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/undelete_detector.c"
+    },
+    {
+      "ts": "2026-11-04T15:03:59.841Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_undelete_detector.c"
+    },
+    {
+      "ts": "2026-11-04T15:04:05.247Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_undelete_detector.c"
+    },
+    {
+      "ts": "2026-11-04T15:04:54.624Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/verify_fix_fixture.ps1"
+    },
+    {
+      "ts": "2026-11-04T15:05:17.227Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/final_real_device_test.ps1"
+    },
+    {
+      "ts": "2026-11-04T15:05:30.685Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/final_real_device_test.ps1"
+    },
+    {
+      "ts": "2026-11-04T15:05:38.286Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/trigger_final_test.ps1"
+    },
+    {
+      "ts": "2026-11-04T15:12:40.669Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T15:13:02.990Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-04T15:19:00.623Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/disable_uac_prompt.ps1"
+    },
+    {
+      "ts": "2026-11-04T15:19:05.159Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/trigger_disable_uac.ps1"
+    },
+    {
+      "ts": "2026-11-04T15:19:34.294Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/verify_no_prompt.ps1"
+    },
+    {
+      "ts": "2026-11-04T15:19:38.814Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/trigger_verify.ps1"
+    },
+    {
+      "ts": "2026-11-04T15:22:59.772Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/disable_uac_fully.ps1"
+    },
+    {
+      "ts": "2026-11-04T15:23:05.282Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/trigger_disable_uac_fully.ps1"
+    },
+    {
+      "ts": "2026-11-04T15:26:32.824Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/disk_enumerator.h"
+    },
+    {
+      "ts": "2026-11-04T15:26:47.290Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/disk_enumerator.c"
+    },
+    {
+      "ts": "2026-11-04T15:27:05.367Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T15:27:11.300Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T15:27:28.041Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/build_recoverctl.ps1"
+    },
+    {
+      "ts": "2026-11-04T15:27:57.944Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/test_list.ps1"
+    },
+    {
+      "ts": "2026-11-04T15:28:12.078Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/regression_check.ps1"
+    },
+    {
+      "ts": "2026-11-04T15:28:38.493Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/investigate_entries.ps1"
+    },
+    {
+      "ts": "2026-11-04T15:29:06.289Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-04T15:29:19.035Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fresh_e2e_test.ps1"
+    },
+    {
+      "ts": "2026-11-04T15:29:38.050Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T15:30:10.456Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/disk_enumerator.h"
+    },
+    {
+      "ts": "2026-11-04T15:30:41.020Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/disk_enumerator.c"
+    },
+    {
+      "ts": "2026-11-04T15:30:46.256Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/disk_enumerator.c"
+    },
+    {
+      "ts": "2026-11-04T15:31:00.613Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T15:31:20.915Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T15:31:29.533Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T15:32:13.669Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/test_p1.ps1"
+    },
+    {
+      "ts": "2026-11-04T15:33:01.275Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/disk_enumerator.c"
+    },
+    {
+      "ts": "2026-11-04T15:34:09.293Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T15:45:00.645Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-04T15:45:12.316Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-04T15:45:25.820Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-04T15:46:12.411Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/fat_boot_sector.h"
+    },
+    {
+      "ts": "2026-11-04T15:46:30.951Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/fat_boot_sector.c"
+    },
+    {
+      "ts": "2026-11-04T15:46:52.445Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_fat_boot_sector.c"
+    },
+    {
+      "ts": "2026-11-04T15:46:59.887Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/build_and_run.sh"
+    },
+    {
+      "ts": "2026-11-04T15:47:41.726Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/fat_dir_entry.h"
+    },
+    {
+      "ts": "2026-11-04T15:48:01.038Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/fat_dir_entry.c"
+    },
+    {
+      "ts": "2026-11-04T15:48:09.821Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/fat_dir_entry.c"
+    },
+    {
+      "ts": "2026-11-04T15:48:31.004Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_fat_dir_entry.c"
+    },
+    {
+      "ts": "2026-11-04T15:48:41.492Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/build_and_run.sh"
+    },
+    {
+      "ts": "2026-11-04T15:49:07.438Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/fat_undelete_scanner.h"
+    },
+    {
+      "ts": "2026-11-04T15:49:22.374Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/fat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-04T15:49:40.929Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_fat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-04T15:49:50.463Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/build_and_run.sh"
+    },
+    {
+      "ts": "2026-11-04T15:50:22.791Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.h"
+    },
+    {
+      "ts": "2026-11-04T15:50:38.791Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-04T15:51:01.692Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T15:51:27.329Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T15:51:37.036Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T15:52:05.961Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T15:52:29.239Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T15:52:43.726Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/build.sh"
+    },
+    {
+      "ts": "2026-11-04T15:53:15.176Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/fat32_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-04T15:54:22.135Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T15:54:41.879Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-04T16:01:37.304Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/vendor/gpt_probe/main.c"
+    },
+    {
+      "ts": "2026-11-04T16:03:09.936Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/partition_reader.h"
+    },
+    {
+      "ts": "2026-11-04T16:03:26.003Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/partition_reader.c"
+    },
+    {
+      "ts": "2026-11-04T16:04:26.985Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T16:04:38.933Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T16:04:47.122Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T16:05:04.655Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/build.sh"
+    },
+    {
+      "ts": "2026-11-04T16:05:31.081Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/gpt_partition_test.sh"
+    },
+    {
+      "ts": "2026-11-04T16:06:11.201Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T16:07:41.824Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T16:07:49.655Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/build.sh"
+    },
+    {
+      "ts": "2026-11-04T16:07:58.114Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/build.sh"
+    },
+    {
+      "ts": "2026-11-04T16:08:20.390Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/mbr_partition_test.sh"
+    },
+    {
+      "ts": "2026-11-04T16:08:51.859Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T16:09:05.283Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-04T16:09:57.336Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.h"
+    },
+    {
+      "ts": "2026-11-04T16:10:07.880Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-04T16:10:13.873Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-04T16:10:19.062Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-04T16:10:41.689Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T16:10:48.495Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T16:11:08.368Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T16:12:01.349Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T16:42:23.270Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T16:43:04.847Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T16:43:40.178Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T16:44:12.479Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T16:44:22.668Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-04T17:11:51.786Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/copy_vsgpt_vsmbr.ps1"
+    },
+    {
+      "ts": "2026-11-04T17:12:06.995Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/build_vsgpt_vsmbr.ps1"
+    },
+    {
+      "ts": "2026-11-04T17:33:25.916Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/build_recoverctl.ps1"
+    },
+    {
+      "ts": "2026-11-04T17:36:12.260Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T17:38:03.319Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T17:38:12.358Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T17:40:41.555Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/scan_gpt_partition.ps1"
+    },
+    {
+      "ts": "2026-11-04T17:41:46.822Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T17:42:08.120Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/scan_gpt_partition.bat"
+    },
+    {
+      "ts": "2026-11-04T17:43:11.871Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T17:44:27.501Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T17:44:35.505Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T17:44:53.419Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T17:45:38.311Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/verify_recover_gpt.ps1"
+    },
+    {
+      "ts": "2026-11-04T17:46:37.838Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T18:13:54.428Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T18:14:57.704Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.h"
+    },
+    {
+      "ts": "2026-11-04T18:15:19.613Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-04T18:17:28.833Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/setup_fat32_disk.txt"
+    },
+    {
+      "ts": "2026-11-04T18:17:36.140Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/list_disks.txt"
+    },
+    {
+      "ts": "2026-11-04T18:17:58.269Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fat32_test_setup.ps1"
+    },
+    {
+      "ts": "2026-11-04T18:18:11.994Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/scan_fat32_real.bat"
+    },
+    {
+      "ts": "2026-11-04T18:18:31.850Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/recover_fat32_real.ps1"
+    },
+    {
+      "ts": "2026-11-04T18:19:05.275Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/recover_fat32_real.bat"
+    },
+    {
+      "ts": "2026-11-04T18:19:50.864Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-04T18:21:27.264Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-04T18:22:08.087Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/verify_fat32_hash.bat"
+    },
+    {
+      "ts": "2026-11-04T18:22:38.975Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/check_fat32_files.bat"
+    },
+    {
+      "ts": "2026-11-04T18:24:32.231Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-04T18:25:55.025Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/check_svi.bat"
+    },
+    {
+      "ts": "2026-11-04T18:26:28.442Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fat32_full_cycle.bat"
+    },
+    {
+      "ts": "2026-11-04T18:26:46.400Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fat32_recover_retry.bat"
+    },
+    {
+      "ts": "2026-11-04T18:27:04.505Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/check_retry_content.bat"
+    },
+    {
+      "ts": "2026-11-04T18:28:35.996Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-04T18:28:42.434Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-04T18:29:47.824Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/flush_and_recover.ps1"
+    },
+    {
+      "ts": "2026-11-04T18:30:44.511Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/raw_dump.ps1"
+    },
+    {
+      "ts": "2026-11-04T18:31:06.033Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/raw_dump_rootdir.ps1"
+    },
+    {
+      "ts": "2026-11-04T18:31:44.712Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/raw_dump_bootsector.ps1"
+    },
+    {
+      "ts": "2026-11-04T18:33:01.144Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fat32_clean_test.ps1"
+    },
+    {
+      "ts": "2026-11-04T18:33:21.257Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fat32_clean_test.ps1"
+    },
+    {
+      "ts": "2026-11-04T18:33:38.799Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fat32_clean_scan_recover.bat"
+    },
+    {
+      "ts": "2026-11-04T18:34:00.045Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fat32_clean_recover.bat"
+    },
+    {
+      "ts": "2026-11-04T18:34:07.368Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fat32_clean_recover.bat"
+    },
+    {
+      "ts": "2026-11-04T18:35:48.167Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T18:35:59.514Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T18:36:08.789Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T18:36:27.527Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T18:36:33.838Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T18:36:39.053Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T18:36:46.453Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T18:36:52.107Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T18:37:10.303Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-04T18:37:16.057Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-04T18:37:22.598Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-04T18:37:50.056Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/fat32_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-04T18:38:34.701Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fat32_final_test.ps1"
+    },
+    {
+      "ts": "2026-11-04T18:38:57.765Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fat32_final_scan_recover.bat"
+    },
+    {
+      "ts": "2026-11-04T18:39:17.904Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fat32_final_recover.bat"
+    },
+    {
+      "ts": "2026-11-04T18:40:43.183Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T18:41:12.664Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-04T18:41:22.801Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-04T19:07:54.346Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T19:12:15.045Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-04T19:12:30.276Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-04T19:14:21.933Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/exfat_dir_entry.h"
+    },
+    {
+      "ts": "2026-11-04T19:15:05.310Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/exfat_dir_entry.c"
+    },
+    {
+      "ts": "2026-11-04T19:15:39.436Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_dir_entry.c"
+    },
+    {
+      "ts": "2026-11-04T19:16:04.198Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/exfat_undelete_scanner.h"
+    },
+    {
+      "ts": "2026-11-04T19:16:19.575Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/exfat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-04T19:16:42.338Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-04T19:17:05.891Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.h"
+    },
+    {
+      "ts": "2026-11-04T19:17:32.968Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.c"
+    },
+    {
+      "ts": "2026-11-04T19:18:00.142Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T19:18:17.815Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T19:18:36.082Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T19:18:45.840Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/build.sh"
+    },
+    {
+      "ts": "2026-11-04T19:18:53.695Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/build_and_run.sh"
+    },
+    {
+      "ts": "2026-11-04T19:19:39.042Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/exfat_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-04T19:20:27.174Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T19:20:40.325Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-04T19:47:18.811Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/setup_exfat_disk.txt"
+    },
+    {
+      "ts": "2026-11-04T19:48:18.708Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/build_recoverctl.ps1"
+    },
+    {
+      "ts": "2026-11-04T19:49:00.706Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/exfat_clean_test.ps1"
+    },
+    {
+      "ts": "2026-11-04T19:49:24.033Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/exfat_scan.bat"
+    },
+    {
+      "ts": "2026-11-04T19:49:45.524Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/exfat_recover.bat"
+    },
+    {
+      "ts": "2026-11-04T19:51:00.897Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T19:51:14.992Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-04T19:52:05.856Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T19:52:46.960Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T19:53:01.525Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T19:53:14.934Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T19:53:43.200Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T19:53:58.854Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T19:54:53.419Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T19:55:13.606Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-04T19:56:46.143Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T19:57:52.615Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/AGENTS.md"
+    },
+    {
+      "ts": "2026-11-04T19:58:07.242Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/AGENTS.md"
+    },
+    {
+      "ts": "2026-11-04T19:58:39.901Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/third_party/MANIFEST.md"
+    },
+    {
+      "ts": "2026-11-04T19:58:48.190Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/third_party/MANIFEST.md"
+    },
+    {
+      "ts": "2026-11-04T19:59:17.428Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-04T19:59:26.592Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-04T19:59:45.457Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-04T20:00:14.484Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-04T20:01:18.040Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T20:28:05.702Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T20:30:39.259Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/ntfs_file_reference.h"
+    },
+    {
+      "ts": "2026-11-04T20:30:44.863Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/ntfs_file_reference.c"
+    },
+    {
+      "ts": "2026-11-04T20:30:53.847Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_ntfs_file_reference.c"
+    },
+    {
+      "ts": "2026-11-04T20:31:15.991Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/path_builder.h"
+    },
+    {
+      "ts": "2026-11-04T20:31:25.450Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/path_builder.c"
+    },
+    {
+      "ts": "2026-11-04T20:31:37.807Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_path_builder.c"
+    },
+    {
+      "ts": "2026-11-04T20:31:54.304Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/undelete_detector.h"
+    },
+    {
+      "ts": "2026-11-04T20:32:00.503Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/undelete_detector.c"
+    },
+    {
+      "ts": "2026-11-04T20:32:10.790Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/undelete_detector.c"
+    },
+    {
+      "ts": "2026-11-04T20:32:40.749Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_undelete_detector.c"
+    },
+    {
+      "ts": "2026-11-04T20:32:48.138Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_undelete_detector.c"
+    },
+    {
+      "ts": "2026-11-04T20:32:55.975Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/build_and_run.sh"
+    },
+    {
+      "ts": "2026-11-04T20:33:09.648Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/build_and_run.sh"
+    },
+    {
+      "ts": "2026-11-04T20:33:39.662Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/path_resolver.h"
+    },
+    {
+      "ts": "2026-11-04T20:34:01.013Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/path_resolver.c"
+    },
+    {
+      "ts": "2026-11-04T20:34:24.843Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T20:34:35.628Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-04T20:34:49.279Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/build.sh"
+    },
+    {
+      "ts": "2026-11-04T20:34:55.638Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/build.sh"
+    },
+    {
+      "ts": "2026-11-04T20:35:27.759Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-04T20:36:05.343Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/build_recoverctl.ps1"
+    },
+    {
+      "ts": "2026-11-04T20:36:10.968Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/build_recoverctl.ps1"
+    },
+    {
+      "ts": "2026-11-04T20:37:19.042Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T20:37:25.281Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-04T20:37:41.123Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T03:52:49.196Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T03:54:31.901Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/sector_aligned_read.h"
+    },
+    {
+      "ts": "2026-11-05T03:54:36.590Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/sector_aligned_read.c"
+    },
+    {
+      "ts": "2026-11-05T03:55:00.089Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_sector_aligned_read.c"
+    },
+    {
+      "ts": "2026-11-05T03:55:20.762Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/aligned_device_reader.h"
+    },
+    {
+      "ts": "2026-11-05T03:55:27.083Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/aligned_device_reader.c"
+    },
+    {
+      "ts": "2026-11-05T03:56:05.971Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_aligned_device_reader.c"
+    },
+    {
+      "ts": "2026-11-05T03:56:20.822Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T03:56:36.724Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T03:56:40.403Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T03:56:53.753Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T03:57:31.417Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T03:57:53.897Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T03:58:06.187Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/build.sh"
+    },
+    {
+      "ts": "2026-11-05T03:58:09.975Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/build.sh"
+    },
+    {
+      "ts": "2026-11-05T03:58:21.144Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/build_and_run.sh"
+    },
+    {
+      "ts": "2026-11-05T03:58:53.918Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/build_recoverctl.ps1"
+    },
+    {
+      "ts": "2026-11-05T03:58:57.143Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/build_recoverctl.ps1"
+    },
+    {
+      "ts": "2026-11-05T04:00:35.414Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T04:00:50.040Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T04:01:10.617Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T04:54:44.910Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/工程思想笔记.md"
+    },
+    {
+      "ts": "2026-11-05T04:54:54.016Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/AGENTS.md"
+    },
+    {
+      "ts": "2026-11-05T04:54:59.123Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/AGENTS.md"
+    },
+    {
+      "ts": "2026-11-05T04:55:10.587Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/.claude/agents/小树.md"
+    },
+    {
+      "ts": "2026-11-05T04:55:23.359Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/.claude/agents/小树.md"
+    },
+    {
+      "ts": "2026-11-05T04:55:29.918Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T04:56:36.014Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T04:56:41.015Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T04:56:42.897Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T04:59:12.076Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T04:59:20.529Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T04:59:26.724Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T04:59:37.840Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T04:59:43.148Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T04:59:54.520Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T04:59:59.734Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:00:06.861Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:00:58.070Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/fat_undelete_scanner.h"
+    },
+    {
+      "ts": "2026-11-05T05:01:19.501Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/fat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-05T05:02:01.500Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_fat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-05T05:02:40.313Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T05:02:53.945Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.h"
+    },
+    {
+      "ts": "2026-11-05T05:03:55.705Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:04:02.574Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:04:12.111Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:04:22.486Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:04:28.764Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:04:40.335Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:04:51.411Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:07:15.996Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T05:07:28.030Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T05:07:39.381Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T05:07:56.214Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T05:08:10.373Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T05:08:31.454Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_fat_dir_entry.c"
+    },
+    {
+      "ts": "2026-11-05T05:08:40.092Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_fat_dir_entry.c"
+    },
+    {
+      "ts": "2026-11-05T05:08:44.575Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_fat_dir_entry.c"
+    },
+    {
+      "ts": "2026-11-05T05:09:00.286Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_boot_sector.c"
+    },
+    {
+      "ts": "2026-11-05T05:09:05.430Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_boot_sector.c"
+    },
+    {
+      "ts": "2026-11-05T05:09:20.844Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_dir_entry.c"
+    },
+    {
+      "ts": "2026-11-05T05:09:25.293Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_dir_entry.c"
+    },
+    {
+      "ts": "2026-11-05T05:10:02.789Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/fat32_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-05T05:10:15.702Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/fat32_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-05T05:10:28.603Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/exfat_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-05T05:10:40.662Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/exfat_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-05T05:11:38.945Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/exfat_subdir_test.ps1"
+    },
+    {
+      "ts": "2026-11-05T05:11:58.957Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/exfat_subdir_scan.bat"
+    },
+    {
+      "ts": "2026-11-05T05:12:12.719Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/exfat_subdir_recover.bat"
+    },
+    {
+      "ts": "2026-11-05T05:12:39.438Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fat32_subdir_test.ps1"
+    },
+    {
+      "ts": "2026-11-05T05:12:56.726Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fat32_subdir_scan.bat"
+    },
+    {
+      "ts": "2026-11-05T05:13:11.537Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fat32_subdir_recover.bat"
+    },
+    {
+      "ts": "2026-11-05T05:14:25.256Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T05:14:47.242Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T05:14:56.063Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T05:15:18.967Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/工程思想笔记.md"
+    },
+    {
+      "ts": "2026-11-05T05:17:11.539Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T05:17:59.575Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/utf16_to_utf8.h"
+    },
+    {
+      "ts": "2026-11-05T05:18:17.176Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/utf16_to_utf8.c"
+    },
+    {
+      "ts": "2026-11-05T05:18:37.225Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_utf16_to_utf8.c"
+    },
+    {
+      "ts": "2026-11-05T05:18:58.684Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/exfat_dir_entry.h"
+    },
+    {
+      "ts": "2026-11-05T05:19:03.077Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/exfat_dir_entry.h"
+    },
+    {
+      "ts": "2026-11-05T05:19:10.963Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/exfat_dir_entry.c"
+    },
+    {
+      "ts": "2026-11-05T05:19:23.450Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/exfat_dir_entry.c"
+    },
+    {
+      "ts": "2026-11-05T05:19:30.729Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/exfat_dir_entry.c"
+    },
+    {
+      "ts": "2026-11-05T05:20:01.540Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:20:10.634Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:20:15.807Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:20:24.061Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:20:32.243Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:20:36.388Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:20:44.670Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:20:51.440Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:21:11.054Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:21:24.372Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/build.sh"
+    },
+    {
+      "ts": "2026-11-05T05:23:46.721Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/fat_dir_entry.h"
+    },
+    {
+      "ts": "2026-11-05T05:23:53.505Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/fat_dir_entry.h"
+    },
+    {
+      "ts": "2026-11-05T05:24:02.910Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/fat_dir_entry.c"
+    },
+    {
+      "ts": "2026-11-05T05:24:18.017Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_fat_dir_entry.c"
+    },
+    {
+      "ts": "2026-11-05T05:24:22.854Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_fat_dir_entry.c"
+    },
+    {
+      "ts": "2026-11-05T05:24:46.405Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/fat_undelete_scanner.h"
+    },
+    {
+      "ts": "2026-11-05T05:24:52.455Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/fat_undelete_scanner.h"
+    },
+    {
+      "ts": "2026-11-05T05:25:00.948Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/fat_undelete_scanner.h"
+    },
+    {
+      "ts": "2026-11-05T05:25:05.766Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/fat_undelete_scanner.h"
+    },
+    {
+      "ts": "2026-11-05T05:26:07.559Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/fat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-05T05:27:03.319Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:27:10.066Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:27:31.198Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:27:38.149Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:27:51.534Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:28:08.761Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:28:17.952Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:28:24.087Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:28:37.971Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:29:22.339Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/build_and_run.sh"
+    },
+    {
+      "ts": "2026-11-05T05:29:27.487Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/build_and_run.sh"
+    },
+    {
+      "ts": "2026-11-05T05:29:32.119Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/build_and_run.sh"
+    },
+    {
+      "ts": "2026-11-05T05:29:57.672Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_fat_dir_entry.c"
+    },
+    {
+      "ts": "2026-11-05T05:30:02.513Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_fat_dir_entry.c"
+    },
+    {
+      "ts": "2026-11-05T05:30:09.453Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_fat_dir_entry.c"
+    },
+    {
+      "ts": "2026-11-05T05:30:32.429Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_fat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-05T05:30:41.708Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_fat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-05T05:30:56.351Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_boot_sector.c"
+    },
+    {
+      "ts": "2026-11-05T05:31:00.575Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_boot_sector.c"
+    },
+    {
+      "ts": "2026-11-05T05:31:17.316Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_dir_entry.c"
+    },
+    {
+      "ts": "2026-11-05T05:31:21.425Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_dir_entry.c"
+    },
+    {
+      "ts": "2026-11-05T05:31:46.500Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-05T05:31:54.839Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-05T05:32:22.585Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/fat32_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-05T05:32:40.448Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/fat32_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-05T05:32:58.226Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/exfat_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-05T05:33:13.928Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/exfat_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-05T05:33:40.386Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/build_recoverctl.ps1"
+    },
+    {
+      "ts": "2026-11-05T05:34:12.061Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fat32_longname_test.ps1"
+    },
+    {
+      "ts": "2026-11-05T05:34:41.187Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fat32_longname_test.ps1"
+    },
+    {
+      "ts": "2026-11-05T05:35:00.816Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fat32_longname_scan.bat"
+    },
+    {
+      "ts": "2026-11-05T05:36:20.042Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fat32_dump_root_dir.ps1"
+    },
+    {
+      "ts": "2026-11-05T05:37:05.215Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fat32_longname_test.ps1"
+    },
+    {
+      "ts": "2026-11-05T05:37:50.522Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fat32_longname_recover.bat"
+    },
+    {
+      "ts": "2026-11-05T05:38:22.751Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/exfat_chinese_test.ps1"
+    },
+    {
+      "ts": "2026-11-05T05:38:43.433Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/exfat_chinese_scan.bat"
+    },
+    {
+      "ts": "2026-11-05T05:38:58.961Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/exfat_chinese_recover.bat"
+    },
+    {
+      "ts": "2026-11-05T05:40:05.870Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T05:40:23.791Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T05:40:46.734Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/工程思想笔记.md"
+    },
+    {
+      "ts": "2026-11-05T05:42:08.406Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T05:43:02.337Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/path_builder.h"
+    },
+    {
+      "ts": "2026-11-05T05:43:10.409Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/path_builder.h"
+    },
+    {
+      "ts": "2026-11-05T05:43:23.696Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/path_builder.c"
+    },
+    {
+      "ts": "2026-11-05T05:43:42.795Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_path_builder.c"
+    },
+    {
+      "ts": "2026-11-05T05:43:59.866Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T05:44:21.778Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T05:44:46.651Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T05:45:02.696Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T05:45:30.194Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T05:46:18.404Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:46:25.374Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:46:35.300Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:46:41.156Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:46:52.583Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:47:08.759Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:47:22.103Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:47:29.989Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:47:42.931Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:47:49.099Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:48:02.574Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:48:34.916Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:53:40.594Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_fat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-05T05:53:51.004Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_fat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-05T05:53:54.155Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_fat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-05T05:54:02.387Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_fat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-05T05:54:42.493Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/fat32_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-05T05:54:49.595Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/fat32_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-05T05:54:56.612Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/fat32_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-05T05:55:25.755Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:55:30.741Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:55:34.691Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:55:47.559Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:55:52.470Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:55:57.588Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:56:12.949Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T05:56:34.462Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-05T05:56:45.042Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-05T05:56:48.258Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-05T05:56:56.264Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-05T05:57:21.928Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/exfat_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-05T05:57:28.627Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/exfat_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-05T05:57:35.448Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/exfat_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-05T05:59:46.855Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/exfat_subsubdir_test.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:00:03.855Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/exfat_subsubdir_scan.bat"
+    },
+    {
+      "ts": "2026-11-05T06:00:18.652Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/exfat_subsubdir_recover.bat"
+    },
+    {
+      "ts": "2026-11-05T06:00:35.837Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/format_fat32_for_subsubdir.txt"
+    },
+    {
+      "ts": "2026-11-05T06:00:50.596Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fat32_subsubdir_test.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:00:53.091Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fat32_subsubdir_scan.bat"
+    },
+    {
+      "ts": "2026-11-05T06:00:56.571Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/fat32_subsubdir_recover.bat"
+    },
+    {
+      "ts": "2026-11-05T06:02:08.601Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T06:02:34.036Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T06:02:42.659Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T06:02:49.059Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T06:03:23.888Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/AGENTS.md"
+    },
+    {
+      "ts": "2026-11-05T06:08:25.034Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T06:08:51.371Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/工程思想笔记.md"
+    },
+    {
+      "ts": "2026-11-05T06:10:20.321Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_boot_dump.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:10:33.530Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_boot_dump.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:11:03.056Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_boot_dump.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:11:56.910Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_setup.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:12:26.289Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_setup.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:13:27.109Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_setup.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:14:02.804Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_rootdir_dump.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:14:37.207Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_fat_dump.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:15:13.005Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_fat_dump.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:17:24.913Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_full_experiment.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:18:15.539Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_full_experiment.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:18:45.473Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_full_experiment.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:18:53.074Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_full_experiment.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:18:57.787Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_full_experiment.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:19:02.531Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_full_experiment.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:19:52.623Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_full_experiment.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:20:28.106Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_full_experiment.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:21:25.708Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_full_experiment.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:22:37.900Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_full_experiment.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:22:46.440Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_full_experiment.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:22:49.525Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_full_experiment.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:23:48.401Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_full_experiment.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:24:19.281Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_phase1.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:24:26.076Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_phase3.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:25:22.792Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_rootdir_dump.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:25:49.877Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_phase1.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:26:39.046Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_phase1.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:27:39.787Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_fat_dump.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:28:25.704Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/frag_fat_dump.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:29:38.515Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/exfat_frag_boot_dump.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:29:41.599Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/format_exfat_fresh.txt"
+    },
+    {
+      "ts": "2026-11-05T06:30:04.008Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/exfat_frag_setup.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:30:41.294Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/exfat_frag_phase3.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:31:01.898Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/exfat_frag_rootdir_dump.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:31:16.565Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/exfat_frag_rootdir_dump.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:31:52.219Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/exfat_frag_fat_dump.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:32:10.214Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/exfat_frag_fat_dump.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:33:57.556Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T06:34:09.414Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T06:34:14.302Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T06:34:46.095Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/工程思想笔记.md"
+    },
+    {
+      "ts": "2026-11-05T06:38:15.452Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T06:38:20.252Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T06:38:27.549Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/AGENTS.md"
+    },
+    {
+      "ts": "2026-11-05T06:39:06.050Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T06:39:36.454Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/工程思想笔记.md"
+    },
+    {
+      "ts": "2026-11-05T06:41:32.576Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/exfat_fat_chain.h"
+    },
+    {
+      "ts": "2026-11-05T06:41:43.641Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/exfat_fat_chain.c"
+    },
+    {
+      "ts": "2026-11-05T06:42:17.170Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_fat_chain.c"
+    },
+    {
+      "ts": "2026-11-05T06:42:25.225Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/build_and_run.sh"
+    },
+    {
+      "ts": "2026-11-05T06:42:38.665Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/exfat_undelete_scanner.h"
+    },
+    {
+      "ts": "2026-11-05T06:42:42.813Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/exfat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-05T06:42:55.504Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-05T06:43:29.666Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T06:43:35.785Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T06:43:48.230Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T06:43:54.457Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T06:44:01.005Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T06:44:08.451Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T06:44:17.463Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T06:44:26.407Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py"
+    },
+    {
+      "ts": "2026-11-05T06:45:25.369Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.h"
+    },
+    {
+      "ts": "2026-11-05T06:45:31.838Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.h"
+    },
+    {
+      "ts": "2026-11-05T06:45:35.834Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T06:46:00.334Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T06:46:04.734Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T06:46:33.164Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T06:47:05.048Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T06:47:24.781Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/build.sh"
+    },
+    {
+      "ts": "2026-11-05T06:48:15.235Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_dir_entry.c"
+    },
+    {
+      "ts": "2026-11-05T06:48:23.676Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_dir_entry.c"
+    },
+    {
+      "ts": "2026-11-05T06:48:48.912Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-05T06:48:57.430Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-05T06:49:24.330Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/exfat_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-05T06:49:31.826Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/exfat_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-05T06:49:37.094Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/exfat_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-05T06:49:47.021Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/exfat_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-05T06:49:58.069Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/exfat_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-05T06:50:24.998Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/build_recoverctl.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:51:30.342Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/exfat_frag_delete_and_recover.ps1"
+    },
+    {
+      "ts": "2026-11-05T06:51:49.186Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/exfat_frag_real_scan.bat"
+    },
+    {
+      "ts": "2026-11-05T06:52:04.415Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/exfat_frag_real_recover.bat"
+    },
+    {
+      "ts": "2026-11-05T06:52:51.064Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T06:53:04.328Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T06:53:14.077Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T06:56:06.893Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/AGENTS.md"
+    },
+    {
+      "ts": "2026-11-05T06:56:44.423Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T06:57:11.876Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/工程思想笔记.md"
+    },
+    {
+      "ts": "2026-11-05T06:57:14.970Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/工程思想笔记.md"
+    },
+    {
+      "ts": "2026-11-05T06:59:34.600Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/bad_sector_policy.h"
+    },
+    {
+      "ts": "2026-11-05T06:59:38.462Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/bad_sector_policy.c"
+    },
+    {
+      "ts": "2026-11-05T06:59:47.014Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_bad_sector_policy.c"
+    },
+    {
+      "ts": "2026-11-05T06:59:57.299Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/bad_sector_log.h"
+    },
+    {
+      "ts": "2026-11-05T07:00:05.599Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/bad_sector_log.c"
+    },
+    {
+      "ts": "2026-11-05T07:00:19.776Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_bad_sector_log.c"
+    },
+    {
+      "ts": "2026-11-05T07:00:54.103Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/aligned_device_reader.h"
+    },
+    {
+      "ts": "2026-11-05T07:01:10.137Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/aligned_device_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:01:43.976Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.h"
+    },
+    {
+      "ts": "2026-11-05T07:01:50.685Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.h"
+    },
+    {
+      "ts": "2026-11-05T07:02:04.929Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:02:19.571Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:02:27.917Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T07:02:32.503Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T07:02:52.055Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T07:03:25.935Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T07:03:34.078Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T07:03:45.848Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T07:03:54.038Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T07:04:02.644Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/build.sh"
+    },
+    {
+      "ts": "2026-11-05T07:04:09.141Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_aligned_device_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:04:15.550Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_aligned_device_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:04:19.805Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_aligned_device_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:04:24.642Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_aligned_device_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:04:54.129Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_aligned_device_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:05:10.956Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_aligned_device_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:05:49.064Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_aligned_device_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:05:54.337Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_aligned_device_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:06:07.407Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/build_and_run.sh"
+    },
+    {
+      "ts": "2026-11-05T07:06:15.949Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/build_and_run.sh"
+    },
+    {
+      "ts": "2026-11-05T07:07:33.635Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T07:07:42.550Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T07:07:52.318Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T07:07:59.322Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T07:08:07.067Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/AGENTS.md"
+    },
+    {
+      "ts": "2026-11-05T07:08:17.003Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/AGENTS.md"
+    },
+    {
+      "ts": "2026-11-05T07:08:23.051Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/AGENTS.md"
+    },
+    {
+      "ts": "2026-11-05T07:14:18.730Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T07:14:38.106Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T07:15:11.053Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/工程思想笔记.md"
+    },
+    {
+      "ts": "2026-11-05T07:18:18.486Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/aligned_device_reader.h"
+    },
+    {
+      "ts": "2026-11-05T07:18:28.198Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/aligned_device_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:19:02.484Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_aligned_device_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:19:44.026Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:20:02.133Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:20:15.347Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:20:23.218Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:20:33.749Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:20:44.271Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.h"
+    },
+    {
+      "ts": "2026-11-05T07:20:58.912Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:21:11.340Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:21:24.761Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:21:41.438Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:21:57.416Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:22:08.586Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:22:13.255Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:22:23.514Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:22:42.417Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:22:49.770Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:23:09.838Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T07:23:17.018Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.h"
+    },
+    {
+      "ts": "2026-11-05T07:23:29.929Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.h"
+    },
+    {
+      "ts": "2026-11-05T07:23:58.011Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T07:24:07.975Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T07:24:26.039Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T07:24:40.682Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T07:25:20.503Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T07:25:39.374Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T07:25:56.598Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T07:26:02.161Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T07:26:08.044Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T07:26:28.516Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T07:26:50.538Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T07:27:03.916Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T07:27:09.254Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T07:27:23.069Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T07:27:29.713Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T07:27:53.174Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T07:29:29.531Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T07:29:56.307Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T07:30:02.211Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T07:30:11.296Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/AGENTS.md"
+    },
+    {
+      "ts": "2026-11-05T07:30:21.259Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/AGENTS.md"
+    },
+    {
+      "ts": "2026-11-05T07:30:32.159Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/AGENTS.md"
+    },
+    {
+      "ts": "2026-11-05T07:34:35.198Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T07:34:50.713Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T07:35:19.118Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/工程思想笔记.md"
+    },
+    {
+      "ts": "2026-11-05T07:38:08.663Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T07:38:15.240Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T07:38:31.739Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T07:41:39.908Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/AGENTS.md"
+    },
+    {
+      "ts": "2026-11-05T07:41:45.778Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/AGENTS.md"
+    },
+    {
+      "ts": "2026-11-05T07:41:52.133Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/AGENTS.md"
+    },
+    {
+      "ts": "2026-11-05T07:42:11.900Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T07:42:27.188Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T07:42:38.623Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T07:43:26.651Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T07:43:54.459Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/工程思想笔记.md"
+    },
+    {
+      "ts": "2026-11-05T07:46:59.874Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/ntfs_bfio_adapter.h"
+    },
+    {
+      "ts": "2026-11-05T07:53:09.332Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/ntfs_bfio_adapter.h"
+    },
+    {
+      "ts": "2026-11-05T07:54:58.196Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/ntfs_bfio_adapter.c"
+    },
+    {
+      "ts": "2026-11-05T07:55:05.814Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/ntfs_bfio_adapter.c"
+    },
+    {
+      "ts": "2026-11-05T07:55:31.802Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/ntfs_bfio_adapter.c"
+    },
+    {
+      "ts": "2026-11-05T07:55:40.879Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/ntfs_bfio_adapter.c"
+    },
+    {
+      "ts": "2026-11-05T07:55:46.517Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/ntfs_bfio_adapter.c"
+    },
+    {
+      "ts": "2026-11-05T07:55:52.722Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/ntfs_bfio_adapter.c"
+    },
+    {
+      "ts": "2026-11-05T07:56:00.714Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/ntfs_bfio_adapter.c"
+    },
+    {
+      "ts": "2026-11-05T07:57:59.717Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/ntfs_bfio_adapter.c"
+    },
+    {
+      "ts": "2026-11-05T07:58:04.947Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/ntfs_bfio_adapter.h"
+    },
+    {
+      "ts": "2026-11-05T07:58:13.804Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/ntfs_bfio_adapter.h"
+    },
+    {
+      "ts": "2026-11-05T07:58:47.898Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_ntfs_bfio_adapter.c"
+    },
+    {
+      "ts": "2026-11-05T07:59:25.396Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/build_and_run.sh"
+    },
+    {
+      "ts": "2026-11-05T07:59:52.416Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/build.sh"
+    },
+    {
+      "ts": "2026-11-05T08:00:15.554Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T08:00:24.022Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T08:00:51.217Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T08:01:01.252Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T08:01:50.164Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/build_recoverctl.ps1"
+    },
+    {
+      "ts": "2026-11-05T08:13:47.859Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/build_recoverctl.ps1"
+    },
+    {
+      "ts": "2026-11-05T08:13:54.055Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/build_recoverctl.ps1"
+    },
+    {
+      "ts": "2026-11-05T08:14:29.079Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/build_recoverctl.ps1"
+    },
+    {
+      "ts": "2026-11-05T08:14:58.815Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/copy_fixture.ps1"
+    },
+    {
+      "ts": "2026-11-05T08:15:08.933Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/test_ntfs_bridge.ps1"
+    },
+    {
+      "ts": "2026-11-05T08:16:05.049Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/check_disks.ps1"
+    },
+    {
+      "ts": "2026-11-05T08:16:17.988Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/check_e_fs.ps1"
+    },
+    {
+      "ts": "2026-11-05T08:16:31.909Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/ntfs_real_device_test.ps1"
+    },
+    {
+      "ts": "2026-11-05T08:16:39.748Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/ntfs_real_device_test.ps1"
+    },
+    {
+      "ts": "2026-11-05T08:16:51.215Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/ntfs_real_device_recover.ps1"
+    },
+    {
+      "ts": "2026-11-05T08:23:48.022Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md"
+    },
+    {
+      "ts": "2026-11-05T08:23:52.615Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T08:24:00.382Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T08:24:05.303Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T08:24:17.440Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md"
+    },
+    {
+      "ts": "2026-11-05T08:24:21.336Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/AGENTS.md"
+    },
+    {
+      "ts": "2026-11-05T08:24:34.204Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/AGENTS.md"
+    },
+    {
+      "ts": "2026-11-05T08:24:41.259Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/AGENTS.md"
+    },
+    {
+      "ts": "2026-11-05T08:24:55.193Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/AGENTS.md"
+    },
+    {
+      "ts": "2026-11-05T08:25:06.660Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/third_party/MANIFEST.md"
+    },
+    {
+      "ts": "2026-11-05T08:25:26.972Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/docs/工程思想笔记.md"
+    },
+    {
+      "ts": "2026-11-05T08:26:54.686Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/build_windows.ps1"
+    },
+    {
+      "ts": "2026-11-05T08:28:02.033Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/AGENTS.md"
+    },
+    {
+      "ts": "2026-11-05T08:28:07.449Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/AGENTS.md"
+    },
+    {
+      "ts": "2026-11-05T08:34:52.857Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T08:35:12.514Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T08:35:28.868Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T08:35:38.618Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.c"
+    },
+    {
+      "ts": "2026-11-05T08:35:48.315Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/exfat_undelete_scanner.h"
+    },
+    {
+      "ts": "2026-11-05T08:35:55.928Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/exfat_undelete_scanner.h"
+    },
+    {
+      "ts": "2026-11-05T08:36:00.872Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/exfat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-05T08:41:48.108Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-05T08:42:13.298Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_undelete_scanner.c"
+    },
+    {
+      "ts": "2026-11-05T08:46:42.308Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/build.sh"
+    },
+    {
+      "ts": "2026-11-05T08:46:45.972Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/build_windows.ps1"
+    },
+    {
+      "ts": "2026-11-05T08:49:31.952Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/fat32_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-05T08:49:40.303Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/fat32_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-05T08:49:46.308Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/fat32_walking_skeleton_test.sh"
+    },
+    {
+      "ts": "2026-11-05T10:20:44.167Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/vshadow_bfio_adapter.h"
+    },
+    {
+      "ts": "2026-11-05T10:21:24.140Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/vshadow_bfio_adapter.c"
+    },
+    {
+      "ts": "2026-11-05T10:21:47.431Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/private/tmp/claude-501/-Users-sam-Projects------------/5bef68aa-ccc2-47f3-97b1-8305924b5524/scratchpad/probe_vshadow_ntfs.c"
+    },
+    {
+      "ts": "2026-11-05T10:21:52.391Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/private/tmp/claude-501/-Users-sam-Projects------------/5bef68aa-ccc2-47f3-97b1-8305924b5524/scratchpad/probe_vshadow_ntfs.c"
+    },
+    {
+      "ts": "2026-11-05T10:23:45.763Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T10:24:37.563Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T10:25:26.282Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T10:26:21.181Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T10:26:39.051Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T10:26:52.725Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T10:27:06.370Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/build.sh"
+    },
+    {
+      "ts": "2026-11-05T10:27:10.979Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/build.sh"
+    },
+    {
+      "ts": "2026-11-05T10:27:17.267Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/build.sh"
+    },
+    {
+      "ts": "2026-11-05T10:27:27.089Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c"
+    },
+    {
+      "ts": "2026-11-05T10:30:36.656Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Documents/win-vm-work/build_libvshadow.ps1"
+    },
+    {
+      "ts": "2026-11-05T10:36:26.586Z",
+      "kind": "resolve",
+      "sessionId": "5bef68aa-ccc2-47f3-97b1-8305924b5524",
+      "file": "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/vshadow_offline_test.sh"
+    }
+  ],
+  "unresolvedByFile": {
+    "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发规划.md": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/docs/开发日志.md": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/ntfs-basic-undelete/make_fixture.py": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/ntfs-basic-undelete/README.md": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/undelete_detector.h": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/undelete_detector.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_framework.h": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_undelete_detector.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/build_and_run.sh": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/undelete_scanner.h": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/undelete_scanner.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_undelete_scanner.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/cli/main.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/cli/build.sh": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/file_writer.h": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/file_writer.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/walking_skeleton_test.sh": 0,
+    "/Users/sam/win-vm-work/get_msys2_url.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/install_msys2.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/msys2_help.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/run_msys2_install.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/pacman_update.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/fix_mirror.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/fix_mirror2.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/list_mirrors.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/fix_mirror3.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/search_pkgs.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/install_toolchain.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/check_clang.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/copy_to_local.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/build_libfsntfs.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/configure_libfsntfs.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/make_libfsntfs.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/verify_build.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/build_recoverctl.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/run_scan_fixture.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/check_disks.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/format_disk.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/check_admin.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/run_elevated.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/copy_script_local.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/format_disk_elevated_trigger.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/check_format_log.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/prepare_test_files.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/scan_real_device.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/trigger_scan_elevated.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/copy_scan_script.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/verify_fix_fixture.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/final_real_device_test.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/trigger_final_test.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/disable_uac_prompt.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/trigger_disable_uac.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/verify_no_prompt.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/trigger_verify.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/disable_uac_fully.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/trigger_disable_uac_fully.ps1": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/disk_enumerator.h": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/disk_enumerator.c": 0,
+    "/Users/sam/Documents/win-vm-work/test_list.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/regression_check.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/investigate_entries.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/fresh_e2e_test.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/test_p1.ps1": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/fat32-basic-undelete/make_fixture.py": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/fat_boot_sector.h": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/fat_boot_sector.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_fat_boot_sector.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/fat_dir_entry.h": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/fat_dir_entry.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_fat_dir_entry.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/fat_undelete_scanner.h": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/fat_undelete_scanner.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_fat_undelete_scanner.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.h": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/fat_reader.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/fat32_walking_skeleton_test.sh": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/vendor/gpt_probe/main.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/partition_reader.h": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/partition_reader.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/gpt_partition_test.sh": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/mbr_partition_test.sh": 0,
+    "/Users/sam/Documents/win-vm-work/copy_vsgpt_vsmbr.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/build_vsgpt_vsmbr.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/scan_gpt_partition.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/scan_gpt_partition.bat": 0,
+    "/Users/sam/Documents/win-vm-work/verify_recover_gpt.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/setup_fat32_disk.txt": 0,
+    "/Users/sam/Documents/win-vm-work/list_disks.txt": 0,
+    "/Users/sam/Documents/win-vm-work/fat32_test_setup.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/scan_fat32_real.bat": 0,
+    "/Users/sam/Documents/win-vm-work/recover_fat32_real.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/recover_fat32_real.bat": 0,
+    "/Users/sam/Documents/win-vm-work/verify_fat32_hash.bat": 0,
+    "/Users/sam/Documents/win-vm-work/check_fat32_files.bat": 0,
+    "/Users/sam/Documents/win-vm-work/check_svi.bat": 0,
+    "/Users/sam/Documents/win-vm-work/fat32_full_cycle.bat": 0,
+    "/Users/sam/Documents/win-vm-work/fat32_recover_retry.bat": 0,
+    "/Users/sam/Documents/win-vm-work/check_retry_content.bat": 0,
+    "/Users/sam/Documents/win-vm-work/flush_and_recover.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/raw_dump.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/raw_dump_rootdir.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/raw_dump_bootsector.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/fat32_clean_test.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/fat32_clean_scan_recover.bat": 0,
+    "/Users/sam/Documents/win-vm-work/fat32_clean_recover.bat": 0,
+    "/Users/sam/Documents/win-vm-work/fat32_final_test.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/fat32_final_scan_recover.bat": 0,
+    "/Users/sam/Documents/win-vm-work/fat32_final_recover.bat": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/exfat-basic-undelete/make_fixture.py": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/exfat_dir_entry.h": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/exfat_dir_entry.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_dir_entry.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/exfat_undelete_scanner.h": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/exfat_undelete_scanner.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_undelete_scanner.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.h": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/exfat_reader.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/exfat_walking_skeleton_test.sh": 0,
+    "/Users/sam/Documents/win-vm-work/setup_exfat_disk.txt": 0,
+    "/Users/sam/Documents/win-vm-work/exfat_clean_test.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/exfat_scan.bat": 0,
+    "/Users/sam/Documents/win-vm-work/exfat_recover.bat": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/AGENTS.md": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/third_party/MANIFEST.md": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/ntfs_file_reference.h": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/ntfs_file_reference.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_ntfs_file_reference.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/path_builder.h": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/path_builder.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_path_builder.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/path_resolver.h": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/path_resolver.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/sector_aligned_read.h": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/sector_aligned_read.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_sector_aligned_read.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/aligned_device_reader.h": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/aligned_device_reader.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_aligned_device_reader.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/docs/工程思想笔记.md": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/.claude/agents/小树.md": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_boot_sector.c": 0,
+    "/Users/sam/Documents/win-vm-work/exfat_subdir_test.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/exfat_subdir_scan.bat": 0,
+    "/Users/sam/Documents/win-vm-work/exfat_subdir_recover.bat": 0,
+    "/Users/sam/Documents/win-vm-work/fat32_subdir_test.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/fat32_subdir_scan.bat": 0,
+    "/Users/sam/Documents/win-vm-work/fat32_subdir_recover.bat": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/utf16_to_utf8.h": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/utf16_to_utf8.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_utf16_to_utf8.c": 0,
+    "/Users/sam/Documents/win-vm-work/fat32_longname_test.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/fat32_longname_scan.bat": 0,
+    "/Users/sam/Documents/win-vm-work/fat32_dump_root_dir.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/fat32_longname_recover.bat": 0,
+    "/Users/sam/Documents/win-vm-work/exfat_chinese_test.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/exfat_chinese_scan.bat": 0,
+    "/Users/sam/Documents/win-vm-work/exfat_chinese_recover.bat": 0,
+    "/Users/sam/Documents/win-vm-work/exfat_subsubdir_test.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/exfat_subsubdir_scan.bat": 0,
+    "/Users/sam/Documents/win-vm-work/exfat_subsubdir_recover.bat": 0,
+    "/Users/sam/Documents/win-vm-work/format_fat32_for_subsubdir.txt": 0,
+    "/Users/sam/Documents/win-vm-work/fat32_subsubdir_test.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/fat32_subsubdir_scan.bat": 0,
+    "/Users/sam/Documents/win-vm-work/fat32_subsubdir_recover.bat": 0,
+    "/Users/sam/Documents/win-vm-work/frag_boot_dump.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/frag_setup.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/frag_rootdir_dump.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/frag_fat_dump.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/frag_full_experiment.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/frag_phase1.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/frag_phase3.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/exfat_frag_boot_dump.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/format_exfat_fresh.txt": 0,
+    "/Users/sam/Documents/win-vm-work/exfat_frag_setup.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/exfat_frag_phase3.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/exfat_frag_rootdir_dump.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/exfat_frag_fat_dump.ps1": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/exfat_fat_chain.h": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/exfat_fat_chain.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_exfat_fat_chain.c": 0,
+    "/Users/sam/Documents/win-vm-work/exfat_frag_delete_and_recover.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/exfat_frag_real_scan.bat": 0,
+    "/Users/sam/Documents/win-vm-work/exfat_frag_real_recover.bat": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/bad_sector_policy.h": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/bad_sector_policy.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_bad_sector_policy.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/bad_sector_log.h": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/core/bad_sector_log.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_bad_sector_log.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/ntfs_bfio_adapter.h": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/ntfs_bfio_adapter.c": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/unit/test_ntfs_bfio_adapter.c": 0,
+    "/Users/sam/Documents/win-vm-work/copy_fixture.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/test_ntfs_bridge.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/check_e_fs.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/ntfs_real_device_test.ps1": 0,
+    "/Users/sam/Documents/win-vm-work/ntfs_real_device_recover.ps1": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/cli/build_windows.ps1": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/vshadow_bfio_adapter.h": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/shell/vshadow_bfio_adapter.c": 0,
+    "/private/tmp/claude-501/-Users-sam-Projects------------/5bef68aa-ccc2-47f3-97b1-8305924b5524/scratchpad/probe_vshadow_ntfs.c": 0,
+    "/Users/sam/Documents/win-vm-work/build_libvshadow.ps1": 0,
+    "/Users/sam/Projects/软件开发/数据恢复软件/engine/tests/e2e/vshadow_offline_test.sh": 0
+  },
+  "fabrications": [],
+  "metrics": {
+    "violations": 0,
+    "blocks": 0,
+    "rewrites": 0,
+    "escapes": 0,
+    "denies": 0,
+    "resolves": 750
+  }
+}

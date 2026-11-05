@@ -1,0 +1,459 @@
+.Dd June 26, 2026
+.Dt LIBBDE 3
+.Os
+.Sh NAME
+.Nm libbde.h
+.Nd Library to access the BitLocker Drive Encryption (BDE) format
+.Sh SYNOPSIS
+.In libbde.h
+.Pp
+Support functions
+.nf
+.Ft const char *
+.Fo libbde_get_version
+.Fa "void"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_get_access_flags_read
+.Fa "void"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_get_codepage
+.Fa "int *codepage"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_set_codepage
+.Fa "int codepage"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_check_volume_signature
+.Fa "const char *filename"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.Pp
+Available when compiled with wide character string support:
+.nf
+.Ft int
+.Fo libbde_check_volume_signature_wide
+.Fa "const wchar_t *filename"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.Pp
+Available when compiled with libbfio support:
+.nf
+.Ft int
+.Fo libbde_check_volume_signature_file_io_handle
+.Fa "libbfio_handle_t *file_io_handle"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.Pp
+Notify functions
+.nf
+.Ft void
+.Fo libbde_notify_set_verbose
+.Fa "int verbose"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_notify_set_stream
+.Fa "FILE *stream"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_notify_stream_open
+.Fa "const char *filename"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_notify_stream_close
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.Pp
+Error functions
+.nf
+.Ft void
+.Fo libbde_error_free
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_error_fprint
+.Fa "libbde_error_t *error"
+.Fa "FILE *stream"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_error_sprint
+.Fa "libbde_error_t *error"
+.Fa "char *string"
+.Fa "size_t size"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_error_backtrace_fprint
+.Fa "libbde_error_t *error"
+.Fa "FILE *stream"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_error_backtrace_sprint
+.Fa "libbde_error_t *error"
+.Fa "char *string"
+.Fa "size_t size"
+.Fc
+.fi
+.Pp
+Volume functions
+.nf
+.Ft int
+.Fo libbde_volume_initialize
+.Fa "libbde_volume_t **volume"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_free
+.Fa "libbde_volume_t **volume"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_signal_abort
+.Fa "libbde_volume_t *volume"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_open
+.Fa "libbde_volume_t *volume"
+.Fa "const char *filename"
+.Fa "int access_flags"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_close
+.Fa "libbde_volume_t *volume"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_is_locked
+.Fa "libbde_volume_t *volume"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_unlock
+.Fa "libbde_volume_t *volume"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft ssize_t
+.Fo libbde_volume_read_buffer
+.Fa "libbde_volume_t *volume"
+.Fa "void *buffer"
+.Fa "size_t buffer_size"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft ssize_t
+.Fo libbde_volume_read_buffer_at_offset
+.Fa "libbde_volume_t *volume"
+.Fa "void *buffer"
+.Fa "size_t buffer_size"
+.Fa "off64_t offset"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft off64_t
+.Fo libbde_volume_seek_offset
+.Fa "libbde_volume_t *volume"
+.Fa "off64_t offset"
+.Fa "int whence"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_get_offset
+.Fa "libbde_volume_t *volume"
+.Fa "off64_t *offset"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_get_size
+.Fa "libbde_volume_t *volume"
+.Fa "size64_t *size"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_get_encryption_method
+.Fa "libbde_volume_t *volume"
+.Fa "uint16_t *encryption_method"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_get_volume_identifier
+.Fa "libbde_volume_t *volume"
+.Fa "uint8_t *guid_data"
+.Fa "size_t guid_data_size"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_get_creation_time
+.Fa "libbde_volume_t *volume"
+.Fa "uint64_t *filetime"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_get_utf8_description_size
+.Fa "libbde_volume_t *volume"
+.Fa "size_t *utf8_string_size"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_get_utf8_description
+.Fa "libbde_volume_t *volume"
+.Fa "uint8_t *utf8_string"
+.Fa "size_t utf8_string_size"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_get_utf16_description_size
+.Fa "libbde_volume_t *volume"
+.Fa "size_t *utf16_string_size"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_get_utf16_description
+.Fa "libbde_volume_t *volume"
+.Fa "uint16_t *utf16_string"
+.Fa "size_t utf16_string_size"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_get_number_of_key_protectors
+.Fa "libbde_volume_t *volume"
+.Fa "int *number_of_key_protectors"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_get_key_protector_by_index
+.Fa "libbde_volume_t *volume"
+.Fa "int key_protector_index"
+.Fa "libbde_key_protector_t **key_protector"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_set_keys
+.Fa "libbde_volume_t *volume"
+.Fa "const uint8_t *full_volume_encryption_key"
+.Fa "size_t full_volume_encryption_key_size"
+.Fa "const uint8_t *tweak_key"
+.Fa "size_t tweak_key_size"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_set_utf8_password
+.Fa "libbde_volume_t *volume"
+.Fa "const uint8_t *utf8_string"
+.Fa "size_t utf8_string_length"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_set_utf16_password
+.Fa "libbde_volume_t *volume"
+.Fa "const uint16_t *utf16_string"
+.Fa "size_t utf16_string_length"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_set_utf8_recovery_password
+.Fa "libbde_volume_t *volume"
+.Fa "const uint8_t *utf8_string"
+.Fa "size_t utf8_string_length"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_set_utf16_recovery_password
+.Fa "libbde_volume_t *volume"
+.Fa "const uint16_t *utf16_string"
+.Fa "size_t utf16_string_length"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_read_startup_key
+.Fa "libbde_volume_t *volume"
+.Fa "const char *filename"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_read_startup_key_wide
+.Fa "libbde_volume_t *volume"
+.Fa "const wchar_t *filename"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.Pp
+Available when compiled with wide character string support:
+.nf
+.Ft int
+.Fo libbde_volume_open_wide
+.Fa "libbde_volume_t *volume"
+.Fa "const wchar_t *filename"
+.Fa "int access_flags"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.Pp
+Available when compiled with libbfio support:
+.nf
+.Ft int
+.Fo libbde_volume_open_file_io_handle
+.Fa "libbde_volume_t *volume"
+.Fa "libbfio_handle_t *file_io_handle"
+.Fa "int access_flags"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_volume_read_startup_key_file_io_handle
+.Fa "libbde_volume_t *volume"
+.Fa "libbfio_handle_t *file_io_handle"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.Pp
+Key protector functions
+.nf
+.Ft int
+.Fo libbde_key_protector_free
+.Fa "libbde_key_protector_t **key_protector"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_key_protector_get_identifier
+.Fa "libbde_key_protector_t *key_protector"
+.Fa "uint8_t *guid_data"
+.Fa "size_t guid_data_size"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.nf
+.Ft int
+.Fo libbde_key_protector_get_type
+.Fa "libbde_key_protector_t *key_protector"
+.Fa "uint16_t *type"
+.Fa "libbde_error_t **error"
+.Fc
+.fi
+.Sh DESCRIPTION
+The
+.Fn libbde_get_version
+function is used to retrieve the library version.
+.Sh RETURN VALUES
+Most of the functions return NULL or \-1 on error, dependent on the return \
+type.
+For the actual return values see
+.In libbde.h .
+.Sh ENVIRONMENT
+None
+.Sh FILES
+None
+.Sh NOTES
+libbde can be compiled with wide character support (wchar_t).
+.sp
+To compile libbde with wide character support use:
+.Ar ./configure --enable-wide-character-type
+ or define:
+.Ar _UNICODE
+ or
+.Ar UNICODE
+ during compilation.
+.sp
+.Ar LIBBDE_WIDE_CHARACTER_TYPE
+ in libbde/features.h can be used to determine if libbde was compiled with \
+wide character support.
+.Sh SEE ALSO
+.In libbde.h
+.Sh AUTHORS
+.An Joachim Metz <joachim.metz@gmail.com>
+.Sh BUGS
+Please report bugs of any kind on the project issue tracker: \
+https://github.com/libyal/libbde/issues
+.Sh COPYRIGHT
+Copyright (C) 2011-2026, Joachim Metz <joachim.metz@gmail.com>.
+.sp
+This is free software; see the source for copying conditions.
+There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A \
+PARTICULAR PURPOSE.

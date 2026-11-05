@@ -1,0 +1,46 @@
+# macOS
+.DS_Store
+
+# 竞品参考软件（R-Studio 商业安装包，闭源，和本项目代码无关，出现在
+# 2026-11-04（本轮自主开发会话开始之前）不是本项目的工作产出，体积
+# 190MB+ 且随时能从官网重新下载，不需要进版本库备份；文件本身未删除，
+# 只是不纳入git追踪）
+成品软件/
+
+# 只做架构参考、从不编译使用的第三方代码（Java/NetBeans技术栈，2.1GB，
+# 详见 AGENTS.md 第3节和 third_party/MANIFEST.md）——不是我们的工作成果，
+# 不进备份，真要用再按 MANIFEST.md 里的来源重新拉取
+third_party/apache-reference/autopsy/
+
+# 第三方 vendored 源码经过 autotools 构建后产生的中间产物（.o/.lo/.a/
+# 动态库/autoreconf生成的脚本等）——这些都是编译过程自动生成的，不是
+# 手写源码，体积大且随时能重新构建出来，不属于"工作成果"
+third_party/**/.libs/
+third_party/**/.deps/
+third_party/**/autom4te.cache/
+third_party/**/*.o
+third_party/**/*.lo
+third_party/**/*.la
+third_party/**/*.a
+third_party/**/*.dll
+third_party/**/*.dylib
+third_party/**/*.so
+third_party/**/*.so.*
+third_party/**/config.log
+third_party/**/config.status
+third_party/**/config.h
+third_party/**/configure
+third_party/**/Makefile
+third_party/**/libtool
+
+# 本项目自己编译出来的可执行文件/动态库（build.sh / build_windows.ps1
+# 的产物，源码在 cli/main.c，二进制本身不需要进版本库）
+cli/recoverctl
+cli/recoverctl.exe
+cli/*.dll
+cli/*.dll.a
+
+# engine/tests/unit/build_and_run.sh 编译出来的测试可执行文件（和同名
+# 的 .c 源文件放在同一目录，靠没有扩展名区分，保留 .c 源码本身）
+engine/tests/unit/test_*
+!engine/tests/unit/test_*.c

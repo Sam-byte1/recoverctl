@@ -1,0 +1,50 @@
+libbde is a library to access the BitLocker Drive Encryption (BDE) format.
+BitLocker Drive Encryption (BDE) is a volume-based encryption method used by
+Microsoft Windows, as of Vista, to encrypt data on a storage media volume.
+
+Project information:
+
+* Status: alpha
+* Licence: LGPL-3.0-or-later
+
+Supported BDE formats:
+
+* BitLocker Windows Vista (version 1)
+* BitLocker Windows 7 and later (version 2)
+* BitLocker To Go
+* Bitlocker Used Disk Space Only encryption
+
+Supported encryption methods:
+
+* AES-CBC
+* AES-CBC with Elephant diffuser
+* AES-XTS
+
+Supported protection methods:
+
+* clear key
+* password
+* recovery password
+* start-up key
+* FKEV and/or TWEAK key data
+
+Unsupported protection methods:
+
+* Trusted Platform Module (TPM)
+* SID-based protector
+
+Additional features:
+
+* support for partial encrypted volumes
+* zeros out the BDE metadata, matches behavior seen on Windows
+
+Work in progress:
+
+* Dokan library support
+* Thread-safety in volume API functions
+
+For more information see:
+
+* Project documentation: https://github.com/libyal/libbde/wiki/Home
+* How to build from source: https://github.com/libyal/libbde/wiki/Building
+
