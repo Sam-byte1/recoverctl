@@ -402,6 +402,9 @@ static int fat_reader_scan_directory_recursive(
      const char *directory_path,
      int depth,
      bad_sector_log_t *out_bad_sector_log,
+     scan_progress_callback_t progress_callback,
+     void *progress_user_data,
+     uint64_t *inout_directories_visited,
      fat_undelete_scan_result_t *out )
 {
 	uint8_t *buffer;
@@ -414,6 +417,11 @@ static int fat_reader_scan_directory_recursive(
 	{
 		return 1;
 	}
+	if( progress_callback != NULL )
+	{
+		progress_callback( *inout_directories_visited, 0, progress_user_data );
+	}
+	( *inout_directories_visited )++;
 
 	buffer = fat_reader_read_directory_clusters( reader, cluster, cluster_size,
 	           out_bad_sector_log != NULL ? FAT_READER_MAX_READ_RETRIES : 0, out_bad_sector_log, &buffer_size );
@@ -461,7 +469,7 @@ static int fat_reader_scan_directory_recursive(
 
 		recurse_result = fat_reader_scan_directory_recursive(
 		                   reader, subdirs.entries[ i ].first_cluster, cluster_size, child_path, depth + 1,
-		                   out_bad_sector_log, out );
+		                   out_bad_sector_log, progress_callback, progress_user_data, inout_directories_visited, out );
 		if( recurse_result != 1 )
 		{
 			fat_subdirectory_list_free( &subdirs );
@@ -476,9 +484,12 @@ static int fat_reader_scan_directory_recursive(
 int fat_reader_scan_directory_tree(
      fat_reader_t *reader,
      bad_sector_log_t *out_bad_sector_log,
+     scan_progress_callback_t progress_callback,
+     void *progress_user_data,
      fat_undelete_scan_result_t *out )
 {
 	size_t cluster_size;
+	uint64_t directories_visited = 0;
 	int result;
 
 	if( reader == NULL || reader->file == READER_IO_INVALID || out == NULL )
@@ -493,7 +504,8 @@ int fat_reader_scan_directory_tree(
 	cluster_size = (size_t) reader->boot_sector.sectors_per_cluster * reader->boot_sector.bytes_per_sector;
 
 	result = fat_reader_scan_directory_recursive(
-	          reader, reader->boot_sector.root_cluster, cluster_size, "", 0, out_bad_sector_log, out );
+	          reader, reader->boot_sector.root_cluster, cluster_size, "", 0, out_bad_sector_log,
+	          progress_callback, progress_user_data, &directories_visited, out );
 
 	if( result != 1 )
 	{

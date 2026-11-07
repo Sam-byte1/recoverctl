@@ -1,5 +1,6 @@
 #include <windows.h>
 #include <winioctl.h>
+#include <winnetwk.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -98,6 +99,35 @@ int disk_enumerator_list_logical_drives(
 
 		type = GetDriveTypeA( root_path );
 		strncpy( entry.drive_type_name, drive_type_name( type ), sizeof( entry.drive_type_name ) - 1 );
+
+		/* 2026-11-06（世杰真机反馈：GUI磁盘卡片里混进了VM的Mac共享
+		 * 文件夹）：`GetDriveTypeA`对Parallels"共享文件夹"映射的盘符
+		 * 不一定报`DRIVE_REMOTE`——真机实测在当时的查询会话里拿到的是
+		 * `DRIVE_NO_ROOT_DIR`（会落进下面的`default`分支变成"Unknown"，
+		 * 这次运气好被已有的Unknown过滤挡住了；但不同会话/不同Windows
+		 * 版本下这类映射盘报出来的真实类型没有十足把握一直是
+		 * Unknown/Network这两种会被过滤掉的值，真机也验证过`net use`
+		 * 能看到这些盘符的"远程"路径和提供者名称）——换一个更可靠的
+		 * 判断依据：`WNetGetConnectionA`直接查"这个盘符是不是通过WNet
+		 * 网络重定向器注册的连接"，这正是`net use`操作的那张表，不管
+		 * 背后是标准SMB共享还是Parallels/VMware这类虚拟机共享文件夹
+		 * 工具自己的提供者实现，只要走了这条注册路径就能查到、不依赖
+		 * `GetDriveTypeA`对这类特殊提供者报了什么类型。查到就直接改写
+		 * 成"Network"，覆盖掉上面`GetDriveTypeA`的结果。 */
+		{
+			char drive_spec[ 3 ];
+			char remote_name[ 260 ];
+			DWORD remote_name_length = sizeof( remote_name );
+
+			drive_spec[ 0 ] = entry.drive_letter;
+			drive_spec[ 1 ] = ':';
+			drive_spec[ 2 ] = '\0';
+
+			if( WNetGetConnectionA( drive_spec, remote_name, &remote_name_length ) == NO_ERROR )
+			{
+				strncpy( entry.drive_type_name, "Network", sizeof( entry.drive_type_name ) - 1 );
+			}
+		}
 
 		/* 光驱/网络盘等可能暂时没有介质，取不到信息是正常情况，不当成错误 */
 		volume_name[ 0 ] = '\0';

@@ -311,15 +311,175 @@ int photorec_invoker_run(
 	return 1;
 }
 
+/* G8（2026-11-06小树裁决③）：和photorec_invoker_run()前半段（启动子
+ * 进程为止）完全相同的逻辑，只是不调用WaitForSingleObject，把两个
+ * 句柄和"等待时需要的状态"存进*out_handle就返回——刻意复制而不是
+ * 提炼共享函数，保持photorec_invoker_run()一行不改（和G6
+ * scanVssOffline()不复用scanNtfs()同样的理由：这段逻辑不长，强行提炼
+ * 共享函数反而让已经验证过的run()多了一条被改坏的路径）。 */
+int photorec_invoker_run_async(
+     const char *photorec_executable_path,
+     const char *target_path,
+     const char *arch_type_token,
+     const char *output_dir_base,
+     photorec_invoke_handle_t *out_handle )
+{
+	char cmd_run[ 64 ];
+	char photorec_dir[ 768 ];
+	char photorec_exe_name[ 256 ];
+	char terminfo_path[ 900 ];
+	char command_line[ 4096 ];
+	size_t offset = 0;
+	STARTUPINFOA startup_info;
+	PROCESS_INFORMATION process_info;
+	SECURITY_ATTRIBUTES security_attributes;
+	HANDLE null_read_handle;
+	HANDLE null_write_handle;
+
+	if( ( photorec_executable_path == NULL )
+	 || ( target_path == NULL )
+	 || ( output_dir_base == NULL )
+	 || ( out_handle == NULL ) )
+	{
+		return -1;
+	}
+	memset( out_handle, 0, sizeof( *out_handle ) );
+	snprintf( out_handle->output_dir_base, sizeof( out_handle->output_dir_base ), "%s", output_dir_base );
+
+	if( photorec_command_builder_build_cmd_run( arch_type_token, cmd_run, sizeof( cmd_run ) ) != 1 )
+	{
+		return -1;
+	}
+	split_path_windows( output_dir_base, out_handle->parent_dir, sizeof( out_handle->parent_dir ),
+	                     out_handle->base_name, sizeof( out_handle->base_name ) );
+	out_handle->suffix_before = find_max_existing_suffix_windows( out_handle->parent_dir, out_handle->base_name );
+
+	split_path_windows( photorec_executable_path, photorec_dir, sizeof( photorec_dir ), photorec_exe_name, sizeof( photorec_exe_name ) );
+	snprintf( terminfo_path, sizeof( terminfo_path ), "%s\\terminfo", photorec_dir );
+
+	offset = 0;
+	if( ( append_quoted_arg( command_line, sizeof( command_line ), &offset, photorec_executable_path ) != 0 )
+	 || ( append_quoted_arg( command_line, sizeof( command_line ), &offset, "/log" ) != 0 )
+	 || ( append_quoted_arg( command_line, sizeof( command_line ), &offset, "/d" ) != 0 )
+	 || ( append_quoted_arg( command_line, sizeof( command_line ), &offset, output_dir_base ) != 0 )
+	 || ( append_quoted_arg( command_line, sizeof( command_line ), &offset, "/cmd" ) != 0 )
+	 || ( append_quoted_arg( command_line, sizeof( command_line ), &offset, target_path ) != 0 )
+	 || ( append_quoted_arg( command_line, sizeof( command_line ), &offset, cmd_run ) != 0 ) )
+	{
+		return -1;
+	}
+
+	out_handle->had_previous_term = GetEnvironmentVariableA( "TERM", out_handle->previous_term, sizeof( out_handle->previous_term ) ) > 0;
+	out_handle->had_previous_terminfo = GetEnvironmentVariableA( "TERMINFO", out_handle->previous_terminfo, sizeof( out_handle->previous_terminfo ) ) > 0;
+
+	SetEnvironmentVariableA( "TERM", "xterm" );
+	SetEnvironmentVariableA( "TERMINFO", terminfo_path );
+
+	security_attributes.nLength = sizeof( SECURITY_ATTRIBUTES );
+	security_attributes.lpSecurityDescriptor = NULL;
+	security_attributes.bInheritHandle = TRUE;
+
+	null_read_handle = CreateFileA( "NUL", GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE,
+	                                 &security_attributes, OPEN_EXISTING, 0, NULL );
+	null_write_handle = CreateFileA( "NUL", GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE,
+	                                  &security_attributes, OPEN_EXISTING, 0, NULL );
+	if( ( null_read_handle == INVALID_HANDLE_VALUE )
+	 || ( null_write_handle == INVALID_HANDLE_VALUE ) )
+	{
+		if( null_read_handle != INVALID_HANDLE_VALUE )
+		{
+			CloseHandle( null_read_handle );
+		}
+		if( null_write_handle != INVALID_HANDLE_VALUE )
+		{
+			CloseHandle( null_write_handle );
+		}
+		return -1;
+	}
+
+	memset( &startup_info, 0, sizeof( startup_info ) );
+	startup_info.cb = sizeof( startup_info );
+	startup_info.dwFlags = STARTF_USESTDHANDLES;
+	startup_info.hStdInput = null_read_handle;
+	startup_info.hStdOutput = null_write_handle;
+	startup_info.hStdError = null_write_handle;
+
+	memset( &process_info, 0, sizeof( process_info ) );
+
+	if( !CreateProcessA( NULL, command_line, NULL, NULL, TRUE, 0, NULL, NULL, &startup_info, &process_info ) )
+	{
+		CloseHandle( null_read_handle );
+		CloseHandle( null_write_handle );
+		if( out_handle->had_previous_term ) { SetEnvironmentVariableA( "TERM", out_handle->previous_term ); } else { SetEnvironmentVariableA( "TERM", NULL ); }
+		if( out_handle->had_previous_terminfo ) { SetEnvironmentVariableA( "TERMINFO", out_handle->previous_terminfo ); } else { SetEnvironmentVariableA( "TERMINFO", NULL ); }
+		return -1;
+	}
+	CloseHandle( null_read_handle );
+	CloseHandle( null_write_handle );
+
+	/* 不在这里还原TERM/TERMINFO——PhotoRec还在跑，可能还没来得及读取
+	 * 这两个环境变量，等wait()真正等到退出之后再还原 */
+	out_handle->process_handle = (intptr_t) process_info.hProcess;
+	out_handle->thread_handle = (intptr_t) process_info.hThread;
+	return 1;
+}
+
+int photorec_invoker_wait(
+     photorec_invoke_handle_t *handle,
+     photorec_invoke_result_t *out_result )
+{
+	DWORD exit_code = 0;
+	int suffix_after;
+
+	if( ( handle == NULL ) || ( out_result == NULL ) )
+	{
+		return -1;
+	}
+	memset( out_result, 0, sizeof( *out_result ) );
+
+	WaitForSingleObject( (HANDLE) handle->process_handle, INFINITE );
+	if( !GetExitCodeProcess( (HANDLE) handle->process_handle, &exit_code ) )
+	{
+		exit_code = (DWORD) -1;
+	}
+	CloseHandle( (HANDLE) handle->process_handle );
+	CloseHandle( (HANDLE) handle->thread_handle );
+
+	if( handle->had_previous_term ) { SetEnvironmentVariableA( "TERM", handle->previous_term ); } else { SetEnvironmentVariableA( "TERM", NULL ); }
+	if( handle->had_previous_terminfo ) { SetEnvironmentVariableA( "TERMINFO", handle->previous_terminfo ); } else { SetEnvironmentVariableA( "TERMINFO", NULL ); }
+
+	out_result->exit_code = (int) exit_code;
+
+	suffix_after = find_max_existing_suffix_windows( handle->parent_dir, handle->base_name );
+	if( suffix_after > handle->suffix_before )
+	{
+		snprintf( out_result->recup_dir_path, sizeof( out_result->recup_dir_path ),
+		          "%s.%d", handle->output_dir_base, suffix_after );
+	}
+	return 1;
+}
+
+void photorec_invoker_cancel(
+     photorec_invoke_handle_t *handle )
+{
+	if( handle == NULL )
+	{
+		return;
+	}
+	TerminateProcess( (HANDLE) handle->process_handle, (UINT) -1 );
+}
+
 #else
 
 #include <dirent.h>
 #include <fcntl.h>
+#include <signal.h>
 #include <spawn.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/wait.h>
+#include <time.h>
 
 #include "../core/photorec_command_builder.h"
 
@@ -481,6 +641,134 @@ int photorec_invoker_run(
 		          "%s.%d", output_dir_base, suffix_after );
 	}
 	return 1;
+}
+
+/* G8（2026-11-06小树裁决③）：和Windows分支同样的理由——复制
+ * photorec_invoker_run()前半段逻辑，不提炼共享函数，保持run()一行
+ * 不改。 */
+int photorec_invoker_run_async(
+     const char *photorec_executable_path,
+     const char *target_path,
+     const char *arch_type_token,
+     const char *output_dir_base,
+     photorec_invoke_handle_t *out_handle )
+{
+	char cmd_run[ 64 ];
+	pid_t pid;
+	int spawn_status;
+	posix_spawn_file_actions_t file_actions;
+	char *argv[ 8 ];
+
+	if( ( photorec_executable_path == NULL )
+	 || ( target_path == NULL )
+	 || ( output_dir_base == NULL )
+	 || ( out_handle == NULL ) )
+	{
+		return -1;
+	}
+	memset( out_handle, 0, sizeof( *out_handle ) );
+	snprintf( out_handle->output_dir_base, sizeof( out_handle->output_dir_base ), "%s", output_dir_base );
+
+	if( photorec_command_builder_build_cmd_run( arch_type_token, cmd_run, sizeof( cmd_run ) ) != 1 )
+	{
+		return -1;
+	}
+	split_path( output_dir_base, out_handle->parent_dir, sizeof( out_handle->parent_dir ),
+	            out_handle->base_name, sizeof( out_handle->base_name ) );
+	out_handle->suffix_before = find_max_existing_suffix( out_handle->parent_dir, out_handle->base_name );
+
+	argv[ 0 ] = (char *) photorec_executable_path;
+	argv[ 1 ] = (char *) "/log";
+	argv[ 2 ] = (char *) "/d";
+	argv[ 3 ] = (char *) output_dir_base;
+	argv[ 4 ] = (char *) "/cmd";
+	argv[ 5 ] = (char *) target_path;
+	argv[ 6 ] = cmd_run;
+	argv[ 7 ] = NULL;
+
+	if( posix_spawn_file_actions_init( &file_actions ) != 0 )
+	{
+		return -1;
+	}
+	posix_spawn_file_actions_addopen( &file_actions, 0, "/dev/null", O_RDONLY, 0 );
+	posix_spawn_file_actions_addopen( &file_actions, 1, "/dev/null", O_WRONLY, 0 );
+	posix_spawn_file_actions_addopen( &file_actions, 2, "/dev/null", O_WRONLY, 0 );
+
+	spawn_status = posix_spawn( &pid, photorec_executable_path, &file_actions, NULL, argv, environ );
+	posix_spawn_file_actions_destroy( &file_actions );
+
+	if( spawn_status != 0 )
+	{
+		return -1;
+	}
+	out_handle->process_handle = (intptr_t) pid;
+	return 1;
+}
+
+int photorec_invoker_wait(
+     photorec_invoke_handle_t *handle,
+     photorec_invoke_result_t *out_result )
+{
+	int wait_status;
+	int suffix_after;
+
+	if( ( handle == NULL ) || ( out_result == NULL ) )
+	{
+		return -1;
+	}
+	memset( out_result, 0, sizeof( *out_result ) );
+
+	if( waitpid( (pid_t) handle->process_handle, &wait_status, 0 ) == -1 )
+	{
+		return -1;
+	}
+	if( WIFEXITED( wait_status ) )
+	{
+		out_result->exit_code = WEXITSTATUS( wait_status );
+	}
+	else
+	{
+		out_result->exit_code = -1;
+	}
+	suffix_after = find_max_existing_suffix( handle->parent_dir, handle->base_name );
+	if( suffix_after > handle->suffix_before )
+	{
+		snprintf( out_result->recup_dir_path, sizeof( out_result->recup_dir_path ),
+		          "%s.%d", handle->output_dir_base, suffix_after );
+	}
+	return 1;
+}
+
+/* 先礼后兵：SIGTERM给PhotoRec一个短暂的优雅退出窗口（它自己的信号
+ * 处理函数如果来得及跑，可能会做一些清理），等待200ms后还活着就
+ * SIGKILL强制了结——不无限等，裁决③明确要的是"行为可预测"，不是
+ * "尽量优雅"。这个短暂的sleep只发生在用户主动点取消之后，不在正常
+ * 雕刻流程的路径上，不影响D6已经验证过的主干性能。
+ *
+ * 检测"200ms后还活着没有"用kill(pid,0)（只检查信号能不能投递，不
+ * 回收僵尸进程），不能用waitpid(...,WNOHANG)——header注释里明确写了
+ * 调用方后续还会调用一次photorec_invoker_wait()去做真正的回收，
+ * POSIX的waitpid只能成功收割一次，这里如果抢先reap掉，wait()那次
+ * 调用会失败（ECHILD），把回收这个子进程的职责完整留给wait()。 */
+void photorec_invoker_cancel(
+     photorec_invoke_handle_t *handle )
+{
+	struct timespec sleep_time;
+
+	if( handle == NULL )
+	{
+		return;
+	}
+	kill( (pid_t) handle->process_handle, SIGTERM );
+
+	sleep_time.tv_sec = 0;
+	sleep_time.tv_nsec = 200000000L;
+	nanosleep( &sleep_time, NULL );
+
+	if( kill( (pid_t) handle->process_handle, 0 ) == 0 )
+	{
+		kill( (pid_t) handle->process_handle, SIGKILL );
+	}
 }
 
 #endif /* _WIN32 */

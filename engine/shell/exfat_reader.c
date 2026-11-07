@@ -375,6 +375,9 @@ static int exfat_reader_scan_directory_recursive(
      const char *directory_path,
      int depth,
      bad_sector_log_t *out_bad_sector_log,
+     scan_progress_callback_t progress_callback,
+     void *progress_user_data,
+     uint64_t *inout_directories_visited,
      exfat_undelete_scan_result_t *out )
 {
 	uint8_t *buffer;
@@ -387,6 +390,11 @@ static int exfat_reader_scan_directory_recursive(
 	{
 		return 1;
 	}
+	if( progress_callback != NULL )
+	{
+		progress_callback( *inout_directories_visited, 0, progress_user_data );
+	}
+	( *inout_directories_visited )++;
 
 	buffer = exfat_reader_read_directory_clusters( reader, cluster, no_fat_chain, declared_size, cluster_size,
 	           out_bad_sector_log != NULL ? EXFAT_READER_MAX_READ_RETRIES : 0, out_bad_sector_log, &buffer_size );
@@ -434,7 +442,7 @@ static int exfat_reader_scan_directory_recursive(
 		                   reader, subdirs.entries[ i ].first_cluster,
 		                   subdirs.entries[ i ].no_fat_chain, subdirs.entries[ i ].file_size,
 		                   cluster_size, child_path, depth + 1,
-		                   out_bad_sector_log, out );
+		                   out_bad_sector_log, progress_callback, progress_user_data, inout_directories_visited, out );
 		if( recurse_result != 1 )
 		{
 			exfat_subdirectory_list_free( &subdirs );
@@ -449,9 +457,12 @@ static int exfat_reader_scan_directory_recursive(
 int exfat_reader_scan_directory_tree(
      exfat_reader_t *reader,
      bad_sector_log_t *out_bad_sector_log,
+     scan_progress_callback_t progress_callback,
+     void *progress_user_data,
      exfat_undelete_scan_result_t *out )
 {
 	size_t cluster_size;
+	uint64_t directories_visited = 0;
 	int result;
 
 	if( reader == NULL || reader->file == READER_IO_INVALID || out == NULL )
@@ -467,7 +478,7 @@ int exfat_reader_scan_directory_tree(
 
 	result = exfat_reader_scan_directory_recursive(
 	          reader, reader->boot_sector.first_cluster_of_root_directory, 0, 0, cluster_size, "", 0,
-	          out_bad_sector_log, out );
+	          out_bad_sector_log, progress_callback, progress_user_data, &directories_visited, out );
 
 	if( result != 1 )
 	{

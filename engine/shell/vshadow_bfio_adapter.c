@@ -125,10 +125,26 @@ static size_t vshadow_bfio_read_adapter( void *context_ptr, void *buffer, size_t
 }
 
 /* 真正的读取回调：复用 ntfs_bfio_read_core 这个已经有完整 mock 单元测试
- * 覆盖的核心逻辑，一行不改——这正是这次改动工作量比第20步小得多的
- * 根本原因：膨胀对齐+重试+坏道容忍这套算术只认一个注入的 read_fn，完全
- * 不关心这个 read_fn 内部到底是读物理设备还是读 libvshadow 重建出来的
- * 逻辑字节流 */
+ * 覆盖的核心逻辑——膨胀对齐+重试+坏道容忍这套算术只认一个注入的
+ * read_fn，完全不关心这个 read_fn 内部到底是读物理设备还是读
+ * libvshadow 重建出来的逻辑字节流。B9真机验证第二轮（2026-11-05小树
+ * 裁决）给 ntfs_bfio_read_core 加了 lead_in 参数之后，这里唯一要跟着
+ * 改的地方就是多传一个恒为 0 的 lead_in 实参——不是"一行不改"了，但
+ * 也只多这一个数字：libvshadow 走 `libvshadow_store_read_buffer_at_offset`
+ * 这种类文件 API，COW 重映射在库内部完成，从来不是裸物理设备，不需要
+ * 对齐，lead_in 永远是 0。
+ *
+ * 2026-11-07 新增"分块循环"：和 ntfs_bfio_adapter.c 里 `ntfs_bfio_read`
+ * 同一个真机测试发现的同一个缺口——libfsntfs 对非驻留属性的单次读取
+ * 请求可能超过 `ntfs_bfio_read_core` 单次能处理的上限
+ * （`NTFS_BFIO_ALIGNED_BUFFER_SIZE`），旧代码里 `ntfs_bfio_read_core` 对
+ * 超限请求会在 lead_in==0（这条路径永远是0）时直接绕过重试/坏道容忍，
+ * 直接把整个请求转交给 `read_fn`——这正是真机测试里让大文件内容读成
+ * 全0字节的那个缺口，VSS离线这条路径和直接NTFS路径共用同一个
+ * `ntfs_bfio_read_core`，必须同样修。这里按
+ * `NTFS_BFIO_ALIGNED_BUFFER_SIZE` 为上限分块，lead_in 恒为0所以每块
+ * 容量恒为这个常量本身，比 ntfs_bfio_adapter.c 那边（lead_in 可能非0）
+ * 简单。 */
 static ssize_t vshadow_bfio_read(
      intptr_t *io_handle,
      uint8_t *buffer,
@@ -136,7 +152,9 @@ static ssize_t vshadow_bfio_read(
      libfsntfs_error_t **error )
 {
 	vshadow_bfio_context_t *context = (vshadow_bfio_context_t *) io_handle;
-	ssize_t result;
+	uint8_t *output_cursor = buffer;
+	size_t remaining = size;
+	size_t total_read = 0;
 
 	(void) error;
 
@@ -145,15 +163,32 @@ static ssize_t vshadow_bfio_read(
 		return -1;
 	}
 
-	result = ntfs_bfio_read_core(
-	          vshadow_bfio_read_adapter, context, buffer, size,
-	          context->max_retries, (uint64_t) context->current_offset, context->out_bad_sector_log );
-
-	if( result > 0 )
+	while( remaining > 0 )
 	{
-		context->current_offset += (int64_t) result;
+		size_t chunk_size = remaining < NTFS_BFIO_ALIGNED_BUFFER_SIZE ? remaining : NTFS_BFIO_ALIGNED_BUFFER_SIZE;
+		ssize_t chunk_result;
+
+		chunk_result = ntfs_bfio_read_core(
+		                vshadow_bfio_read_adapter, context, output_cursor, chunk_size, 0,
+		                context->max_retries, (uint64_t) context->current_offset, context->out_bad_sector_log );
+
+		if( chunk_result <= 0 )
+		{
+			return total_read > 0 ? (ssize_t) total_read : chunk_result;
+		}
+
+		context->current_offset += (int64_t) chunk_result;
+		output_cursor            += (size_t) chunk_result;
+		total_read               += (size_t) chunk_result;
+		remaining                -= (size_t) chunk_result;
+
+		if( (size_t) chunk_result < chunk_size )
+		{
+			break;
+		}
 	}
-	return result;
+
+	return (ssize_t) total_read;
 }
 
 static ssize_t vshadow_bfio_write(

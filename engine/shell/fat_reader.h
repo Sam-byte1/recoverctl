@@ -26,6 +26,7 @@
 #include "../core/bad_sector_log.h"
 #include "../core/fat_boot_sector.h"
 #include "../core/fat_undelete_scanner.h"
+#include "../core/scan_progress_callback.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -85,10 +86,19 @@ int fat_reader_scan_root_directory(
  * 时，目录簇读取失败会先重试，重试耗尽后把这个（子）目录当成空目录
  * 处理（全 0 字节按 FAT 目录项格式解析出来就是"目录结束"），并记一笔
  * 坏道日志——效果上和原来"跳过这一层"完全一致，只是现在有了可见的
- * 坏道记录；传 NULL 表示不需要这个能力，行为和原来完全一样。 */
+ * 坏道记录；传 NULL 表示不需要这个能力，行为和原来完全一样。
+ *
+ * progress_callback（G2，GUI开发排期，2026-11-05）：每访问完一个目录
+ * （不管是根目录还是任意深度的子目录）回调一次，current是到目前为止
+ * 已经访问过的目录数（从0开始），total固定传0——递归遍历子目录之前
+ * 不知道总共会有多少层/多少个目录，这是 engine/core/scan_progress_callback.h
+ * 里"total=0表示总数未知"这个约定的典型场景，不是遗漏。传NULL表示不
+ * 需要进度汇报，行为和加这个参数之前完全一样。 */
 int fat_reader_scan_directory_tree(
      fat_reader_t *reader,
      bad_sector_log_t *out_bad_sector_log,
+     scan_progress_callback_t progress_callback,
+     void *progress_user_data,
      fat_undelete_scan_result_t *out );
 
 /* 假设数据连续存储，从 first_cluster 开始读 file_size 字节，写到 output_path。

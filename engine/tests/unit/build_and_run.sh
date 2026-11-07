@@ -5,6 +5,7 @@ set -e
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 ENGINE_DIR="$(cd "$SCRIPT_DIR/../.." && pwd)"
 LIBFSNTFS_DIR="$ENGINE_DIR/../third_party/lgpl-dynamic/libfsntfs"
+LIBBDE_DIR="$ENGINE_DIR/../third_party/lgpl-dynamic/libbde"
 FIXTURE="$ENGINE_DIR/tests/fixtures/ntfs-basic-undelete/volume.img"
 
 run_test() {
@@ -92,6 +93,16 @@ run_plain_test "test_bad_sector_policy" "$ENGINE_DIR/core/bad_sector_policy.c"
 run_plain_test "test_bad_sector_log" "$ENGINE_DIR/core/bad_sector_log.c"
 run_plain_test "test_photorec_report_parser" "$ENGINE_DIR/core/photorec_report_parser.c"
 run_plain_test "test_photorec_command_builder" "$ENGINE_DIR/core/photorec_command_builder.c"
+run_plain_test "test_bitlocker_key_protector_type_name" "$ENGINE_DIR/core/bitlocker_key_protector_type_name.c"
+run_plain_test "test_secure_memory" "$ENGINE_DIR/shell/secure_memory.c"
+run_plain_test "test_bitlocker_credential" "$ENGINE_DIR/core/bitlocker_credential.c"
+run_plain_test "test_hidden_input_core" "$ENGINE_DIR/core/hidden_input_core.c"
+run_plain_test "test_bitlocker_credential_source" \
+  "$ENGINE_DIR/shell/bitlocker_credential_source.c" \
+  "$ENGINE_DIR/core/bitlocker_credential.c" \
+  "$ENGINE_DIR/core/hidden_input_core.c" \
+  "$ENGINE_DIR/shell/secure_memory.c" \
+  "$ENGINE_DIR/shell/hidden_input_reader.c"
 
 run_shell_test() {
 	TEST_NAME="$1"
@@ -136,6 +147,38 @@ run_ntfs_shell_test() {
 }
 
 run_ntfs_shell_test "test_ntfs_bfio_adapter" \
+  "$ENGINE_DIR/shell/ntfs_bfio_adapter.c" \
+  "$ENGINE_DIR/core/sector_aligned_read.c" \
+  "$ENGINE_DIR/core/bad_sector_policy.c" \
+  "$ENGINE_DIR/core/bad_sector_log.c"
+
+# bitlocker_unlock.c 链接了真实的 libbde（B6，2026-11-05 任务拆解排期），
+# 和 ntfs_bfio_adapter 同样需要单独一个带实际库链接参数的编译命令
+run_libbde_shell_test() {
+	TEST_NAME="$1"
+	shift
+	echo "=== $TEST_NAME ==="
+	cc -std=c11 \
+	  -I "$LIBBDE_DIR/include" \
+	  -I "$LIBFSNTFS_DIR/include" \
+	  -I "$ENGINE_DIR/core" \
+	  -I "$ENGINE_DIR/shell" \
+	  "$SCRIPT_DIR/$TEST_NAME.c" \
+	  "$@" \
+	  -L "$LIBBDE_DIR/libbde/.libs" \
+	  -lbde \
+	  -L "$LIBFSNTFS_DIR/libfsntfs/.libs" \
+	  -lfsntfs \
+	  -Wl,-rpath,"$LIBBDE_DIR/libbde/.libs" \
+	  -Wl,-rpath,"$LIBFSNTFS_DIR/libfsntfs/.libs" \
+	  -o "$SCRIPT_DIR/$TEST_NAME"
+
+	"$SCRIPT_DIR/$TEST_NAME"
+}
+
+run_libbde_shell_test "test_bitlocker_unlock" \
+  "$ENGINE_DIR/shell/bitlocker_unlock.c" \
+  "$ENGINE_DIR/shell/secure_memory.c" \
   "$ENGINE_DIR/shell/ntfs_bfio_adapter.c" \
   "$ENGINE_DIR/core/sector_aligned_read.c" \
   "$ENGINE_DIR/core/bad_sector_policy.c" \

@@ -31,6 +31,8 @@ static int undelete_scan_result_append(
 int undelete_scanner_scan_volume(
      libfsntfs_volume_t *volume,
      undelete_scan_result_t *out,
+     scan_progress_callback_t progress_callback,
+     void *progress_user_data,
      libfsntfs_error_t **error )
 {
 	libfsntfs_file_entry_t *file_entry = NULL;
@@ -54,6 +56,10 @@ int undelete_scanner_scan_volume(
 
 	for( index = 0; index < number_of_entries; index++ )
 	{
+		if( progress_callback != NULL )
+		{
+			progress_callback( index, number_of_entries, progress_user_data );
+		}
 		if( libfsntfs_volume_get_file_entry_by_index( volume, index, &file_entry, error ) != 1 )
 		{
 			/* 有些索引本身不可读（从未使用的槽位），这是正常情况，跳过继续 */

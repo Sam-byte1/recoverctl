@@ -12,6 +12,7 @@
 #include <libfsntfs.h>
 
 #include "undelete_detector.h"
+#include "scan_progress_callback.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -27,11 +28,20 @@ undelete_scan_result_t;
 
 /* 扫描整个卷，把找到的候选项收集到 out 里（out 需要先用 memset 清零或保证
  * candidates == NULL、count == 0、capacity == 0）。
+ *
+ * progress_callback（G2，GUI开发排期，2026-11-05）：每处理完一个MFT
+ * 索引就回调一次（current=已处理的索引号，total=卷上的MFT条目总数，
+ * 扫描开始前就查得到，不是未知量）；传NULL表示不需要进度汇报（CLI场景
+ * 的默认用法），这种情况下和没加这个参数之前完全零行为变化——不会有
+ * 任何额外开销或副作用。progress_user_data原样透传给回调，不解释其含义。
+ *
  * 返回 1 表示扫描流程本身成功完成，-1 表示出现无法处理的错误。
  */
 int undelete_scanner_scan_volume(
      libfsntfs_volume_t *volume,
      undelete_scan_result_t *out,
+     scan_progress_callback_t progress_callback,
+     void *progress_user_data,
      libfsntfs_error_t **error );
 
 /* 释放 undelete_scanner_scan_volume 分配的内存 */

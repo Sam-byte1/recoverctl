@@ -1,6 +1,9 @@
 # macOS
 .DS_Store
 
+# PhotoRec手动测试时在项目根目录（cwd）留下的日志文件（/log标志的产物）
+photorec.log
+
 # 竞品参考软件（R-Studio 商业安装包，闭源，和本项目代码无关，出现在
 # 2026-11-04（本轮自主开发会话开始之前）不是本项目的工作产出，体积
 # 190MB+ 且随时能从官网重新下载，不需要进版本库备份；文件本身未删除，
@@ -44,3 +47,8 @@ cli/*.dll.a
 # 的 .c 源文件放在同一目录，靠没有扩展名区分，保留 .c 源码本身）
 engine/tests/unit/test_*
 !engine/tests/unit/test_*.c
+
+# ui-tokenize插件的本地记账状态（设计token使用记录），是插件自己的
+# 工作簿，不是产品源码，项目里好几个目录下都有（根目录/gui/cli/
+# third_party下面），不分路径统一忽略
+.tokenize/

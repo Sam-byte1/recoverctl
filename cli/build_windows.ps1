@@ -5,6 +5,7 @@ LIBFSNTFS_DIR=/c/dev/libfsntfs
 LIBVSGPT_DIR=/c/dev/libvsgpt
 LIBVSMBR_DIR=/c/dev/libvsmbr
 LIBVSHADOW_DIR=/c/dev/libvshadow
+LIBBDE_DIR=/c/dev/libbde
 ENGINE_DIR=/c/dev/engine
 OUT=/c/dev/cli/recoverctl.exe
 BRIDGE_DLL=/c/dev/cli/ntfs_bfio_bridge.dll
@@ -43,6 +44,8 @@ clang -std=c11 \
   -I "$LIBVSMBR_DIR/common" \
   -I "$LIBVSHADOW_DIR/include" \
   -I "$LIBVSHADOW_DIR/common" \
+  -I "$LIBBDE_DIR/include" \
+  -I "$LIBBDE_DIR/common" \
   -I "$ENGINE_DIR/core" \
   /c/dev/cli/main.c \
   "$ENGINE_DIR/core/undelete_detector.c" \
@@ -64,12 +67,24 @@ clang -std=c11 \
   "$ENGINE_DIR/core/photorec_report_parser.c" \
   "$ENGINE_DIR/core/photorec_command_builder.c" \
   "$ENGINE_DIR/shell/photorec_invoker.c" \
+  "$ENGINE_DIR/core/bitlocker_key_protector_type_name.c" \
+  "$ENGINE_DIR/core/bitlocker_credential.c" \
+  "$ENGINE_DIR/core/hidden_input_core.c" \
+  "$ENGINE_DIR/shell/secure_memory.c" \
+  "$ENGINE_DIR/shell/hidden_input_reader.c" \
+  "$ENGINE_DIR/shell/bitlocker_volume_opener.c" \
+  "$ENGINE_DIR/shell/bitlocker_credential_source.c" \
+  "$ENGINE_DIR/shell/bitlocker_unlock.c" \
+  "$ENGINE_DIR/shell/bitlocker_bfio_adapter.c" \
   "$ENGINE_DIR/shell/aligned_device_reader.c" \
+  "$ENGINE_DIR/shell/partition_extractor.c" \
   "$ENGINE_DIR/shell/file_writer.c" \
   "$ENGINE_DIR/shell/ntfs_bfio_adapter.c" \
   "$ENGINE_DIR/shell/vshadow_bfio_adapter.c" \
   "$ENGINE_DIR/shell/path_resolver.c" \
   "$ENGINE_DIR/shell/disk_enumerator.c" \
+  "$ENGINE_DIR/shell/bitlocker_status_checker.c" \
+  "$ENGINE_DIR/shell/volume_disk_extents.c" \
   "$ENGINE_DIR/shell/fat_reader.c" \
   "$ENGINE_DIR/shell/exfat_reader.c" \
   "$ENGINE_DIR/shell/partition_reader.c" \
@@ -81,8 +96,12 @@ clang -std=c11 \
   -lvsmbr \
   -L "$LIBVSHADOW_DIR/libvshadow/.libs" \
   -lvshadow \
+  -L "$LIBBDE_DIR/libbde/.libs" \
+  -lbde \
   -L /c/dev/cli \
   -lntfs_bfio_bridge \
+  -L /clangarm64/lib \
+  -lmpr \
   -o "$OUT"
 
 echo "build succeeded: $OUT"
@@ -90,6 +109,12 @@ cp "$LIBFSNTFS_DIR/libfsntfs/.libs/libfsntfs-1.dll" /c/dev/cli/
 cp "$LIBVSGPT_DIR/libvsgpt/.libs/libvsgpt-1.dll" /c/dev/cli/
 cp "$LIBVSMBR_DIR/libvsmbr/.libs/libvsmbr-1.dll" /c/dev/cli/
 cp "$LIBVSHADOW_DIR/libvshadow/.libs/libvshadow-1.dll" /c/dev/cli/
+cp "$LIBBDE_DIR/libbde/.libs/libbde-1.dll" /c/dev/cli/
+# libbde links against winpthread (see docs/开发日志.md B2 entry for why);
+# this DLL only lives inside the MSYS2 install tree, not on a normal
+# Windows system PATH, so it has to ship alongside the other DLLs just
+# like libncursesw6.dll does for photorec.exe below.
+cp /clangarm64/bin/libwinpthread-1.dll /c/dev/cli/
 ls -la /c/dev/cli/
 '@
 $cmd | & "C:\msys64\usr\bin\bash.exe" --login

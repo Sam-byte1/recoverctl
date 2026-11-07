@@ -25,6 +25,7 @@
 #include "../core/bad_sector_log.h"
 #include "../core/exfat_boot_sector.h"
 #include "../core/exfat_undelete_scanner.h"
+#include "../core/scan_progress_callback.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -74,10 +75,17 @@ int exfat_reader_scan_root_directory(
  * P5 坏道保护（2026-11-05 小树裁决第18步）：out_bad_sector_log 非 NULL
  * 时，目录簇读取失败会先重试，重试耗尽后把这个（子）目录当成空目录
  * 处理（和 fat_reader_scan_directory_tree 同样的设计，见那边的注释），
- * 并记一笔坏道日志；传 NULL 表示不需要这个能力，行为和原来完全一样。 */
+ * 并记一笔坏道日志；传 NULL 表示不需要这个能力，行为和原来完全一样。
+ *
+ * progress_callback（G2，GUI开发排期，2026-11-05）：和
+ * fat_reader_scan_directory_tree 同样的设计（见那边的注释）——每访问
+ * 完一个目录回调一次，total固定传0（总数未知）。传NULL表示不需要进度
+ * 汇报，行为和加这个参数之前完全一样。 */
 int exfat_reader_scan_directory_tree(
      exfat_reader_t *reader,
      bad_sector_log_t *out_bad_sector_log,
+     scan_progress_callback_t progress_callback,
+     void *progress_user_data,
      exfat_undelete_scan_result_t *out );
 
 /* 从 first_cluster 开始恢复 file_size 字节的内容，写到 output_path。

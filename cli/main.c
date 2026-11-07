@@ -21,15 +21,24 @@
 #include "../engine/shell/fat_reader.h"
 #include "../engine/shell/file_writer.h"
 #include "../engine/shell/ntfs_bfio_adapter.h"
+#include "../engine/shell/partition_extractor.h"
 #include "../engine/shell/partition_reader.h"
 #include "../engine/shell/path_resolver.h"
 #include "../engine/shell/photorec_invoker.h"
 #include "../engine/shell/vshadow_bfio_adapter.h"
+#include "../engine/shell/bitlocker_volume_opener.h"
+#include "../engine/shell/bitlocker_credential_source.h"
+#include "../engine/shell/bitlocker_unlock.h"
+#include "../engine/shell/bitlocker_bfio_adapter.h"
+#include "../engine/shell/secure_memory.h"
 #include "../engine/core/photorec_report_parser.h"
+#include "../engine/core/bitlocker_key_protector_type_name.h"
 
 #ifdef _WIN32
 #include <windows.h>
 #include "../engine/shell/disk_enumerator.h"
+#include "../engine/shell/bitlocker_status_checker.h"
+#include "../engine/shell/volume_disk_extents.h"
 #endif
 
 /* 前向声明：NTFS 分区偏移扫描（拷贝到临时文件再处理那条路径）要调用
@@ -124,6 +133,7 @@ static void print_usage( const char *program_name )
 #ifdef _WIN32
 	fprintf( stderr, "      %s list   (列出本机的磁盘/分区)\n", program_name );
 	fprintf( stderr, "      %s list-shadows <盘符>   (列出这个盘现有的历史卷影副本，比如系统还原点自动创建的快照)\n", program_name );
+	fprintf( stderr, "      %s disk-encryption-status <盘符>   (诊断：查询这个盘符是否受BitLocker管理/是否锁定/加密进度，以及它在物理盘上的编号+字节偏移)\n", program_name );
 	fprintf( stderr, "      %s scan-shadow <卷影副本设备路径>   (像扫描普通NTFS卷一样扫描某个历史快照，设备路径从 list-shadows 的输出里拿)\n", program_name );
 	fprintf( stderr, "      %s recover-shadow <卷影副本设备路径> <候选项序号> <输出路径>\n", program_name );
 #endif
@@ -132,6 +142,15 @@ static void print_usage( const char *program_name )
 	fprintf( stderr, "      %s recover-shadow-offline <磁盘/卷镜像路径> <store序号> <候选项序号> <输出路径>\n", program_name );
 	fprintf( stderr, "      %s recover-carve <PhotoRec可执行文件路径> <设备/镜像路径> <输出目录>   (信号雕刻兜底手段，整个目标当一块盘处理，文件系统结构损坏到scan/recover解析不出来时用)\n", program_name );
 	fprintf( stderr, "      %s recover-carve-partition <PhotoRec可执行文件路径> <设备路径> <分区偏移> <分区大小字节数> <输出目录>   (先按我们自己解析出的分区边界切出这一段，再做信号雕刻，不让PhotoRec自己重新探测分区表)\n", program_name );
+	fprintf( stderr, "      %s list-bitlocker-key-protectors <磁盘/卷路径> <偏移>   (诊断：列出这个卷上有哪些BitLocker密钥保护器，不碰任何凭据)\n", program_name );
+	fprintf( stderr, "      %s scan-bitlocker <磁盘/卷路径> <偏移> <凭据类型:password|recovery-key|startup-key|fvek> <凭据来源:file|cli|interactive> [<凭据文件路径或凭据内容本身>]\n", program_name );
+	fprintf( stderr, "      %s recover-bitlocker <磁盘/卷路径> <偏移> <凭据类型> <凭据来源:file|cli|interactive> [<凭据文件路径或凭据内容本身>] <MFT索引> <输出路径>\n", program_name );
+	fprintf( stderr, "          （凭据来源=interactive时不要传凭据内容参数——会现场从终端不回显地提示输入，"
+	                 "不支持startup-key类型；来源=cli时凭据会短暂出现在shell历史/进程列表里，"
+	                 "不敏感场景外不建议使用）\n" );
+	fprintf( stderr, "          （锁定的BitLocker卷不能用卷盘符路径直接读取，必须传物理盘路径（如\\\\.\\PhysicalDrive3）"
+	                 "+该分区在物理盘上的字节偏移（用 `%s partitions <磁盘>` 查）；未锁定/未加密卷可以继续传卷路径+偏移0）\n", program_name );
+	fprintf( stderr, "          凭据来源=file时上一个参数是文件路径；=cli时是凭据内容本身（注意：这种方式凭据会短暂出现在shell历史/进程列表里，本工具用完会尽快原地覆写，但无法消除“曾经出现过”这个事实；startup-key类型只支持file来源）\n" );
 }
 
 static int command_partitions_gpt( const char *device_path )
@@ -219,166 +238,14 @@ static int command_partitions_mbr( const char *device_path )
  * 稳定的东西）。所以先用"拷一份出来再用现成的 NTFS 读取逻辑"这个更
  * 保守的办法，代价是大分区会多花时间/磁盘空间去拷贝——这个限制值得
  * 以后专门花时间换成真正的 range 读取，不是本次没注意到。
+ *
+ * 2026-11-06小树裁决：实际的"打开+定位+循环拷贝"实现和"系统临时文件
+ * 路径"两个函数已经抽到`engine/shell/partition_extractor.{h,c}`
+ * （`partition_extractor_extract_to_temp_file`/
+ * `partition_extractor_get_temp_file_path`），供`recover-carve-partition`
+ * 这个CLI命令和GUI的`CarveDialog`"按分区范围雕刻"分支共享同一份实现，
+ * 不是各自维护一份。
  */
-/* 这个函数之前在 Windows/非 Windows 两个分支里各自维护了一份完整的
- * "打开+定位+循环拷贝"实现，循环部分完全不做扇区对齐处理——当初没撞上
- * FAT32/exFAT 那种"请求长度不是扇区整数倍就返回 0"的坑，纯粹是运气：
- * 这里拷贝的是整个分区，分区大小恰好是内部缓冲区大小的整数倍。这其实是
- * 一个潜伏的同类 bug，只是还没被真实触发（2026-11-05 第 11 步文档/质量
- * 复查时顺带识别出来的）。现在改成和 fat_reader.c/exfat_reader.c 一样，
- * 调用共享的 `aligned_device_reader_copy_to_file`，用一个保守的扇区大小
- * 假设（4096，覆盖常见的 512 逻辑扇区和 4K Advanced Format 物理扇区，
- * 4096 的倍数必然也是 512 的倍数）做对齐，不再是"运气好才没触发"。
- * 平台相关的部分收窄到只剩"怎么打开/定位一个裸设备句柄"。 */
-#define PARTITION_COPY_ASSUMED_SECTOR_SIZE 4096
-
-#ifdef _WIN32
-/* 真实的 \\.\PhysicalDriveN / \\.\<盘符>: 路径是裸设备，不是普通文件——
- * 用 CRT 的 fopen/fseek/fread 实测在这种路径上要么打不开、要么读到一半
- * 就不出声地失败（第一次在真实 GPT 磁盘上跑 scan-partition 就撞上了这个）。
- * disk_enumerator.c 已经验证过 CreateFileA + GENERIC_READ + FILE_SHARE_READ/WRITE
- * 这套组合能稳定打开裸设备，这里照搬同样的打开方式，只是换成用 ReadFile 顺序读。 */
-static size_t partition_copy_read_adapter( void *context, void *buffer, size_t size )
-{
-	HANDLE input = (HANDLE) context;
-	DWORD actually_read = 0;
-
-	if( !ReadFile( input, buffer, (DWORD) size, &actually_read, NULL ) )
-	{
-		return 0;
-	}
-	return (size_t) actually_read;
-}
-
-/* P5 坏道保护（2026-11-05 小树裁决第18步，桶①）：这次拷贝的是整个分区，
- * 坏道容忍对这条路径依然有意义——分区里某一小段物理损坏，不应该让整个
- * scan-partition/recover-partition 直接失败，而是把那一小段在临时文件
- * 里用 0 填充，libfsntfs 后续解析时该段落的 NTFS 结构会读不出来，但卷
- * 其它部分依然可以正常扫描/恢复。 */
-#define PARTITION_COPY_MAX_READ_RETRIES 3
-
-static int extract_partition_to_temp_file(
-     const char *device_path,
-     long offset,
-     uint64_t size,
-     bad_sector_log_t *out_bad_sector_log,
-     const char *temp_path )
-{
-	HANDLE input;
-	LARGE_INTEGER move_to;
-	int return_code;
-
-	input = CreateFileA(
-	         device_path,
-	         GENERIC_READ,
-	         FILE_SHARE_READ | FILE_SHARE_WRITE,
-	         NULL,
-	         OPEN_EXISTING,
-	         0,
-	         NULL );
-	if( input == INVALID_HANDLE_VALUE )
-	{
-		return -1;
-	}
-
-	move_to.QuadPart = offset;
-	if( !SetFilePointerEx( input, move_to, NULL, FILE_BEGIN ) )
-	{
-		CloseHandle( input );
-		return -1;
-	}
-
-	return_code = aligned_device_reader_copy_to_file(
-	               partition_copy_read_adapter, (void *) input,
-	               PARTITION_COPY_ASSUMED_SECTOR_SIZE, size,
-	               out_bad_sector_log != NULL ? PARTITION_COPY_MAX_READ_RETRIES : 0,
-	               out_bad_sector_log, temp_path );
-
-	CloseHandle( input );
-	return return_code;
-}
-#else
-/* Mac 开发机上这个函数只会对着我们自己手造的合成镜像文件（普通文件）测试，
- * 不涉及真实裸设备，不需要扇区对齐——传 sector_size=0 即可。 */
-static size_t partition_copy_read_adapter( void *context, void *buffer, size_t size )
-{
-	FILE *input = (FILE *) context;
-
-	return fread( buffer, 1, size, input );
-}
-
-#define PARTITION_COPY_MAX_READ_RETRIES 3
-
-static int extract_partition_to_temp_file(
-     const char *device_path,
-     long offset,
-     uint64_t size,
-     bad_sector_log_t *out_bad_sector_log,
-     const char *temp_path )
-{
-	FILE *input;
-	int return_code;
-
-	input = fopen( device_path, "rb" );
-	if( input == NULL )
-	{
-		return -1;
-	}
-	if( fseek( input, offset, SEEK_SET ) != 0 )
-	{
-		fclose( input );
-		return -1;
-	}
-
-	return_code = aligned_device_reader_copy_to_file(
-	               partition_copy_read_adapter, input, 0, size,
-	               out_bad_sector_log != NULL ? PARTITION_COPY_MAX_READ_RETRIES : 0,
-	               out_bad_sector_log, temp_path );
-
-	fclose( input );
-	return return_code;
-}
-#endif
-
-/* 对分区表解析出来的某个分区偏移，直接当一个独立的 FAT32 卷去扫描——
- * 这是把"第 3 步：分区表解析"和"scan"真正串起来的地方，而不是停在
- * "只能看到分区在哪"这一半。目前只支持 FAT32：NTFS 要用 libbfio 的
- * "range io handle" 包一层才能让 libfsntfs 从非零偏移开始读，这部分
- * 还没做（明确记在开发日志里，不是忘了），FAT32 这边因为读写逻辑完全是
- * 我们自己写的 fat_reader.c，加一个 base_offset 字段就直接支持了，
- * 成本低很多，所以先做这一半。
- */
-#define PARTITION_TEMP_FILE_NAME "recoverctl_partition_extract.tmp"
-
-/* libfsntfs 打开卷时会把传入路径解析成绝对路径，这一步依赖"当前工作目录"
- * 是一个能被正常查询到的本地路径——用户双击运行、从计划任务启动、或者像
- * 我们在虚拟机里测试时从网络共享盘的脚本里调用，当前工作目录都可能是
- * 奇怪的地方（真实撞上过：从共享盘上的 .bat 里启动时，libcpath 查询当前
- * 工作目录失败，导致"打开 NTFS 卷"莫名其妙失败，且一开始完全没打印任何
- * 错误信息，排查了很久）。所以这里不再用相对路径的临时文件名，而是显式
- * 落到系统临时目录，彻底不依赖当前工作目录是否正常。 */
-static int get_partition_temp_file_path( char *out_path, size_t out_path_size )
-{
-#ifdef _WIN32
-	char temp_dir[ MAX_PATH ];
-	DWORD temp_dir_length = GetTempPathA( (DWORD) sizeof( temp_dir ), temp_dir );
-
-	if( ( temp_dir_length == 0 ) || ( temp_dir_length > sizeof( temp_dir ) ) )
-	{
-		return -1;
-	}
-	if( snprintf( out_path, out_path_size, "%s%s", temp_dir, PARTITION_TEMP_FILE_NAME ) >= (int) out_path_size )
-	{
-		return -1;
-	}
-#else
-	if( snprintf( out_path, out_path_size, "/tmp/%s", PARTITION_TEMP_FILE_NAME ) >= (int) out_path_size )
-	{
-		return -1;
-	}
-#endif
-	return 1;
-}
 
 static int command_scan_partition_ntfs_via_copy( const char *device_path, long offset, uint64_t size )
 {
@@ -395,7 +262,7 @@ static int command_scan_partition_ntfs_via_copy( const char *device_path, long o
 		return EXIT_FAILURE;
 	}
 
-	if( get_partition_temp_file_path( temp_path, sizeof( temp_path ) ) != 1 )
+	if( partition_extractor_get_temp_file_path( temp_path, sizeof( temp_path ) ) != 1 )
 	{
 		fprintf( stderr, "无法确定临时文件路径\n" );
 		return EXIT_FAILURE;
@@ -404,7 +271,7 @@ static int command_scan_partition_ntfs_via_copy( const char *device_path, long o
 	printf( "不是 FAT32，按 NTFS 尝试（先把这段分区拷到临时文件 %s，再用现成的 NTFS 逻辑处理，大分区会慢一些）...\n",
 	        temp_path );
 
-	if( extract_partition_to_temp_file( device_path, offset, size, &bad_log, temp_path ) != 1 )
+	if( partition_extractor_extract_to_temp_file( device_path, offset, size, &bad_log, temp_path ) != 1 )
 	{
 		fprintf( stderr, "拷贝分区内容失败\n" );
 		bad_sector_log_free( &bad_log );
@@ -470,7 +337,7 @@ static int command_scan_partition( const char *device_path, const char *offset_s
 	printf( "正在扫描 (FAT32, 偏移=%ld): %s\n", offset, device_path );
 
 	memset( &result, 0, sizeof( result ) );
-	if( fat_reader_scan_directory_tree( &reader, &bad_log, &result ) != 1 )
+	if( fat_reader_scan_directory_tree( &reader, &bad_log, NULL, NULL, &result ) != 1 )
 	{
 		fprintf( stderr, "扫描过程中发生错误\n" );
 		fat_reader_close( &reader );
@@ -540,7 +407,7 @@ static int command_scan_partition_exfat( const char *device_path, const char *of
 	printf( "正在扫描 (exFAT, 偏移=%ld): %s\n", offset, device_path );
 
 	memset( &result, 0, sizeof( result ) );
-	if( exfat_reader_scan_directory_tree( &reader, &bad_log, &result ) != 1 )
+	if( exfat_reader_scan_directory_tree( &reader, &bad_log, NULL, NULL, &result ) != 1 )
 	{
 		fprintf( stderr, "扫描过程中发生错误\n" );
 		exfat_reader_close( &reader );
@@ -592,13 +459,13 @@ static int command_recover_partition_ntfs_via_copy( const char *device_path, lon
 		return EXIT_FAILURE;
 	}
 
-	if( get_partition_temp_file_path( temp_path, sizeof( temp_path ) ) != 1 )
+	if( partition_extractor_get_temp_file_path( temp_path, sizeof( temp_path ) ) != 1 )
 	{
 		fprintf( stderr, "无法确定临时文件路径\n" );
 		return EXIT_FAILURE;
 	}
 
-	if( extract_partition_to_temp_file( device_path, offset, size, &bad_log, temp_path ) != 1 )
+	if( partition_extractor_extract_to_temp_file( device_path, offset, size, &bad_log, temp_path ) != 1 )
 	{
 		fprintf( stderr, "拷贝分区内容失败\n" );
 		bad_sector_log_free( &bad_log );
@@ -667,7 +534,7 @@ static int command_recover_partition( const char *device_path, const char *offse
 	}
 
 	memset( &result, 0, sizeof( result ) );
-	if( fat_reader_scan_directory_tree( &reader, &bad_log, &result ) != 1 )
+	if( fat_reader_scan_directory_tree( &reader, &bad_log, NULL, NULL, &result ) != 1 )
 	{
 		fprintf( stderr, "扫描失败\n" );
 		fat_reader_close( &reader );
@@ -733,7 +600,7 @@ static int command_recover_partition_exfat( const char *device_path, long offset
 	}
 
 	memset( &result, 0, sizeof( result ) );
-	if( exfat_reader_scan_directory_tree( &reader, &bad_log, &result ) != 1 )
+	if( exfat_reader_scan_directory_tree( &reader, &bad_log, NULL, NULL, &result ) != 1 )
 	{
 		fprintf( stderr, "扫描失败\n" );
 		exfat_reader_close( &reader );
@@ -1063,7 +930,7 @@ static int command_scan_ntfs_via_bfio_handle(
 
 	printf( "正在扫描 (NTFS): %s\n", display_label );
 
-	if( undelete_scanner_scan_volume( volume, &result, &error ) != 1 )
+	if( undelete_scanner_scan_volume( volume, &result, NULL, NULL, &error ) != 1 )
 	{
 		fprintf( stderr, "扫描过程中发生错误\n" );
 		goto on_error;
@@ -1150,7 +1017,7 @@ static int command_scan_ntfs( const char *volume_path )
 	 * 实现读磁盘，插不进任何坏道容忍逻辑），改成自己构造一个自定义
 	 * libbfio 句柄（engine/shell/ntfs_bfio_adapter.c），真正的读取走我们
 	 * 自己的代码，能接入重试+跳过+坏道日志 */
-	if( ntfs_bfio_adapter_initialize( volume_path, NTFS_DIRECT_MAX_READ_RETRIES, &bad_log, &bfio_handle, &error ) != 1 )
+	if( ntfs_bfio_adapter_initialize( volume_path, 0, NTFS_DIRECT_MAX_READ_RETRIES, &bad_log, &bfio_handle, &error ) != 1 )
 	{
 		fprintf( stderr, "无法构造自定义 I/O 句柄: %s\n", volume_path );
 		if( error != NULL )
@@ -1185,7 +1052,7 @@ static int command_scan_fat( const char *volume_path )
 
 	printf( "正在扫描 (FAT32): %s\n", volume_path );
 
-	if( fat_reader_scan_directory_tree( &reader, &bad_log, &result ) != 1 )
+	if( fat_reader_scan_directory_tree( &reader, &bad_log, NULL, NULL, &result ) != 1 )
 	{
 		fprintf( stderr, "扫描过程中发生错误\n" );
 		fat_reader_close( &reader );
@@ -1251,7 +1118,7 @@ static int command_scan_exfat( const char *volume_path )
 
 	printf( "正在扫描 (exFAT): %s\n", volume_path );
 
-	if( exfat_reader_scan_directory_tree( &reader, &bad_log, &result ) != 1 )
+	if( exfat_reader_scan_directory_tree( &reader, &bad_log, NULL, NULL, &result ) != 1 )
 	{
 		fprintf( stderr, "扫描过程中发生错误\n" );
 		exfat_reader_close( &reader );
@@ -1425,7 +1292,7 @@ static int command_recover_ntfs( const char *volume_path, const char *mft_index_
 
 	/* 和 command_scan_ntfs 同样的理由：自定义 libbfio 句柄才能接入坏道
 	 * 容忍，见 engine/shell/ntfs_bfio_adapter.c */
-	if( ntfs_bfio_adapter_initialize( volume_path, NTFS_DIRECT_MAX_READ_RETRIES, &bad_log, &bfio_handle, &error ) != 1 )
+	if( ntfs_bfio_adapter_initialize( volume_path, 0, NTFS_DIRECT_MAX_READ_RETRIES, &bad_log, &bfio_handle, &error ) != 1 )
 	{
 		fprintf( stderr, "无法构造自定义 I/O 句柄: %s\n", volume_path );
 		if( error != NULL )
@@ -1733,7 +1600,7 @@ static int command_recover_fat( const char *volume_path, const char *index_str, 
 	}
 
 	memset( &result, 0, sizeof( result ) );
-	if( fat_reader_scan_directory_tree( &reader, &bad_log, &result ) != 1 )
+	if( fat_reader_scan_directory_tree( &reader, &bad_log, NULL, NULL, &result ) != 1 )
 	{
 		fprintf( stderr, "扫描失败\n" );
 		fat_reader_close( &reader );
@@ -1800,7 +1667,7 @@ static int command_recover_exfat( const char *volume_path, const char *index_str
 	}
 
 	memset( &result, 0, sizeof( result ) );
-	if( exfat_reader_scan_directory_tree( &reader, &bad_log, &result ) != 1 )
+	if( exfat_reader_scan_directory_tree( &reader, &bad_log, NULL, NULL, &result ) != 1 )
 	{
 		fprintf( stderr, "扫描失败\n" );
 		exfat_reader_close( &reader );
@@ -2012,14 +1879,14 @@ static int command_recover_carve_partition(
 		fprintf( stderr, "信号雕刻需要知道分区大小才能先把这段范围切出来，不能是 0\n" );
 		return EXIT_FAILURE;
 	}
-	if( get_partition_temp_file_path( temp_path, sizeof( temp_path ) ) != 1 )
+	if( partition_extractor_get_temp_file_path( temp_path, sizeof( temp_path ) ) != 1 )
 	{
 		fprintf( stderr, "无法确定临时文件路径\n" );
 		return EXIT_FAILURE;
 	}
 	printf( "先把这段分区范围拷到临时文件 %s 再做信号雕刻...\n", temp_path );
 
-	if( extract_partition_to_temp_file( device_path, offset, size, &bad_log, temp_path ) != 1 )
+	if( partition_extractor_extract_to_temp_file( device_path, offset, size, &bad_log, temp_path ) != 1 )
 	{
 		fprintf( stderr, "拷贝分区内容失败\n" );
 		bad_sector_log_free( &bad_log );
@@ -2030,6 +1897,340 @@ static int command_recover_carve_partition(
 
 	return_code = command_recover_carve( photorec_bin_path, temp_path, output_dir_base );
 	remove( temp_path );
+	return return_code;
+}
+
+static void print_bitlocker_error( libbde_error_t **error )
+{
+	char message[ 1024 ];
+
+	if( *error == NULL )
+	{
+		return;
+	}
+	if( libbde_error_sprint( *error, message, sizeof( message ) ) != -1 )
+	{
+		fprintf( stderr, "%s\n", message );
+	}
+	libbde_error_free( error );
+}
+
+/* B1（BitLocker，2026-11-05 任务拆解排期）：诊断命令，不碰任何凭据，
+ * 只列出这个卷上登记了哪些密钥保护器——libbde打开BDE卷的元数据本身
+ * 是明文的，只有卷数据才加密，所以这一步完全不涉及敏感信息处理。 */
+static int command_list_bitlocker_key_protectors( const char *device_path, uint64_t base_offset )
+{
+	bitlocker_key_protector_list_t list;
+	libbde_error_t *error = NULL;
+	int i;
+
+	memset( &list, 0, sizeof( list ) );
+
+	if( bitlocker_volume_opener_list_key_protectors( device_path, base_offset, &list, &error ) != 1 )
+	{
+		fprintf( stderr, "无法打开/解析该卷的BitLocker元数据: %s（偏移=%llu）\n", device_path, (unsigned long long) base_offset );
+		print_bitlocker_error( &error );
+		return EXIT_FAILURE;
+	}
+	if( list.count == 0 )
+	{
+		printf( "这个卷没有检测到任何BitLocker密钥保护器（可能不是BitLocker加密卷，或者还没有启用BitLocker）\n" );
+	}
+	else
+	{
+		printf( "找到 %d 个密钥保护器：\n", list.count );
+		for( i = 0; i < list.count; i++ )
+		{
+			int j;
+
+			printf( "  [%d] 类型=%s  GUID=", i, bitlocker_key_protector_type_name( list.entries[ i ].type ) );
+			for( j = 0; j < 16; j++ )
+			{
+				printf( "%02x", list.entries[ i ].guid[ j ] );
+			}
+			printf( "\n" );
+		}
+	}
+	bitlocker_key_protector_list_free( &list );
+	return EXIT_SUCCESS;
+}
+
+#ifdef _WIN32
+/* I3（BitLocker自动识别，2026-11-06小树裁决）：诊断命令，独立于GUI的
+ * 验证入口——和I1/I2延续这个项目一贯"CLI先行、GUI复用"的顺序（list-
+ * shadows/scan-bitlocker等都是这个模式），不是GUI专属功能。 */
+static int command_disk_encryption_status( char drive_letter )
+{
+	bitlocker_status_t status;
+	volume_disk_extents_t extents;
+
+	if( bitlocker_status_checker_query( drive_letter, &status ) != 1 )
+	{
+		fprintf( stderr, "查询 %c: 的BitLocker状态失败（PowerShell查询没有正常完成）\n", drive_letter );
+		return EXIT_FAILURE;
+	}
+
+	printf( "盘符: %c:\n", drive_letter );
+	if( !status.is_fve_manageable )
+	{
+		printf( "  不受BitLocker管理（这个盘从来没有和BitLocker打过交道）\n" );
+	}
+	else if( status.is_locked )
+	{
+		printf( "  已加密，当前已锁定（需要提供凭据才能读取）\n" );
+	}
+	else if( status.is_protected )
+	{
+		printf( "  已加密，当前已解锁（已用 %d%%）\n", status.encryption_percentage );
+	}
+	else
+	{
+		printf( "  未加密\n" );
+	}
+
+	if( volume_disk_extents_query( drive_letter, &extents ) != 1 )
+	{
+		fprintf( stderr, "查询 %c: 的物理盘位置失败\n", drive_letter );
+		return EXIT_FAILURE;
+	}
+	if( !extents.is_single_extent )
+	{
+		printf( "  物理盘位置: 这个卷跨多个物理区间，无法自动定位单一的物理盘+偏移\n" );
+	}
+	else
+	{
+		printf( "  物理盘位置: \\\\.\\PhysicalDrive%u，偏移 %llu 字节（大小 %llu 字节）\n",
+		     extents.disk_number, (unsigned long long) extents.starting_offset, (unsigned long long) extents.extent_length );
+	}
+	return EXIT_SUCCESS;
+}
+#endif
+
+#define BITLOCKER_MAX_READ_RETRIES 3
+
+/* B8（BitLocker，2026-11-05 任务拆解排期）：把credential-type字符串
+ * 解析成 bitlocker_credential_type_t。 */
+static int parse_bitlocker_credential_type( const char *type_str, bitlocker_credential_type_t *out_type )
+{
+	if( strcmp( type_str, "password" ) == 0 )
+	{
+		*out_type = BITLOCKER_CREDENTIAL_TYPE_PASSWORD;
+	}
+	else if( strcmp( type_str, "recovery-key" ) == 0 )
+	{
+		*out_type = BITLOCKER_CREDENTIAL_TYPE_RECOVERY_KEY;
+	}
+	else if( strcmp( type_str, "startup-key" ) == 0 )
+	{
+		*out_type = BITLOCKER_CREDENTIAL_TYPE_STARTUP_KEY;
+	}
+	else if( strcmp( type_str, "fvek" ) == 0 )
+	{
+		*out_type = BITLOCKER_CREDENTIAL_TYPE_FVEK;
+	}
+	else
+	{
+		fprintf( stderr, "无效的凭据类型: %s（应该是 password / recovery-key / startup-key / fvek 之一）\n", type_str );
+		return -1;
+	}
+	return 1;
+}
+
+/* 三种凭据渠道（file/B5、cli/B10、interactive/B11c）全部接入，世杰
+ * 拍板要的三种渠道到这里齐了。 */
+static int bitlocker_open_volume_and_bfio(
+     const char *device_path,
+     uint64_t base_offset,
+     bitlocker_credential_type_t credential_type,
+     const char *credential_source,
+     char *credential_value,
+     bad_sector_log_t *bad_log,
+     libbde_volume_t **out_volume,
+     libbfio_handle_t **out_unlock_bfio_handle,
+     libbfio_handle_t **out_bfio_handle )
+{
+	bitlocker_resolved_credential_t credential;
+	libbde_error_t *error = NULL;
+	libfsntfs_error_t *fsntfs_error = NULL;
+
+	if( strcmp( credential_source, "file" ) == 0 )
+	{
+		if( bitlocker_credential_source_load_from_file( credential_type, credential_value, &credential ) != 1 )
+		{
+			return -1;
+		}
+	}
+	else if( strcmp( credential_source, "cli" ) == 0 )
+	{
+		int load_result = bitlocker_credential_source_load_from_cli_argument( credential_type, credential_value, &credential );
+
+		/* B10：凭据一旦拷进 credential，立刻原地覆写这个argv槽位——
+		 * 缩短凭据明文留在进程参数列表里的窗口期，但如世杰拍板时
+		 * 已经提醒过的：覆写只能缩短窗口，不能消除"这个进程启动时
+		 * 命令行参数/shell历史里曾经出现过明文凭据"这个事实本身，
+		 * 这条渠道的这个暴露面是命令行参数机制本身决定的，不是本
+		 * 项目能单方面修复的，必须在帮助文案/文档里诚实告知用户。 */
+		secure_memory_zero( credential_value, strlen( credential_value ) );
+		if( load_result != 1 )
+		{
+			return -1;
+		}
+	}
+	else if( strcmp( credential_source, "interactive" ) == 0 )
+	{
+		/* B11c：不经过argv——credential_value这个参数对这条渠道毫无
+		 * 意义（CLI层在解析命令行时就没有给这条渠道留credential_value
+		 * 位置，见main()里的参数个数判断），内容是现场从终端不回显
+		 * 读出来的。 */
+		int load_result = bitlocker_credential_source_load_from_interactive( credential_type, &credential );
+
+		if( load_result == 0 )
+		{
+			fprintf( stderr, "已取消。\n" );
+			return -1;
+		}
+		if( load_result != 1 )
+		{
+			return -1;
+		}
+	}
+	else
+	{
+		fprintf( stderr, "无效的凭据来源: %s（应该是 file / cli / interactive 之一）\n", credential_source );
+		return -1;
+	}
+	if( bitlocker_unlock_volume( device_path, base_offset, &credential, out_volume, out_unlock_bfio_handle, &error ) != 1 )
+	{
+		if( error != NULL )
+		{
+			print_bitlocker_error( &error );
+		}
+		else
+		{
+			fprintf( stderr, "解锁失败：凭据不正确，或者凭据类型和这个卷实际使用的保护器不匹配\n" );
+		}
+		return -1;
+	}
+	if( bitlocker_bfio_adapter_initialize( *out_volume, BITLOCKER_MAX_READ_RETRIES, bad_log, out_bfio_handle, &fsntfs_error ) != 1 )
+	{
+		fprintf( stderr, "无法构造自定义 I/O 句柄\n" );
+		if( fsntfs_error != NULL )
+		{
+			libfsntfs_error_free( &fsntfs_error );
+		}
+		libbde_volume_close( *out_volume, NULL );
+		libbfio_handle_free( out_unlock_bfio_handle, NULL );
+		libbde_volume_free( out_volume, NULL );
+		return -1;
+	}
+	return 1;
+}
+
+static int command_scan_bitlocker(
+     const char *device_path,
+     uint64_t base_offset,
+     const char *offset_str,
+     const char *type_str,
+     const char *source_str,
+     char *credential_value )
+{
+	bitlocker_credential_type_t credential_type;
+	libbde_volume_t *volume = NULL;
+	libbfio_handle_t *unlock_bfio_handle = NULL;
+	libbfio_handle_t *bfio_handle = NULL;
+	bad_sector_log_t bad_log;
+	char display_label[ 1200 ];
+	char recover_hint[ 1200 ];
+	int return_code;
+	/* source=cli 时 credential_value 本身是明文凭据，解锁流程结束后
+	 * 会被原地清零——不能在提示文案里原样回显它（那等于我们自己把
+	 * 清零的意义抵消掉），用占位符代替；source=interactive 时
+	 * credential_value 根本是 NULL（命令行里压根没有这个位置，B11c），
+	 * 同样不能直接喂给 %s，也用占位符。 */
+	int credential_is_secret = ( strcmp( source_str, "cli" ) == 0 ) || ( strcmp( source_str, "interactive" ) == 0 );
+
+	if( parse_bitlocker_credential_type( type_str, &credential_type ) != 1 )
+	{
+		return EXIT_FAILURE;
+	}
+	memset( &bad_log, 0, sizeof( bad_log ) );
+
+	if( bitlocker_open_volume_and_bfio(
+	     device_path, base_offset, credential_type, source_str, credential_value, &bad_log, &volume, &unlock_bfio_handle, &bfio_handle ) != 1 )
+	{
+		bad_sector_log_free( &bad_log );
+		return EXIT_FAILURE;
+	}
+	snprintf( display_label, sizeof( display_label ), "%s 偏移=%s (BitLocker)", device_path, offset_str );
+	if( strcmp( source_str, "interactive" ) == 0 )
+	{
+		/* recover-bitlocker 的 interactive 渠道不接受凭据内容参数
+		 * （见main()的参数个数判断），提示文案里不能拼一个本来就不
+		 * 存在的位置 */
+		snprintf( recover_hint, sizeof( recover_hint ), "recover-bitlocker %s %s %s %s",
+		          device_path, offset_str, type_str, source_str );
+	}
+	else
+	{
+		snprintf( recover_hint, sizeof( recover_hint ), "recover-bitlocker %s %s %s %s %s",
+		          device_path, offset_str, type_str, source_str, credential_is_secret ? "<凭据>" : credential_value );
+	}
+
+	return_code = command_scan_ntfs_via_bfio_handle( bfio_handle, &bad_log, display_label, recover_hint );
+
+	libbde_volume_close( volume, NULL );
+	libbfio_handle_free( &unlock_bfio_handle, NULL );
+	libbde_volume_free( &volume, NULL );
+	bad_sector_log_free( &bad_log );
+	return return_code;
+}
+
+static int command_recover_bitlocker(
+     const char *device_path,
+     uint64_t base_offset,
+     const char *offset_str,
+     const char *type_str,
+     const char *source_str,
+     char *credential_value,
+     const char *mft_index_str,
+     const char *output_path )
+{
+	bitlocker_credential_type_t credential_type;
+	libbde_volume_t *volume = NULL;
+	libbfio_handle_t *unlock_bfio_handle = NULL;
+	libbfio_handle_t *bfio_handle = NULL;
+	bad_sector_log_t bad_log;
+	char display_label[ 1200 ];
+	uint64_t mft_entry_index;
+	char *end_pointer = NULL;
+	int return_code;
+
+	if( parse_bitlocker_credential_type( type_str, &credential_type ) != 1 )
+	{
+		return EXIT_FAILURE;
+	}
+	mft_entry_index = (uint64_t) strtoull( mft_index_str, &end_pointer, 10 );
+	if( ( end_pointer == mft_index_str ) || ( *end_pointer != '\0' ) )
+	{
+		fprintf( stderr, "无效的 MFT 索引: %s\n", mft_index_str );
+		return EXIT_FAILURE;
+	}
+	memset( &bad_log, 0, sizeof( bad_log ) );
+
+	if( bitlocker_open_volume_and_bfio(
+	     device_path, base_offset, credential_type, source_str, credential_value, &bad_log, &volume, &unlock_bfio_handle, &bfio_handle ) != 1 )
+	{
+		bad_sector_log_free( &bad_log );
+		return EXIT_FAILURE;
+	}
+	snprintf( display_label, sizeof( display_label ), "%s 偏移=%s (BitLocker)", device_path, offset_str );
+
+	return_code = command_recover_ntfs_via_bfio_handle( bfio_handle, &bad_log, display_label, mft_entry_index, output_path );
+
+	libbde_volume_close( volume, NULL );
+	libbfio_handle_free( &unlock_bfio_handle, NULL );
+	libbde_volume_free( &volume, NULL );
+	bad_sector_log_free( &bad_log );
 	return return_code;
 }
 
@@ -2145,6 +2346,16 @@ if( strcmp( argv[ 1 ], "partitions" ) == 0 )
 		return command_list_shadows( argv[ 2 ] );
 	}
 
+	if( strcmp( argv[ 1 ], "disk-encryption-status" ) == 0 )
+	{
+		if( argc != 3 || strlen( argv[ 2 ] ) < 1 )
+		{
+			print_usage( argv[ 0 ] );
+			return EXIT_FAILURE;
+		}
+		return command_disk_encryption_status( argv[ 2 ][ 0 ] );
+	}
+
 	if( strcmp( argv[ 1 ], "scan-shadow" ) == 0 )
 	{
 		int return_code;
@@ -2249,6 +2460,91 @@ if( strcmp( argv[ 1 ], "partitions" ) == 0 )
 			return EXIT_FAILURE;
 		}
 		return command_recover_carve_partition( argv[ 2 ], argv[ 3 ], carve_offset, carve_size, argv[ 6 ] );
+	}
+
+	/* B9真机验证+2026-11-05小树裁决：锁定的BitLocker卷不能通过卷盘符
+	 * 设备对象（`\\.\G:`）直接读取（Windows fvevol.sys过滤驱动会拒绝），
+	 * 三个BitLocker命令的<设备路径>因此拆成<磁盘/卷路径> <偏移>两个
+	 * 参数（对齐scan-partition的形状）——偏移=0就是"直接传卷路径"这个
+	 * 旧用法的退化特例，没有保留单参数旧形式的必要（裁决③）。 */
+	if( strcmp( argv[ 1 ], "list-bitlocker-key-protectors" ) == 0 )
+	{
+		uint64_t base_offset;
+		char *end_pointer = NULL;
+
+		if( argc != 4 )
+		{
+			print_usage( argv[ 0 ] );
+			return EXIT_FAILURE;
+		}
+		base_offset = (uint64_t) strtoull( argv[ 3 ], &end_pointer, 10 );
+		if( ( end_pointer == argv[ 3 ] ) || ( *end_pointer != '\0' ) )
+		{
+			fprintf( stderr, "无效的偏移: %s\n", argv[ 3 ] );
+			return EXIT_FAILURE;
+		}
+		return command_list_bitlocker_key_protectors( argv[ 2 ], base_offset );
+	}
+
+	if( strcmp( argv[ 1 ], "scan-bitlocker" ) == 0 )
+	{
+		uint64_t base_offset;
+		char *end_pointer = NULL;
+		/* B11c：interactive渠道不接受凭据内容参数（内容现场从终端
+		 * 不回显读出来，压根不该出现在argv里）——这个渠道的命令行比
+		 * file/cli渠道少一个位置，argc因此有两种合法值 */
+		int is_interactive;
+
+		if( ( argc != 6 ) && ( argc != 7 ) )
+		{
+			print_usage( argv[ 0 ] );
+			return EXIT_FAILURE;
+		}
+		is_interactive = ( strcmp( argv[ 5 ], "interactive" ) == 0 );
+		if( is_interactive != ( argc == 6 ) )
+		{
+			fprintf( stderr, "参数个数不对：interactive 渠道不需要（也不接受）凭据内容参数；file/cli 渠道必须提供凭据内容参数（是不是漏传了？）\n" );
+			print_usage( argv[ 0 ] );
+			return EXIT_FAILURE;
+		}
+		base_offset = (uint64_t) strtoull( argv[ 3 ], &end_pointer, 10 );
+		if( ( end_pointer == argv[ 3 ] ) || ( *end_pointer != '\0' ) )
+		{
+			fprintf( stderr, "无效的偏移: %s\n", argv[ 3 ] );
+			return EXIT_FAILURE;
+		}
+		return command_scan_bitlocker( argv[ 2 ], base_offset, argv[ 3 ], argv[ 4 ], argv[ 5 ], is_interactive ? NULL : argv[ 6 ] );
+	}
+
+	if( strcmp( argv[ 1 ], "recover-bitlocker" ) == 0 )
+	{
+		uint64_t base_offset;
+		char *end_pointer = NULL;
+		int is_interactive;
+
+		if( ( argc != 8 ) && ( argc != 9 ) )
+		{
+			print_usage( argv[ 0 ] );
+			return EXIT_FAILURE;
+		}
+		is_interactive = ( strcmp( argv[ 5 ], "interactive" ) == 0 );
+		if( is_interactive != ( argc == 8 ) )
+		{
+			fprintf( stderr, "参数个数不对：interactive 渠道不需要（也不接受）凭据内容参数；file/cli 渠道必须提供凭据内容参数（是不是漏传了？）\n" );
+			print_usage( argv[ 0 ] );
+			return EXIT_FAILURE;
+		}
+		base_offset = (uint64_t) strtoull( argv[ 3 ], &end_pointer, 10 );
+		if( ( end_pointer == argv[ 3 ] ) || ( *end_pointer != '\0' ) )
+		{
+			fprintf( stderr, "无效的偏移: %s\n", argv[ 3 ] );
+			return EXIT_FAILURE;
+		}
+		if( is_interactive )
+		{
+			return command_recover_bitlocker( argv[ 2 ], base_offset, argv[ 3 ], argv[ 4 ], argv[ 5 ], NULL, argv[ 6 ], argv[ 7 ] );
+		}
+		return command_recover_bitlocker( argv[ 2 ], base_offset, argv[ 3 ], argv[ 4 ], argv[ 5 ], argv[ 6 ], argv[ 7 ], argv[ 8 ] );
 	}
 
 	fprintf( stderr, "未知命令: %s\n", argv[ 1 ] );

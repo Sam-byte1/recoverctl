@@ -38,6 +38,39 @@
 
 **待核实事项，不是已验证结论（2026-11-05 记录，留给 G5 打包阶段动手前核实）**：`pacman -Si mingw-w64-clang-aarch64-qt6-base` 的 `Licenses` 字段是一行聚合 SPDX 表达式（`LGPL-3.0-only WITH Qt-GPL-exception-1.0 AND AFL-2.1 AND Apache-2.0 AND ... AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND custom`），这是整个 Qt 源码打包（含内部工具/测试/文档/示例等各种许可证的文件）的汇总，**不等于**我们实际要分发的 `Qt6Core.dll`/`Qt6Gui.dll`/`Qt6Widgets.dll`/`Qt6Multimedia.dll` 这几个运行时库本身是 GPL——这和 `cpl-modular/sleuthkit` "仓库混有 GPL 标注文件，只能用非 GPL 标注部分" 是同一类风险形态。目前的裁决依据是业界长期公认的惯例（QtCore/Gui/Widgets/Multimedia 等核心模块走 LGPL-3.0 路线，这是大量闭源商业 Windows 桌面软件使用 Qt 的标准方式），**不是本项目自己逐文件核实过的结论**。正式打包分发前，必须去 Qt 官方每个模块的 LICENSE 文件 / 官方许可证说明页逐一核实我们实际链接和分发的具体 DLL 确实落在 LGPL-3.0 范围内，不能只凭 pacman 这一行聚合字符串就当作已验证完毕。另外 `qt6-base` 会动态依赖 `openssl`（Apache-2.0，宽松许可，暂不构成合规风险，但如果最终产品不需要 QtNetwork/TLS 相关功能，G5 打包时可以评估是否能从分发清单里裁掉这个 DLL）。
 
+**[2026-11-06 小树裁决，触发条件已满足]**：GUI 壳层 G1-G4 已全部完成并真机验证通过，现在正式进入 G5 打包阶段——这段话写的触发条件（"G5 打包阶段动手前核实"）已经到达，排为 G5a（绿色版打包）第一项任务，不再继续往后推，详见 `docs/开发规划.md`/`docs/开发日志.md` 对应记录。待核实的具体对象：`gui/build_windows.ps1` 实际拷贝到产物目录的全部 DLL（含目前还没查清楚为什么被 `windeployqt` 部署进来的 `Qt6Network.dll`——GUI 代码目前只链接了 `Qt6Widgets`，如果确认不需要网络功能，应该连带它可能依赖的 `openssl` 一起从分发清单里拿掉）+ MSYS2 工具链运行时 DLL（`libc++`/`libicu*` 等，此前只验证过它们能正常运行，没有专门核实过许可证条款）。
+
+**[2026-11-06 核实完成]**：
+
+- **`Qt6Network.dll` 疑点已解决，不再分发**：排查确认是 `windeployqt` 默认扫描全部 `generic` 类插件（触屏/平板输入插件，和本项目桌面场景完全无关），其中 `qtuiotouchplugin.dll` 依赖 `Qt6Network`，才被连带部署进来——不是 GUI 代码本身需要网络功能。`gui/build_windows.ps1` 已加 `windeployqt --skip-plugin-types generic`，真机验证应用照常运行不受影响，`Qt6Network.dll`/`networkinformation/`/`tls/` 不再出现在产物目录。因此这次核实的分发清单里**不包含** `Qt6Network.dll`，也就不需要再追查它是否依赖 OpenSSL。
+- **Qt6Core/Gui/Widgets 逐模块核实结论**：去官方 `doc.qt.io/qt-6/licensing.html` 核实确认这三个模块属于 Qt Essentials，走 **LGPL-3.0-only**（不是 GPL-only、不是只能商用授权）。动态链接场景下对分发方的义务：提供 LGPLv3 许可证全文、告知用户用了 LGPL 组件；"允许用户替换库"这条因为本来就是独立 `.dll` 动态加载，天然满足，不需要额外工作。**之前"业界惯例推测、未逐一核实"的待办状态到此解除**。
+- **MSYS2 工具链运行时 DLL 逐一核实结论**（这批不是本项目 vendor 的代码，是 Qt/MSYS2 生态的间接运行时依赖，这次是第一次正式核实）：
+
+  | 库 | 真实 SPDX 许可证 | 动态链接分发义务 |
+  |---|---|---|
+  | libc++.dll | Apache-2.0 WITH LLVM-exception | 保留版权声明 |
+  | libiconv-2.dll | LGPL-2.1-or-later | 提供许可证全文 |
+  | libintl-8.dll | LGPL-2.1-or-later | 提供许可证全文 |
+  | libglib-2.0-0.dll | LGPL-2.1-or-later | 提供许可证全文 |
+  | libgraphite2.dll | 三选一（LGPL-2.1-or-later / GPL-2.0-or-later / MPL-2.0），本项目按 LGPL-2.1-or-later 使用 | 提供许可证全文 |
+  | libpcre2-8-0.dll / libpcre2-16-0.dll | BSD-3-Clause（含 PCRE2-exception） | 保留版权声明 |
+  | libzstd.dll | 双选（BSD-3-Clause / GPL-2.0-or-later），本项目按 BSD-3-Clause 使用 | 保留版权声明 |
+  | zlib1.dll | Zlib License | 不得谎称来源；改动需标注；保留声明 |
+  | libbz2-1.dll | bzip2-1.0.6（BSD 风格） | 保留版权声明；改动需标注 |
+  | libbrotlicommon.dll / libbrotlidec.dll | MIT | 保留版权声明 |
+  | libpng16-16.dll | libpng license v2（permissive） | 保留版权声明 |
+  | libfreetype-6.dll | 二选一（FTL / GPL-2.0），本项目按 FTL 使用 | **要求在文档里包含指定信用声明文字**："Portions of this software are copyright © The FreeType Project (www.freetype.org). All rights reserved."——这是本次核实里唯一一条"必须包含特定文字"的强制条款，不是可选鸣谢，正式对外分发前不能漏 |
+  | libharfbuzz-0.dll | MIT | 保留版权声明 |
+  | libdouble-conversion.dll | BSD-3-Clause | 保留版权声明 |
+  | libmd4c.dll | MIT | 保留版权声明 |
+  | libb2-1.dll | 三选一（CC0 / OpenSSL License / Apache-2.0），本项目按 CC0 使用 | 无强制条款（CC0 等同公有领域） |
+
+  **结论：这批 DLL 全部是宽松许可证或弱 copyleft（LGPL 系列），没有一个要求公开本项目自身源代码的强 copyleft 许可证（GPL/AGPL）**——和 `third_party/` 下 `gpl-subprocess-only`（PhotoRec/testdisk，只能独立子进程调用）是完全不同的风险类别，这批可以正常动态链接分发。
+
+- **分阶段的合规义务**：
+  - **用于内部技术验证的绿色版压缩包（不对外公开）**：以上这些许可证的义务都是"对外分发给真实终端用户时"才触发，内部验证阶段**不需要**先补许可证全文/NOTICE 文件就可以直接打包使用。
+  - **以后要真正对外公开分发时，还缺的具体合规动作**（留给 G5b 或者正式对外发布前处理，现在先记下来）：① 新建一个 `THIRD_PARTY_LICENSES.txt` 汇总上表每个库的许可证全文（含 LGPL-3.0/LGPL-2.1/MIT/BSD-3-Clause/zlib/bzip2-1.0.6/PCRE2 等各自完整文本）；② **FreeType 的信用声明是强制项，必须单独确认写进去**；③ Qt 的 LGPL-3.0"告知用户使用了 LGPL 组件"这条义务要体现在产品"关于"页面这类用户能看到的地方，不能只塞进一个没人会打开的 txt 文件里；④ 对三选一/双选的库（graphite2/zstd/freetype/libb2），`THIRD_PARTY_LICENSES.txt` 里要明确写清楚本项目实际选择的是哪一个许可证，不能含糊写"多选一"。
+
 ---
 
 ## C. cpl-modular — Common Public License 1.0，弱 copyleft，模块化集成
