@@ -30,6 +30,25 @@ run_test() {
 run_test "test_undelete_detector"
 run_test "test_undelete_scanner"
 
+# J1（2026-11-14，NTFS备用数据流ADS枚举）：用独立的ADS fixture，
+# 不能复用上面run_test()里写死的$FIXTURE（那是ntfs-basic-undelete，
+# 核实过不含任何ADS），单独写一个带正确fixture路径的调用。
+echo "=== test_ads_enumerator ==="
+cc -std=c11 \
+  -I "$LIBFSNTFS_DIR/include" \
+  -I "$LIBFSNTFS_DIR/common" \
+  -I "$ENGINE_DIR/core" \
+  "$SCRIPT_DIR/test_ads_enumerator.c" \
+  "$ENGINE_DIR/core/ads_enumerator.c" \
+  "$ENGINE_DIR/core/undelete_detector.c" \
+  "$ENGINE_DIR/core/ntfs_file_reference.c" \
+  -L "$LIBFSNTFS_DIR/libfsntfs/.libs" \
+  -lfsntfs \
+  -Wl,-rpath,"$LIBFSNTFS_DIR/libfsntfs/.libs" \
+  -o "$SCRIPT_DIR/test_ads_enumerator"
+
+"$SCRIPT_DIR/test_ads_enumerator" "$ENGINE_DIR/tests/fixtures/ntfs-ads-undelete/volume.img"
+
 run_fat_test() {
 	TEST_NAME="$1"
 	FAT_FIXTURE="$ENGINE_DIR/tests/fixtures/fat32-basic-undelete/volume.img"

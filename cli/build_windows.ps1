@@ -50,6 +50,7 @@ clang -std=c11 \
   /c/dev/cli/main.c \
   "$ENGINE_DIR/core/undelete_detector.c" \
   "$ENGINE_DIR/core/undelete_scanner.c" \
+  "$ENGINE_DIR/core/ads_enumerator.c" \
   "$ENGINE_DIR/core/ntfs_file_reference.c" \
   "$ENGINE_DIR/core/path_builder.c" \
   "$ENGINE_DIR/core/sector_aligned_read.c" \

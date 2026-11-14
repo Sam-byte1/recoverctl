@@ -13,6 +13,7 @@
 #ifndef MAIN_WINDOW_H
 #define MAIN_WINDOW_H
 
+#include <QElapsedTimer>
 #include <QHash>
 #include <QMainWindow>
 #include <QPixmap>
@@ -33,6 +34,7 @@ class QPushButton;
 class QStackedWidget;
 class QTableWidget;
 class QTableWidgetItem;
+class QTimer;
 class ScanWorker;
 class VssPage;
 
@@ -81,6 +83,16 @@ private slots:
 	void onTableSelectionChanged();
 	void onThumbnailReady( int row, bool success, const QString &reason, const QPixmap &pixmap );
 	void onAdvancedToggled();
+	/* 2026-11-07（世杰真机反馈：恢复大文件时进度条"直接就满了看不出进度"、
+	 * 恢复进行中预览一直卡在"正在加载预览"）：ScanWorker整个实例跑在
+	 * 唯一一个worker线程上，scan/recover/recoverBatch/generateThumbnail
+	 * 四类请求天然排队、互斥——这不是bug，是G3定下的架构（见scan_worker.h
+	 * 头注释），但GUI层此前完全没有把"确实在推进、只是排队/还没轮到"这件
+	 * 事表达给用户。这个tick只负责刷新"已用时"文案，不代表任何真实的
+	 * 字节级进度——真正的字节级进度需要给engine层每条恢复路径加回调，
+	 * 跨越多个文件、工作量和H2坏道计数上报那次相当，这次判断为"超出这轮
+	 * 真机反馈应该解决的范围"，记录为已知限制，不是忘了做。 */
+	void onElapsedTimerTick();
 	/* H1追加（世杰真机反馈：没有全选，只能一个个点）：表格每行名称格前
 	 * 的勾选框状态变化——`itemChanged`是QTableWidget通用的数据变化信号，
 	 * 不是专门的"勾选框"信号，但这个表格里唯一会被setData()触发的场景
@@ -158,6 +170,19 @@ private:
 	QPushButton *m_recoverButton;
 	QProgressBar *m_progressBar;
 	QLabel *m_statusLabel;
+	/* 2026-11-07：恢复/扫描进行中显示"已用时 M:SS"，照抄CarvePage已经
+	 * 验证过的QTimer+QElapsedTimer模式（见carve_page.h/.cpp）——不是
+	 * 真实字节进度，但能让用户确认"确实在推进，没有卡死"，哪怕进度条
+	 * 本身是不确定模式的忙碌动画。 */
+	QLabel *m_elapsedLabel;
+	QTimer *m_elapsedTimer;
+	QElapsedTimer m_stopwatch;
+	/* setBusy(true)/(false)之间为true；onTableSelectionChanged()用它
+	 * 判断要不要把预览请求emit给worker线程——busy期间worker线程正在跑
+	 * scan/recover/recoverBatch，新的预览请求只会排队等着、让用户误以为
+	 * "预览卡住了"，不如直接提示"进行中，请稍候"（2026-11-07世杰真机
+	 * 反馈，详见开发日志对应记录）。 */
+	bool m_busy;
 
 	/* ---- 历史版本 / 深度查找 ---- */
 	VssPage *m_vssPage;

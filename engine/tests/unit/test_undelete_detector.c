@@ -44,6 +44,8 @@ static void test_allocated_entry_is_not_recoverable( libfsntfs_volume_t *volume 
 	             "inspect 不应报错" );
 	TEST_ASSERT_EQ_INT( result.is_deleted_recoverable, 0,
 	                     "entry 65 是正常文件，不应判定为已删除" );
+	TEST_ASSERT_EQ_INT( result.has_file_size, 0,
+	                     "不是候选项的记录不应该带着一个 has_file_size=1，避免调用方误用" );
 
 	libfsntfs_file_entry_free( &file_entry, &error );
 }
@@ -69,6 +71,10 @@ static void test_deleted_passwords_txt_is_recoverable( libfsntfs_volume_t *volum
 	                     "mft_entry_index 应该原样回传" );
 	TEST_ASSERT_EQ_INT( (int) result.parent_mft_index, 5,
 	                     "passwords.txt 直接在根目录下，父目录 MFT 索引应该是 5（NTFS 根目录固定索引）" );
+	TEST_ASSERT_EQ_INT( result.has_file_size, 1,
+	                     "passwords.txt 应该能成功读到文件大小" );
+	TEST_ASSERT_EQ_INT( (int) result.file_size, 116,
+	                     "passwords.txt.original 实际字节数是 116（ls -la 核实），应该原样读出" );
 
 	libfsntfs_file_entry_free( &file_entry, &error );
 }
@@ -92,6 +98,10 @@ static void test_deleted_another_file_is_recoverable( libfsntfs_volume_t *volume
 	                     "文件名应该是 another_file" );
 	TEST_ASSERT_EQ_INT( (int) result.parent_mft_index, 64,
 	                     "another_file 在 a_directory 里，父目录 MFT 索引应该是 64（a_directory 的 MFT 索引）" );
+	TEST_ASSERT_EQ_INT( result.has_file_size, 1,
+	                     "another_file 应该能成功读到文件大小" );
+	TEST_ASSERT_EQ_INT( (int) result.file_size, 22,
+	                     "another_file.original 实际字节数是 22（ls -la 核实），应该原样读出" );
 
 	libfsntfs_file_entry_free( &file_entry, &error );
 }

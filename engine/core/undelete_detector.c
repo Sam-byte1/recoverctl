@@ -114,5 +114,27 @@ int undelete_detector_inspect(
 	 * 未分配但读不到任何名字的，是从未使用过的空槽位，不算 */
 	out->is_deleted_recoverable = ( out->name[ 0 ] != '\0' ) ? 1 : 0;
 
+	if( out->is_deleted_recoverable == 1 )
+	{
+		size64_t data_size = 0;
+
+		if( libfsntfs_file_entry_get_size( file_entry, &data_size, error ) == 1 )
+		{
+			out->file_size     = (uint64_t) data_size;
+			out->has_file_size = 1;
+		}
+		else
+		{
+			/* 读取失败就老老实实维持 has_file_size = 0（memset 已经清零过），
+			 * 不编造一个假的大小值——和这个函数其它地方的"诚实标注限制"
+			 * 纪律一致。清掉错误，不升级成整体 inspect 失败：拿不到大小
+			 * 不代表这条记录不是一个有效的已删除候选项。 */
+			if( ( error != NULL ) && ( *error != NULL ) )
+			{
+				libfsntfs_error_free( error );
+			}
+		}
+	}
+
 	return 1;
 }

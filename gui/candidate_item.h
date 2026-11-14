@@ -36,8 +36,10 @@ struct CandidateItem
 	 * （engine目前的FAT32/exFAT实现只验证一层子目录，这不是GUI这边的
 	 * 限制，是engine/shell对应scanner的既有范围边界，见各自头文件）。 */
 	QString directoryPath;
-	/* NTFS候选项结构体本身不携带文件大小（undelete_candidate_t没有这个
-	 * 字段），hasSize=false时UI不应该显示一个假的0，而是显示"未知"。 */
+	/* NTFS候选项（2026-11-14 L1起，undelete_candidate_t新增file_size/
+	 * has_file_size字段，读取成功时hasSize=true）：has_file_size=0（对应
+	 * 的libfsntfs_file_entry_get_size调用失败）时hasSize必须维持false，
+	 * UI不应该显示一个假的0，而是显示"未知"。 */
 	bool hasSize = false;
 	quint64 size = 0;
 

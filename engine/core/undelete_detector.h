@@ -35,6 +35,17 @@ typedef struct
 	 * ——这里只是把"父目录是谁"这个已经顺手拿到的信息记下来，不在这个
 	 * 纯函数里做任何真实的路径重建 I/O，保持这个函数的"不做磁盘 I/O"边界。 */
 	uint64_t parent_mft_index;
+
+	/* 默认 $DATA 流（无名数据流）的大小，字节数。只有 has_file_size == 1
+	 * 时这个字段才有意义——读取失败（比如 libfsntfs_file_entry_get_size
+	 * 报错）时必须保持 has_file_size == 0，不能编造一个假的大小值，这是
+	 * 这个项目一贯的"诚实标注限制"纪律：宁可显示"未知"，也不能显示一个
+	 * 可能是错的数字。 */
+	uint64_t file_size;
+
+	/* 1 = file_size 字段有效，0 = 没能成功读到大小（比如这条记录本身就
+	 * 不是可恢复候选项，或者 libfsntfs_file_entry_get_size 调用失败）。 */
+	int has_file_size;
 }
 undelete_candidate_t;
 

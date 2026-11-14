@@ -3,6 +3,7 @@
 #include <QButtonGroup>
 #include <QCheckBox>
 #include <QCloseEvent>
+#include <QElapsedTimer>
 #include <QFileDialog>
 #include <QFileInfo>
 #include <QFrame>
@@ -204,6 +205,9 @@ MainWindow::MainWindow( QWidget *parent )
 	, m_recoverButton( nullptr )
 	, m_progressBar( nullptr )
 	, m_statusLabel( nullptr )
+	, m_elapsedLabel( nullptr )
+	, m_elapsedTimer( nullptr )
+	, m_busy( false )
 	, m_vssPage( nullptr )
 	, m_carvePage( nullptr )
 	, m_worker( nullptr )
@@ -424,7 +428,18 @@ MainWindow::MainWindow( QWidget *parent )
 	m_statusLabel->setProperty( "role", "secondary" );
 	progressRow->addWidget( m_progressBar, 1 );
 	progressRow->addWidget( m_statusLabel );
+	/* 2026-11-07（世杰真机反馈：进度不够明确）：忙碌期间额外显示"已用时"，
+	 * 不是真实字节进度，但能持续证明"确实在推进"，照抄CarvePage已验证
+	 * 过的做法。默认隐藏，setBusy(true)时才显示。 */
+	m_elapsedLabel = new QLabel( resultsPage );
+	m_elapsedLabel->setProperty( "role", "secondary" );
+	m_elapsedLabel->setVisible( false );
+	progressRow->addWidget( m_elapsedLabel );
 	resultsLayout->addLayout( progressRow );
+
+	m_elapsedTimer = new QTimer( this );
+	m_elapsedTimer->setInterval( 1000 );
+	connect( m_elapsedTimer, &QTimer::timeout, this, &MainWindow::onElapsedTimerTick );
 
 	QFrame *noticeFrame = new QFrame( resultsPage );
 	noticeFrame->setProperty( "notice", true );
@@ -945,6 +960,15 @@ void MainWindow::onRecoverClicked()
 		}
 
 		setBusy( true );
+		/* 2026-11-07（世杰真机反馈：恢复大文件时进度条"直接就满了，一直
+		 * 保持满的状态"）：这里原来漏了设置进度条——单文件恢复走的是
+		 * 这个独立分支，不会经过onProgress()，如果不在这里主动重置，
+		 * 进度条会停留在上一次操作（通常是扫描完成）留下的满值
+		 * （onScanFinished()会setRange(0,1)+setValue(1)），看起来就像
+		 * "进度条显示100%但状态写着恢复中"这种自相矛盾的样子。批量恢复
+		 * 分支（下面）和扫描开始时都已经在做这个reset，单文件恢复漏了，
+		 * 不是设计上刻意的差异。 */
+		m_progressBar->setRange( 0, 0 );
 		m_statusLabel->setText( QStringLiteral( "恢复中..." ) );
 		emit requestRecover( m_currentScanSource, item, outputPath );
 		return;
@@ -1047,6 +1071,8 @@ void MainWindow::onScanFinished( bool success, const QString &errorMessage, cons
 void MainWindow::onRecoverFinished( bool success, const QString &errorMessage, int badSectorCount, quint64 badSectorBytes )
 {
 	setBusy( false );
+	m_progressBar->setRange( 0, 1 );
+	m_progressBar->setValue( success ? 1 : 0 );
 
 	if( success )
 	{
@@ -1079,11 +1105,37 @@ void MainWindow::onRecoverFinished( bool success, const QString &errorMessage, i
 
 void MainWindow::setBusy( bool busy )
 {
+	m_busy = busy;
 	m_scanButton->setEnabled( !busy && m_selectedCard != nullptr );
 	m_openImageButton->setEnabled( !busy );
 	m_unlockBitLockerButton->setEnabled( !busy );
 	m_recoverButton->setEnabled( !busy );
 	m_refreshButton->setEnabled( !busy );
+
+	if( busy )
+	{
+		m_stopwatch.start();
+		m_elapsedLabel->setText( QStringLiteral( "已用时 0:00" ) );
+		m_elapsedLabel->setVisible( true );
+		m_elapsedTimer->start();
+	}
+	else
+	{
+		m_elapsedTimer->stop();
+		m_elapsedLabel->setVisible( false );
+		/* 2026-11-07：忙碌状态刚结束——如果用户在忙碌期间选中过某一行、
+		 * 当时因为m_busy==true被onTableSelectionChanged()拦下没有真正
+		 * emit预览请求，这里补一次，不需要用户重新点一下那一行才能看到
+		 * 预览。重新走一遍onTableSelectionChanged()，它自己会判断当前
+		 * 选中行/缓存状态，不需要额外参数。 */
+		onTableSelectionChanged();
+	}
+}
+
+void MainWindow::onElapsedTimerTick()
+{
+	qint64 secs = m_stopwatch.elapsed() / 1000;
+	m_elapsedLabel->setText( QStringLiteral( "已用时 %1:%2" ).arg( secs / 60, 2, 10, QLatin1Char( '0' ) ).arg( secs % 60, 2, 10, QLatin1Char( '0' ) ) );
 }
 
 void MainWindow::populateTable( const QVector<CandidateItem> &candidates )
@@ -1300,6 +1352,19 @@ void MainWindow::onTableSelectionChanged()
 	{
 		m_previewLabel->setPixmap( QPixmap() );
 		m_previewLabel->setText( QStringLiteral( "此类型暂不支持预览，仍可尝试恢复" ) );
+		return;
+	}
+
+	/* 2026-11-07（世杰真机反馈：恢复大文件时点预览一直显示"正在加载预览"）：
+	 * ScanWorker的scan/recover/recoverBatch/generateThumbnail全部排在
+	 * 同一个worker线程的队列上（见scan_worker.h头注释），忙碌期间新发出
+	 * 的预览请求只会排队等着，不是真的卡死，但用户看不出区别。这里不再
+	 * 无条件emit，忙碌时直接提示"进行中、请稍候"，等setBusy(false)时会
+	 * 自动重新触发一次（见setBusy()实现），用户不需要自己再点一次。 */
+	if( m_busy )
+	{
+		m_previewLabel->setPixmap( QPixmap() );
+		m_previewLabel->setText( QStringLiteral( "扫描/恢复进行中，请稍候再查看预览…" ) );
 		return;
 	}
 

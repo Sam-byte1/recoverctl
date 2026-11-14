@@ -15,6 +15,7 @@
 #include <libfsntfs.h>
 #include <libvshadow.h>
 
+#include "../engine/core/ads_enumerator.h"
 #include "../engine/core/undelete_scanner.h"
 #include "../engine/shell/aligned_device_reader.h"
 #include "../engine/shell/exfat_reader.h"
@@ -44,7 +45,7 @@
 /* 前向声明：NTFS 分区偏移扫描（拷贝到临时文件再处理那条路径）要调用
  * 这两个函数，但它们的正式定义在文件后面 */
 static int command_scan_ntfs( const char *volume_path );
-static int command_recover_ntfs( const char *volume_path, const char *mft_index_str, const char *output_path );
+static int command_recover_ntfs( const char *volume_path, const char *mft_index_str, const char *stream_name, const char *output_path );
 static int command_scan_partition_exfat( const char *device_path, const char *offset_str, long offset );
 static int command_recover_partition_exfat( const char *device_path, long offset, const char *index_str, const char *output_path );
 
@@ -126,7 +127,7 @@ static void print_carve_disclaimer( void )
 static void print_usage( const char *program_name )
 {
 	fprintf( stderr, "用法: %s scan <ntfs/fat32 镜像/卷路径>\n", program_name );
-	fprintf( stderr, "      %s recover <镜像/卷路径> <索引> <输出路径>\n", program_name );
+	fprintf( stderr, "      %s recover <镜像/卷路径> <索引> <输出路径> [<流名称>]   (<流名称>可选，只有NTFS支持；不传=恢复主数据流，传了=恢复这个名字对应的具名备用数据流ADS，流名称从scan的输出里拿)\n", program_name );
 	fprintf( stderr, "      %s partitions <磁盘镜像/设备路径>   (绕过系统卷管理，直接解析分区表)\n", program_name );
 	fprintf( stderr, "      %s scan-partition <磁盘镜像/设备路径> <分区偏移> [分区大小]   (对某个分区直接扫描；FAT32/exFAT 不需要分区大小，NTFS 需要，因为要先拷出来)\n", program_name );
 	fprintf( stderr, "      %s recover-partition <磁盘镜像/设备路径> <分区偏移> <分区大小(FAT32可填0)> <候选项序号或MFT索引> <输出路径>\n", program_name );
@@ -135,16 +136,16 @@ static void print_usage( const char *program_name )
 	fprintf( stderr, "      %s list-shadows <盘符>   (列出这个盘现有的历史卷影副本，比如系统还原点自动创建的快照)\n", program_name );
 	fprintf( stderr, "      %s disk-encryption-status <盘符>   (诊断：查询这个盘符是否受BitLocker管理/是否锁定/加密进度，以及它在物理盘上的编号+字节偏移)\n", program_name );
 	fprintf( stderr, "      %s scan-shadow <卷影副本设备路径>   (像扫描普通NTFS卷一样扫描某个历史快照，设备路径从 list-shadows 的输出里拿)\n", program_name );
-	fprintf( stderr, "      %s recover-shadow <卷影副本设备路径> <候选项序号> <输出路径>\n", program_name );
+	fprintf( stderr, "      %s recover-shadow <卷影副本设备路径> <候选项序号> <输出路径> [<流名称>]   (<流名称>可选，含义同recover命令)\n", program_name );
 #endif
 	fprintf( stderr, "      %s list-shadows-offline <磁盘/卷镜像路径>   (离线解析一个镜像文件里记录的历史卷影副本，不需要目标是当前活系统，跨平台)\n", program_name );
 	fprintf( stderr, "      %s scan-shadow-offline <磁盘/卷镜像路径> <store序号>   (扫描镜像里某个历史卷影副本，store序号从 list-shadows-offline 的输出里拿)\n", program_name );
-	fprintf( stderr, "      %s recover-shadow-offline <磁盘/卷镜像路径> <store序号> <候选项序号> <输出路径>\n", program_name );
+	fprintf( stderr, "      %s recover-shadow-offline <磁盘/卷镜像路径> <store序号> <候选项序号> <输出路径> [<流名称>]   (<流名称>可选，含义同recover命令)\n", program_name );
 	fprintf( stderr, "      %s recover-carve <PhotoRec可执行文件路径> <设备/镜像路径> <输出目录>   (信号雕刻兜底手段，整个目标当一块盘处理，文件系统结构损坏到scan/recover解析不出来时用)\n", program_name );
 	fprintf( stderr, "      %s recover-carve-partition <PhotoRec可执行文件路径> <设备路径> <分区偏移> <分区大小字节数> <输出目录>   (先按我们自己解析出的分区边界切出这一段，再做信号雕刻，不让PhotoRec自己重新探测分区表)\n", program_name );
 	fprintf( stderr, "      %s list-bitlocker-key-protectors <磁盘/卷路径> <偏移>   (诊断：列出这个卷上有哪些BitLocker密钥保护器，不碰任何凭据)\n", program_name );
 	fprintf( stderr, "      %s scan-bitlocker <磁盘/卷路径> <偏移> <凭据类型:password|recovery-key|startup-key|fvek> <凭据来源:file|cli|interactive> [<凭据文件路径或凭据内容本身>]\n", program_name );
-	fprintf( stderr, "      %s recover-bitlocker <磁盘/卷路径> <偏移> <凭据类型> <凭据来源:file|cli|interactive> [<凭据文件路径或凭据内容本身>] <MFT索引> <输出路径>\n", program_name );
+	fprintf( stderr, "      %s recover-bitlocker <磁盘/卷路径> <偏移> <凭据类型> <凭据来源:file|cli|interactive> [<凭据文件路径或凭据内容本身>] <MFT索引> <输出路径> [<流名称>]   (<流名称>可选，含义同recover命令)\n", program_name );
 	fprintf( stderr, "          （凭据来源=interactive时不要传凭据内容参数——会现场从终端不回显地提示输入，"
 	                 "不支持startup-key类型；来源=cli时凭据会短暂出现在shell历史/进程列表里，"
 	                 "不敏感场景外不建议使用）\n" );
@@ -474,7 +475,13 @@ static int command_recover_partition_ntfs_via_copy( const char *device_path, lon
 	print_bad_sector_summary( &bad_log );
 	bad_sector_log_free( &bad_log );
 
-	return_code = command_recover_ntfs( temp_path, mft_index_str, output_path );
+	/* recover-partition 没有纳入 J3 这次的ADS支持范围（见2026-11-14
+	 * 开发日志对应记录）——这个命令要先探测分区实际文件系统（FAT32/
+	 * exFAT/NTFS 三选一），NTFS 分支又是先拷贝再复用 command_recover_ntfs
+	 * 这个额外的临时文件间接层，范围和另外三个直接共享
+	 * command_recover_ntfs_via_bfio_handle 的命令不一样，留给以后单独
+	 * 评估要不要补，这里始终传 NULL（主数据流），零行为变化。 */
+	return_code = command_recover_ntfs( temp_path, mft_index_str, NULL, output_path );
 	remove( temp_path );
 	return return_code;
 }
@@ -959,22 +966,100 @@ static int command_scan_ntfs_via_bfio_handle(
 				path_is_complete = 0;
 			}
 
+			/* 2026-11-14（L2）：undelete_candidate_t新增file_size/has_file_size
+			 * 字段后，这里把大小打印出来；has_file_size为0（读取失败）时
+			 * 显示"未知"，不显示一个可能是错的0——这是本项目一贯的"诚实
+			 * 标注限制"纪律，不止GUI那边要遵守，CLI也一样。这个函数是
+			 * scan/scan-shadow/scan-shadow-offline/scan-bitlocker共用的
+			 * 唯一打印核心（见command_scan_ntfs_via_bfio_handle的三处
+			 * 调用点），改一处覆盖全部四个命令。 */
+			char size_label[ 32 ];
+
+			if( result.candidates[ i ].has_file_size )
+			{
+				snprintf( size_label, sizeof( size_label ), "%llu 字节",
+				          (unsigned long long) result.candidates[ i ].file_size );
+			}
+			else
+			{
+				snprintf( size_label, sizeof( size_label ), "未知" );
+			}
+
 			if( ancestor_path[ 0 ] != '\0' )
 			{
-				printf( "  [%d] MFT 索引=%llu  路径=%s\\%s%s\n",
+				printf( "  [%d] MFT 索引=%llu  大小=%s  路径=%s\\%s%s\n",
 				        i,
 				        (unsigned long long) result.candidates[ i ].mft_entry_index,
+				        size_label,
 				        ancestor_path,
 				        result.candidates[ i ].name,
 				        path_is_complete ? "" : "（上级目录链中途断开，路径可能不完整）" );
 			}
 			else
 			{
-				printf( "  [%d] MFT 索引=%llu  文件名=%s%s\n",
+				printf( "  [%d] MFT 索引=%llu  大小=%s  文件名=%s%s\n",
 				        i,
 				        (unsigned long long) result.candidates[ i ].mft_entry_index,
+				        size_label,
 				        result.candidates[ i ].name,
 				        path_is_complete ? "" : "（上级目录链中途断开，路径可能不完整）" );
+			}
+
+			/* J3（2026-11-14）：对有具名备用数据流（ADS）的候选项追加一行
+			 * 提示。undelete_candidate_t本身不携带file_entry（扫描阶段
+			 * 用完就释放了，和L系列file_size字段不同——那个是扫描阶段
+			 * 顺手读的一个标量，这里是变长列表，没有必要让每个候选项
+			 * 都携带一份，大多数文件根本没有ADS），这里按MFT索引重新
+			 * 打开一次file_entry专门做这次枚举，和上面path_resolver
+			 * 重建路径时"按索引重新查"是同一个既有模式，不是新发明
+			 * 一种做法。重新打开失败就安静跳过，不升级成整个scan失败
+			 * ——没有ADS信息不影响这个候选项本身的扫描结果可信度。 */
+			{
+				libfsntfs_file_entry_t *ads_probe_entry = NULL;
+				libfsntfs_error_t *ads_error = NULL;
+
+				if( libfsntfs_volume_get_file_entry_by_index(
+				     volume, result.candidates[ i ].mft_entry_index, &ads_probe_entry, &ads_error ) == 1 )
+				{
+					ads_stream_list_t streams;
+
+					memset( &streams, 0, sizeof( streams ) );
+
+					if( ads_enumerator_list_streams( ads_probe_entry, &streams, &ads_error ) == 1
+					 && streams.count > 0 )
+					{
+						int stream_index;
+
+						printf( "      该文件还有 %d 个备用数据流：", streams.count );
+						for( stream_index = 0; stream_index < streams.count; stream_index++ )
+						{
+							if( streams.streams[ stream_index ].has_size )
+							{
+								printf( "%s%s(%llu 字节)",
+								        stream_index == 0 ? "" : ", ",
+								        streams.streams[ stream_index ].name,
+								        (unsigned long long) streams.streams[ stream_index ].size );
+							}
+							else
+							{
+								printf( "%s%s(大小未知)",
+								        stream_index == 0 ? "" : ", ",
+								        streams.streams[ stream_index ].name );
+							}
+						}
+						printf( "\n" );
+					}
+					else if( ads_error != NULL )
+					{
+						libfsntfs_error_free( &ads_error );
+					}
+					ads_stream_list_free( &streams );
+					libfsntfs_file_entry_free( &ads_probe_entry, NULL );
+				}
+				else if( ads_error != NULL )
+				{
+					libfsntfs_error_free( &ads_error );
+				}
 			}
 		}
 		printf( "\n用 `recoverctl %s <MFT 索引> <输出路径>` 恢复某一个文件。\n", recover_hint );
@@ -1159,21 +1244,43 @@ static int command_scan_exfat( const char *volume_path )
  * 系统，都打不开就是真的不认识这个卷，或者卷本身已经严重损坏 */
 static int command_scan( const char *volume_path )
 {
+	/* 探测NTFS这一步改用ntfs_bfio_adapter而不是libfsntfs自带的默认文件
+	 * IO（2026-11-14，和gui/scan_worker.cpp的scanDirectDevice()同一天
+	 * 同一根因修的同一个bug，详见那边的注释）：默认IO对VSS卷影副本设备
+	 * 路径（\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopyN）打不开，
+	 * 这个通用scan命令此前从未被人拿去指向卷影副本路径（卷影副本场景
+	 * 一直走专门的scan-shadow命令，它直接调用command_scan_ntfs()、
+	 * 从不经过这里的探测），所以这个潜在bug一直没暴露，这次顺手和GUI
+	 * 那边一起修，避免以后谁拿通用scan命令指向卷影副本路径时重新撞上。 */
+	libbfio_handle_t *probe_bfio_handle = NULL;
 	libfsntfs_volume_t *probe_volume = NULL;
 	libfsntfs_error_t *probe_error   = NULL;
-	int is_ntfs;
+	bad_sector_log_t probe_bad_log;
+	int is_ntfs = 0;
 
-	if( libfsntfs_volume_initialize( &probe_volume, &probe_error ) != 1 )
+	memset( &probe_bad_log, 0, sizeof( probe_bad_log ) );
+
+	if( ntfs_bfio_adapter_initialize( volume_path, 0, NTFS_DIRECT_MAX_READ_RETRIES, &probe_bad_log, &probe_bfio_handle, &probe_error ) == 1 )
 	{
-		fprintf( stderr, "无法初始化 volume 对象\n" );
-		return EXIT_FAILURE;
+		if( libfsntfs_volume_initialize( &probe_volume, &probe_error ) == 1 )
+		{
+			if( libfsntfs_volume_open_file_io_handle( probe_volume, probe_bfio_handle, LIBFSNTFS_OPEN_READ, &probe_error ) == 1 )
+			{
+				is_ntfs = 1;
+				probe_bfio_handle = NULL;
+			}
+			libfsntfs_volume_free( &probe_volume, NULL );
+		}
+		if( probe_bfio_handle != NULL )
+		{
+			libbfio_handle_free( &probe_bfio_handle, NULL );
+		}
 	}
-	is_ntfs = ( libfsntfs_volume_open( probe_volume, volume_path, LIBFSNTFS_OPEN_READ, &probe_error ) == 1 );
-	libfsntfs_volume_free( &probe_volume, NULL );
 	if( probe_error != NULL )
 	{
 		libfsntfs_error_free( &probe_error );
 	}
+	bad_sector_log_free( &probe_bad_log );
 
 	if( is_ntfs )
 	{
@@ -1208,12 +1315,19 @@ static int command_scan( const char *volume_path )
  * 的理由抽出来复用）：给定一个已经构造好的 bfio_handle，按 MFT 索引恢复
  * 一个文件。display_label 只用于错误提示里标注"是哪个卷打不开"，这个
  * 函数拥有 bfio_handle 的生命周期，返回前会释放它；bad_log 由调用方
- * 提供、不释放。 */
+ * 提供、不释放。
+ *
+ * stream_name（2026-11-14 J3新增）：NULL表示恢复主数据流（和这个参数
+ * 加入之前完全一样的行为）；非NULL表示恢复这个名字对应的具名备用
+ * 数据流（ADS）——直接转发给file_writer_write_entry_content，这个函数
+ * 本身不需要关心主流/ADS的差异，复用同一套"打开卷+按索引找file_entry+
+ * 写文件"流程。 */
 static int command_recover_ntfs_via_bfio_handle(
      libbfio_handle_t *bfio_handle,
      bad_sector_log_t *bad_log,
      const char *display_label,
      uint64_t mft_entry_index,
+     const char *stream_name,
      const char *output_path )
 {
 	libfsntfs_volume_t *volume         = NULL;
@@ -1238,13 +1352,28 @@ static int command_recover_ntfs_via_bfio_handle(
 		goto on_error;
 	}
 
-	if( file_writer_write_entry_content( file_entry, output_path, &error ) != 1 )
+	if( file_writer_write_entry_content( file_entry, stream_name, output_path, &error ) != 1 )
 	{
-		fprintf( stderr, "写出内容失败: %s\n", output_path );
+		if( stream_name != NULL )
+		{
+			fprintf( stderr, "写出内容失败（备用数据流=%s，可能这个名字的流不存在）: %s\n", stream_name, output_path );
+		}
+		else
+		{
+			fprintf( stderr, "写出内容失败: %s\n", output_path );
+		}
 		goto on_error;
 	}
 
-	printf( "已恢复 MFT 索引 %llu -> %s\n", (unsigned long long) mft_entry_index, output_path );
+	if( stream_name != NULL )
+	{
+		printf( "已恢复 MFT 索引 %llu 的备用数据流 %s -> %s\n",
+		        (unsigned long long) mft_entry_index, stream_name, output_path );
+	}
+	else
+	{
+		printf( "已恢复 MFT 索引 %llu -> %s\n", (unsigned long long) mft_entry_index, output_path );
+	}
 	print_bad_sector_summary( bad_log );
 
 	libfsntfs_file_entry_free( &file_entry, &error );
@@ -1271,7 +1400,7 @@ on_error:
 	return EXIT_FAILURE;
 }
 
-static int command_recover_ntfs( const char *volume_path, const char *mft_index_str, const char *output_path )
+static int command_recover_ntfs( const char *volume_path, const char *mft_index_str, const char *stream_name, const char *output_path )
 {
 	libbfio_handle_t *bfio_handle = NULL;
 	libfsntfs_error_t *error      = NULL;
@@ -1303,7 +1432,7 @@ static int command_recover_ntfs( const char *volume_path, const char *mft_index_
 		return EXIT_FAILURE;
 	}
 
-	return_code = command_recover_ntfs_via_bfio_handle( bfio_handle, &bad_log, volume_path, mft_entry_index, output_path );
+	return_code = command_recover_ntfs_via_bfio_handle( bfio_handle, &bad_log, volume_path, mft_entry_index, stream_name, output_path );
 	bad_sector_log_free( &bad_log );
 	return return_code;
 }
@@ -1528,7 +1657,7 @@ static int command_scan_shadow_offline( const char *image_path, const char *stor
 }
 
 static int command_recover_shadow_offline(
-     const char *image_path, const char *store_index_str, const char *mft_index_str, const char *output_path )
+     const char *image_path, const char *store_index_str, const char *mft_index_str, const char *stream_name, const char *output_path )
 {
 	libvshadow_volume_t *volume = NULL;
 	libvshadow_store_t *store   = NULL;
@@ -1558,7 +1687,7 @@ static int command_recover_shadow_offline(
 
 	snprintf( display_label, sizeof( display_label ), "%s (store %s, 离线解析)", image_path, store_index_str );
 
-	return_code = command_recover_ntfs_via_bfio_handle( bfio_handle, &bad_log, display_label, mft_entry_index, output_path );
+	return_code = command_recover_ntfs_via_bfio_handle( bfio_handle, &bad_log, display_label, mft_entry_index, stream_name, output_path );
 
 	libvshadow_store_free( &store, NULL );
 	libvshadow_volume_close( volume, NULL );
@@ -1708,7 +1837,7 @@ static int command_recover_exfat( const char *volume_path, const char *index_str
 }
 
 /* 和 command_scan 同样的"先试 NTFS 再试 FAT32 再试 exFAT"判断方式 */
-static int command_recover( const char *volume_path, const char *index_str, const char *output_path )
+static int command_recover( const char *volume_path, const char *index_str, const char *stream_name, const char *output_path )
 {
 	libfsntfs_volume_t *probe_volume = NULL;
 	libfsntfs_error_t *probe_error   = NULL;
@@ -1728,7 +1857,17 @@ static int command_recover( const char *volume_path, const char *index_str, cons
 
 	if( is_ntfs )
 	{
-		return command_recover_ntfs( volume_path, index_str, output_path );
+		return command_recover_ntfs( volume_path, index_str, stream_name, output_path );
+	}
+
+	/* 备用数据流（ADS）是 NTFS 专属概念，FAT32/exFAT 没有对等结构——
+	 * 指定了流名称但探测出来不是 NTFS 卷，老实报错，不能假装"反正没人
+	 * 传这个参数时也能用"就悄悄忽略它去恢复主数据流，那样会让调用方
+	 * 以为自己拿到的是ADS内容，实际上恢复的是完全不相关的东西。 */
+	if( stream_name != NULL )
+	{
+		fprintf( stderr, "备用数据流（ADS）只有 NTFS 支持，这个卷不是 NTFS，不能指定流名称: %s\n", volume_path );
+		return EXIT_FAILURE;
 	}
 
 	{
@@ -2193,6 +2332,7 @@ static int command_recover_bitlocker(
      const char *source_str,
      char *credential_value,
      const char *mft_index_str,
+     const char *stream_name,
      const char *output_path )
 {
 	bitlocker_credential_type_t credential_type;
@@ -2225,7 +2365,7 @@ static int command_recover_bitlocker(
 	}
 	snprintf( display_label, sizeof( display_label ), "%s 偏移=%s (BitLocker)", device_path, offset_str );
 
-	return_code = command_recover_ntfs_via_bfio_handle( bfio_handle, &bad_log, display_label, mft_entry_index, output_path );
+	return_code = command_recover_ntfs_via_bfio_handle( bfio_handle, &bad_log, display_label, mft_entry_index, stream_name, output_path );
 
 	libbde_volume_close( volume, NULL );
 	libbfio_handle_free( &unlock_bfio_handle, NULL );
@@ -2268,19 +2408,29 @@ int main( int argc, char *argv[] )
 
 	if( strcmp( argv[ 1 ], "recover" ) == 0 )
 	{
-		if( argc != 5 )
+		/* J3（2026-11-14）：末尾新增一个可选的<流名称>参数——不传就是
+		 * 原来的行为（恢复主数据流），传了就改成恢复这个名字对应的
+		 * NTFS 备用数据流（ADS）。argc因此有两种合法值，和B11c（BitLocker
+		 * interactive渠道）"参数个数随渠道变化"是同一种处理模式。 */
+		const char *stream_name = NULL;
+
+		if( argc != 5 && argc != 6 )
 		{
 			print_usage( argv[ 0 ] );
 			return EXIT_FAILURE;
+		}
+		if( argc == 6 )
+		{
+			stream_name = argv[ 5 ];
 		}
 #ifdef _WIN32
 		{
 			char resolved_path[ 64 ];
 			resolve_device_path( argv[ 2 ], resolved_path, sizeof( resolved_path ) );
-			return command_recover( resolved_path, argv[ 3 ], argv[ 4 ] );
+			return command_recover( resolved_path, argv[ 3 ], stream_name, argv[ 4 ] );
 		}
 #else
-		return command_recover( argv[ 2 ], argv[ 3 ], argv[ 4 ] );
+		return command_recover( argv[ 2 ], argv[ 3 ], stream_name, argv[ 4 ] );
 #endif
 	}
 
@@ -2382,12 +2532,18 @@ if( strcmp( argv[ 1 ], "partitions" ) == 0 )
 
 	if( strcmp( argv[ 1 ], "recover-shadow" ) == 0 )
 	{
-		if( argc != 5 )
+		const char *stream_name = NULL;
+
+		if( argc != 5 && argc != 6 )
 		{
 			print_usage( argv[ 0 ] );
 			return EXIT_FAILURE;
 		}
-		return command_recover_ntfs( argv[ 2 ], argv[ 3 ], argv[ 4 ] );
+		if( argc == 6 )
+		{
+			stream_name = argv[ 5 ];
+		}
+		return command_recover_ntfs( argv[ 2 ], argv[ 3 ], stream_name, argv[ 4 ] );
 	}
 #endif
 
@@ -2417,12 +2573,18 @@ if( strcmp( argv[ 1 ], "partitions" ) == 0 )
 
 	if( strcmp( argv[ 1 ], "recover-shadow-offline" ) == 0 )
 	{
-		if( argc != 6 )
+		const char *stream_name = NULL;
+
+		if( argc != 6 && argc != 7 )
 		{
 			print_usage( argv[ 0 ] );
 			return EXIT_FAILURE;
 		}
-		return command_recover_shadow_offline( argv[ 2 ], argv[ 3 ], argv[ 4 ], argv[ 5 ] );
+		if( argc == 7 )
+		{
+			stream_name = argv[ 6 ];
+		}
+		return command_recover_shadow_offline( argv[ 2 ], argv[ 3 ], argv[ 4 ], stream_name, argv[ 5 ] );
 	}
 
 	if( strcmp( argv[ 1 ], "recover-carve" ) == 0 )
@@ -2518,21 +2680,40 @@ if( strcmp( argv[ 1 ], "partitions" ) == 0 )
 
 	if( strcmp( argv[ 1 ], "recover-bitlocker" ) == 0 )
 	{
+		/* J3（2026-11-14）：末尾新增一个可选的<流名称>参数。interactive
+		 * 渠道（没有凭据内容位置）和 file/cli 渠道（多一个凭据内容位置）
+		 * 本来argc基准就不一样，is_interactive先从argv[5]的内容判断出来
+		 * （不依赖argc），再分别判断各自的argc是"基准"还是"基准+1（带
+		 * 流名称）"，这样不会和B11c已有的"interactive比另外两个渠道少
+		 * 一个位置"这条规则产生歧义。 */
 		uint64_t base_offset;
 		char *end_pointer = NULL;
 		int is_interactive;
+		const char *stream_name = NULL;
 
-		if( ( argc != 8 ) && ( argc != 9 ) )
+		if( ( argc < 8 ) || ( argc > 10 ) )
 		{
 			print_usage( argv[ 0 ] );
 			return EXIT_FAILURE;
 		}
 		is_interactive = ( strcmp( argv[ 5 ], "interactive" ) == 0 );
-		if( is_interactive != ( argc == 8 ) )
+		if( is_interactive )
 		{
-			fprintf( stderr, "参数个数不对：interactive 渠道不需要（也不接受）凭据内容参数；file/cli 渠道必须提供凭据内容参数（是不是漏传了？）\n" );
-			print_usage( argv[ 0 ] );
-			return EXIT_FAILURE;
+			if( ( argc != 8 ) && ( argc != 9 ) )
+			{
+				fprintf( stderr, "参数个数不对：interactive 渠道不需要（也不接受）凭据内容参数（是不是多传了？）\n" );
+				print_usage( argv[ 0 ] );
+				return EXIT_FAILURE;
+			}
+		}
+		else
+		{
+			if( ( argc != 9 ) && ( argc != 10 ) )
+			{
+				fprintf( stderr, "参数个数不对：file/cli 渠道必须提供凭据内容参数（是不是漏传了？）\n" );
+				print_usage( argv[ 0 ] );
+				return EXIT_FAILURE;
+			}
 		}
 		base_offset = (uint64_t) strtoull( argv[ 3 ], &end_pointer, 10 );
 		if( ( end_pointer == argv[ 3 ] ) || ( *end_pointer != '\0' ) )
@@ -2542,9 +2723,11 @@ if( strcmp( argv[ 1 ], "partitions" ) == 0 )
 		}
 		if( is_interactive )
 		{
-			return command_recover_bitlocker( argv[ 2 ], base_offset, argv[ 3 ], argv[ 4 ], argv[ 5 ], NULL, argv[ 6 ], argv[ 7 ] );
+			stream_name = ( argc == 9 ) ? argv[ 8 ] : NULL;
+			return command_recover_bitlocker( argv[ 2 ], base_offset, argv[ 3 ], argv[ 4 ], argv[ 5 ], NULL, argv[ 6 ], stream_name, argv[ 7 ] );
 		}
-		return command_recover_bitlocker( argv[ 2 ], base_offset, argv[ 3 ], argv[ 4 ], argv[ 5 ], argv[ 6 ], argv[ 7 ], argv[ 8 ] );
+		stream_name = ( argc == 10 ) ? argv[ 9 ] : NULL;
+		return command_recover_bitlocker( argv[ 2 ], base_offset, argv[ 3 ], argv[ 4 ], argv[ 5 ], argv[ 6 ], argv[ 7 ], stream_name, argv[ 8 ] );
 	}
 
 	fprintf( stderr, "未知命令: %s\n", argv[ 1 ] );

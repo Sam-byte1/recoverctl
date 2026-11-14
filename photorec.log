@@ -2806,3 +2806,327 @@ Total: 1 file found
 
 4032 sectors contain unknown data, 0 invalid files found and rejected.
 PhotoRec exited normally.
+Using locale 'C/UTF-8/C/C/C/C'.
+
+
+Sat Nov 14 20:54:38 2026
+Command line: PhotoRec /log /d /var/folders/88/s_v1rwcd7_n1zydbsxc5tfkw0000gn/T/tmp.m37er7PNQx/carve_out /cmd /Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/photorec-carve/test_image.dd partition_none,search
+
+PhotoRec 7.2, Data Recovery Utility, February 2024
+Christophe GRENIER <grenier@cgsecurity.org>
+https://www.cgsecurity.org
+OS: Darwin, kernel 27.0.0 (Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142) arm64
+Compiler: GCC 4.2
+ext2fs lib: none, ntfs lib: none, ewf lib: none, libjpeg: none, curses lib: ncurses 6.0
+User is not root!
+Hard disk list
+Disk /Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/photorec-carve/test_image.dd - 2097 KB / 2048 Ki, sector size=512
+
+Partition table type defaults to None
+Disk /Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/photorec-carve/test_image.dd - 2097 KB / 2048 Ki
+Partition table type: None
+   P Unknown                  0   0  1     0  65  1       4096
+743 first-level signatures enabled
+
+Analyse
+   P Unknown                  0   0  1     0  65  1       4096
+Pass 0 (blocksize=512) STATUS_FIND_OFFSET
+blocksize=32768, offset=18432
+Elapsed time 0h00m00s
+Pass 1 (blocksize=32768) STATUS_EXT2_OFF
+/var/folders/88/s_v1rwcd7_n1zydbsxc5tfkw0000gn/T/tmp.m37er7PNQx/carve_out.1/f0000100.jpg	 100-163
+Elapsed time 0h00m00s
+Pass 1 +1 file
+jpg: 1/1 recovered
+Total: 1 file found
+
+4032 sectors contain unknown data, 0 invalid files found and rejected.
+PhotoRec exited normally.
+Using locale 'C/UTF-8/C/C/C/C'.
+
+
+Sat Nov 14 20:54:39 2026
+Command line: PhotoRec /log /d /var/folders/88/s_v1rwcd7_n1zydbsxc5tfkw0000gn/T/tmp.giBI57RgBJ/carve_whole /cmd /Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/photorec-carve/test_image.dd partition_none,search
+
+PhotoRec 7.2, Data Recovery Utility, February 2024
+Christophe GRENIER <grenier@cgsecurity.org>
+https://www.cgsecurity.org
+OS: Darwin, kernel 27.0.0 (Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142) arm64
+Compiler: GCC 4.2
+ext2fs lib: none, ntfs lib: none, ewf lib: none, libjpeg: none, curses lib: ncurses 6.0
+User is not root!
+Hard disk list
+Disk /Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/photorec-carve/test_image.dd - 2097 KB / 2048 Ki, sector size=512
+
+Partition table type defaults to None
+Disk /Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/photorec-carve/test_image.dd - 2097 KB / 2048 Ki
+Partition table type: None
+   P Unknown                  0   0  1     0  65  1       4096
+743 first-level signatures enabled
+
+Analyse
+   P Unknown                  0   0  1     0  65  1       4096
+Pass 0 (blocksize=512) STATUS_FIND_OFFSET
+blocksize=32768, offset=18432
+Elapsed time 0h00m00s
+Pass 1 (blocksize=32768) STATUS_EXT2_OFF
+/var/folders/88/s_v1rwcd7_n1zydbsxc5tfkw0000gn/T/tmp.giBI57RgBJ/carve_whole.1/f0000100.jpg	 100-163
+Elapsed time 0h00m00s
+Pass 1 +1 file
+jpg: 1/1 recovered
+Total: 1 file found
+
+4032 sectors contain unknown data, 0 invalid files found and rejected.
+PhotoRec exited normally.
+Using locale 'C/UTF-8/C/C/C/C'.
+
+
+Sat Nov 14 20:54:39 2026
+Command line: PhotoRec /log /d /var/folders/88/s_v1rwcd7_n1zydbsxc5tfkw0000gn/T/tmp.giBI57RgBJ/carve_partition /cmd /tmp/recoverctl_partition_extract.tmp partition_none,search
+
+PhotoRec 7.2, Data Recovery Utility, February 2024
+Christophe GRENIER <grenier@cgsecurity.org>
+https://www.cgsecurity.org
+OS: Darwin, kernel 27.0.0 (Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142) arm64
+Compiler: GCC 4.2
+ext2fs lib: none, ntfs lib: none, ewf lib: none, libjpeg: none, curses lib: ncurses 6.0
+User is not root!
+Hard disk list
+Disk /tmp/recoverctl_partition_extract.tmp - 2097 KB / 2048 KiB - CHS 1 255 63 (RO), sector size=512
+
+Partition table type defaults to None
+Disk /tmp/recoverctl_partition_extract.tmp - 2097 KB / 2048 KiB (RO)
+Partition table type: None
+   P Unknown                  0   0  1     0  65  1       4096
+743 first-level signatures enabled
+
+Analyse
+   P Unknown                  0   0  1     0  65  1       4096
+Pass 0 (blocksize=512) STATUS_FIND_OFFSET
+blocksize=32768, offset=18432
+Elapsed time 0h00m00s
+Pass 1 (blocksize=32768) STATUS_EXT2_OFF
+/var/folders/88/s_v1rwcd7_n1zydbsxc5tfkw0000gn/T/tmp.giBI57RgBJ/carve_partition.1/f0000100.jpg	 100-163
+Elapsed time 0h00m00s
+Pass 1 +1 file
+jpg: 1/1 recovered
+Total: 1 file found
+
+4032 sectors contain unknown data, 0 invalid files found and rejected.
+PhotoRec exited normally.
+Using locale 'C/UTF-8/C/C/C/C'.
+
+
+Sat Nov 14 20:56:38 2026
+Command line: PhotoRec /log /d /var/folders/88/s_v1rwcd7_n1zydbsxc5tfkw0000gn/T/tmp.3I9GoEC8zl/carve_out /cmd /Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/photorec-carve/test_image.dd partition_none,search
+
+PhotoRec 7.2, Data Recovery Utility, February 2024
+Christophe GRENIER <grenier@cgsecurity.org>
+https://www.cgsecurity.org
+OS: Darwin, kernel 27.0.0 (Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142) arm64
+Compiler: GCC 4.2
+ext2fs lib: none, ntfs lib: none, ewf lib: none, libjpeg: none, curses lib: ncurses 6.0
+User is not root!
+Hard disk list
+Disk /Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/photorec-carve/test_image.dd - 2097 KB / 2048 Ki, sector size=512
+
+Partition table type defaults to None
+Disk /Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/photorec-carve/test_image.dd - 2097 KB / 2048 Ki
+Partition table type: None
+   P Unknown                  0   0  1     0  65  1       4096
+743 first-level signatures enabled
+
+Analyse
+   P Unknown                  0   0  1     0  65  1       4096
+Pass 0 (blocksize=512) STATUS_FIND_OFFSET
+blocksize=32768, offset=18432
+Elapsed time 0h00m00s
+Pass 1 (blocksize=32768) STATUS_EXT2_OFF
+/var/folders/88/s_v1rwcd7_n1zydbsxc5tfkw0000gn/T/tmp.3I9GoEC8zl/carve_out.1/f0000100.jpg	 100-163
+Elapsed time 0h00m00s
+Pass 1 +1 file
+jpg: 1/1 recovered
+Total: 1 file found
+
+4032 sectors contain unknown data, 0 invalid files found and rejected.
+PhotoRec exited normally.
+Using locale 'C/UTF-8/C/C/C/C'.
+
+
+Sat Nov 14 20:56:38 2026
+Command line: PhotoRec /log /d /var/folders/88/s_v1rwcd7_n1zydbsxc5tfkw0000gn/T/tmp.yC3vxQhyLp/carve_whole /cmd /Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/photorec-carve/test_image.dd partition_none,search
+
+PhotoRec 7.2, Data Recovery Utility, February 2024
+Christophe GRENIER <grenier@cgsecurity.org>
+https://www.cgsecurity.org
+OS: Darwin, kernel 27.0.0 (Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142) arm64
+Compiler: GCC 4.2
+ext2fs lib: none, ntfs lib: none, ewf lib: none, libjpeg: none, curses lib: ncurses 6.0
+User is not root!
+Hard disk list
+Disk /Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/photorec-carve/test_image.dd - 2097 KB / 2048 Ki, sector size=512
+
+Partition table type defaults to None
+Disk /Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/photorec-carve/test_image.dd - 2097 KB / 2048 Ki
+Partition table type: None
+   P Unknown                  0   0  1     0  65  1       4096
+743 first-level signatures enabled
+
+Analyse
+   P Unknown                  0   0  1     0  65  1       4096
+Pass 0 (blocksize=512) STATUS_FIND_OFFSET
+blocksize=32768, offset=18432
+Elapsed time 0h00m00s
+Pass 1 (blocksize=32768) STATUS_EXT2_OFF
+/var/folders/88/s_v1rwcd7_n1zydbsxc5tfkw0000gn/T/tmp.yC3vxQhyLp/carve_whole.1/f0000100.jpg	 100-163
+Elapsed time 0h00m00s
+Pass 1 +1 file
+jpg: 1/1 recovered
+Total: 1 file found
+
+4032 sectors contain unknown data, 0 invalid files found and rejected.
+PhotoRec exited normally.
+Using locale 'C/UTF-8/C/C/C/C'.
+
+
+Sat Nov 14 20:56:38 2026
+Command line: PhotoRec /log /d /var/folders/88/s_v1rwcd7_n1zydbsxc5tfkw0000gn/T/tmp.yC3vxQhyLp/carve_partition /cmd /tmp/recoverctl_partition_extract.tmp partition_none,search
+
+PhotoRec 7.2, Data Recovery Utility, February 2024
+Christophe GRENIER <grenier@cgsecurity.org>
+https://www.cgsecurity.org
+OS: Darwin, kernel 27.0.0 (Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142) arm64
+Compiler: GCC 4.2
+ext2fs lib: none, ntfs lib: none, ewf lib: none, libjpeg: none, curses lib: ncurses 6.0
+User is not root!
+Hard disk list
+Disk /tmp/recoverctl_partition_extract.tmp - 2097 KB / 2048 KiB - CHS 1 255 63 (RO), sector size=512
+
+Partition table type defaults to None
+Disk /tmp/recoverctl_partition_extract.tmp - 2097 KB / 2048 KiB (RO)
+Partition table type: None
+   P Unknown                  0   0  1     0  65  1       4096
+743 first-level signatures enabled
+
+Analyse
+   P Unknown                  0   0  1     0  65  1       4096
+Pass 0 (blocksize=512) STATUS_FIND_OFFSET
+blocksize=32768, offset=18432
+Elapsed time 0h00m00s
+Pass 1 (blocksize=32768) STATUS_EXT2_OFF
+/var/folders/88/s_v1rwcd7_n1zydbsxc5tfkw0000gn/T/tmp.yC3vxQhyLp/carve_partition.1/f0000100.jpg	 100-163
+Elapsed time 0h00m00s
+Pass 1 +1 file
+jpg: 1/1 recovered
+Total: 1 file found
+
+4032 sectors contain unknown data, 0 invalid files found and rejected.
+PhotoRec exited normally.
+Using locale 'C/UTF-8/C/C/C/C'.
+
+
+Sat Nov 14 21:02:02 2026
+Command line: PhotoRec /log /d /var/folders/88/s_v1rwcd7_n1zydbsxc5tfkw0000gn/T/tmp.vAFIp2h9dF/carve_out /cmd /Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/photorec-carve/test_image.dd partition_none,search
+
+PhotoRec 7.2, Data Recovery Utility, February 2024
+Christophe GRENIER <grenier@cgsecurity.org>
+https://www.cgsecurity.org
+OS: Darwin, kernel 27.0.0 (Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142) arm64
+Compiler: GCC 4.2
+ext2fs lib: none, ntfs lib: none, ewf lib: none, libjpeg: none, curses lib: ncurses 6.0
+User is not root!
+Hard disk list
+Disk /Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/photorec-carve/test_image.dd - 2097 KB / 2048 Ki, sector size=512
+
+Partition table type defaults to None
+Disk /Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/photorec-carve/test_image.dd - 2097 KB / 2048 Ki
+Partition table type: None
+   P Unknown                  0   0  1     0  65  1       4096
+743 first-level signatures enabled
+
+Analyse
+   P Unknown                  0   0  1     0  65  1       4096
+Pass 0 (blocksize=512) STATUS_FIND_OFFSET
+blocksize=32768, offset=18432
+Elapsed time 0h00m00s
+Pass 1 (blocksize=32768) STATUS_EXT2_OFF
+/var/folders/88/s_v1rwcd7_n1zydbsxc5tfkw0000gn/T/tmp.vAFIp2h9dF/carve_out.1/f0000100.jpg	 100-163
+Elapsed time 0h00m00s
+Pass 1 +1 file
+jpg: 1/1 recovered
+Total: 1 file found
+
+4032 sectors contain unknown data, 0 invalid files found and rejected.
+PhotoRec exited normally.
+Using locale 'C/UTF-8/C/C/C/C'.
+
+
+Sat Nov 14 21:02:02 2026
+Command line: PhotoRec /log /d /var/folders/88/s_v1rwcd7_n1zydbsxc5tfkw0000gn/T/tmp.MZFPuazhSA/carve_whole /cmd /Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/photorec-carve/test_image.dd partition_none,search
+
+PhotoRec 7.2, Data Recovery Utility, February 2024
+Christophe GRENIER <grenier@cgsecurity.org>
+https://www.cgsecurity.org
+OS: Darwin, kernel 27.0.0 (Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142) arm64
+Compiler: GCC 4.2
+ext2fs lib: none, ntfs lib: none, ewf lib: none, libjpeg: none, curses lib: ncurses 6.0
+User is not root!
+Hard disk list
+Disk /Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/photorec-carve/test_image.dd - 2097 KB / 2048 Ki, sector size=512
+
+Partition table type defaults to None
+Disk /Users/sam/Projects/软件开发/数据恢复软件/engine/tests/fixtures/photorec-carve/test_image.dd - 2097 KB / 2048 Ki
+Partition table type: None
+   P Unknown                  0   0  1     0  65  1       4096
+743 first-level signatures enabled
+
+Analyse
+   P Unknown                  0   0  1     0  65  1       4096
+Pass 0 (blocksize=512) STATUS_FIND_OFFSET
+blocksize=32768, offset=18432
+Elapsed time 0h00m00s
+Pass 1 (blocksize=32768) STATUS_EXT2_OFF
+/var/folders/88/s_v1rwcd7_n1zydbsxc5tfkw0000gn/T/tmp.MZFPuazhSA/carve_whole.1/f0000100.jpg	 100-163
+Elapsed time 0h00m00s
+Pass 1 +1 file
+jpg: 1/1 recovered
+Total: 1 file found
+
+4032 sectors contain unknown data, 0 invalid files found and rejected.
+PhotoRec exited normally.
+Using locale 'C/UTF-8/C/C/C/C'.
+
+
+Sat Nov 14 21:02:02 2026
+Command line: PhotoRec /log /d /var/folders/88/s_v1rwcd7_n1zydbsxc5tfkw0000gn/T/tmp.MZFPuazhSA/carve_partition /cmd /tmp/recoverctl_partition_extract.tmp partition_none,search
+
+PhotoRec 7.2, Data Recovery Utility, February 2024
+Christophe GRENIER <grenier@cgsecurity.org>
+https://www.cgsecurity.org
+OS: Darwin, kernel 27.0.0 (Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142) arm64
+Compiler: GCC 4.2
+ext2fs lib: none, ntfs lib: none, ewf lib: none, libjpeg: none, curses lib: ncurses 6.0
+User is not root!
+Hard disk list
+Disk /tmp/recoverctl_partition_extract.tmp - 2097 KB / 2048 KiB - CHS 1 255 63 (RO), sector size=512
+
+Partition table type defaults to None
+Disk /tmp/recoverctl_partition_extract.tmp - 2097 KB / 2048 KiB (RO)
+Partition table type: None
+   P Unknown                  0   0  1     0  65  1       4096
+743 first-level signatures enabled
+
+Analyse
+   P Unknown                  0   0  1     0  65  1       4096
+Pass 0 (blocksize=512) STATUS_FIND_OFFSET
+blocksize=32768, offset=18432
+Elapsed time 0h00m00s
+Pass 1 (blocksize=32768) STATUS_EXT2_OFF
+/var/folders/88/s_v1rwcd7_n1zydbsxc5tfkw0000gn/T/tmp.MZFPuazhSA/carve_partition.1/f0000100.jpg	 100-163
+Elapsed time 0h00m00s
+Pass 1 +1 file
+jpg: 1/1 recovered
+Total: 1 file found
+
+4032 sectors contain unknown data, 0 invalid files found and rejected.
+PhotoRec exited normally.

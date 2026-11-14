@@ -156,24 +156,52 @@ bool ScanWorker::scanDirectDevice( const QString &devicePath, QVector<CandidateI
 	QByteArray pathUtf8 = devicePath.toUtf8();
 	const char *path = pathUtf8.constData();
 
-	/* probe只是"打得开就算数"，不碰真正的扫描逻辑，用完立刻关掉 */
+	/* probe只是"打得开就算数"，不碰真正的扫描逻辑，用完立刻关掉。
+	 * 2026-11-14（世杰真机GUI点击测试发现，首次真实点击验证"历史版本→
+	 * 本机历史版本"就撞上）：这里原来探测NTFS用的是libfsntfs自带的默认
+	 * 文件IO（直接libfsntfs_volume_open(path)），对VSS卷影副本设备路径
+	 * （\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopyN）打不开，导致
+	 * GUI报"无法识别卷的文件系统"；但真正扫描时scanNtfs()用的是我们自己
+	 * 的ntfs_bfio_adapter（CreateFileA+重试/坏道容忍），对同一个路径能
+	 * 正常打开——用CLI的`scan-shadow`命令（它跳过这层探测，直接用
+	 * ntfs_bfio_adapter）对同一个真实设备路径验证过能扫出19个候选项，
+	 * 证实问题精确出在"探测这一步用错了IO方式"，不是路径或数据本身的
+	 * 问题。改成探测也用ntfs_bfio_adapter，和真正扫描时的打开方式保持
+	 * 一致，消除这种"扫描时打得开、探测时打不开"的不对称。 */
 	{
+		libbfio_handle_t *probeBfioHandle = nullptr;
 		libfsntfs_volume_t *probeVolume = nullptr;
 		libfsntfs_error_t *probeError = nullptr;
-		bool isNtfs;
+		bad_sector_log_t probeBadLog;
+		bool isNtfs = false;
 
-		if( libfsntfs_volume_initialize( &probeVolume, &probeError ) == 1 )
+		memset( &probeBadLog, 0, sizeof( probeBadLog ) );
+
+		if( ntfs_bfio_adapter_initialize( path, 0, kNtfsMaxReadRetries, &probeBadLog, &probeBfioHandle, &probeError ) == 1 )
 		{
-			isNtfs = ( libfsntfs_volume_open( probeVolume, path, LIBFSNTFS_OPEN_READ, &probeError ) == 1 );
-			libfsntfs_volume_free( &probeVolume, nullptr );
-			if( probeError != nullptr )
+			if( libfsntfs_volume_initialize( &probeVolume, &probeError ) == 1 )
 			{
-				libfsntfs_error_free( &probeError );
+				if( libfsntfs_volume_open_file_io_handle( probeVolume, probeBfioHandle, LIBFSNTFS_OPEN_READ, &probeError ) == 1 )
+				{
+					isNtfs = true;
+					probeBfioHandle = nullptr;
+				}
+				libfsntfs_volume_free( &probeVolume, nullptr );
 			}
-			if( isNtfs )
+			if( probeBfioHandle != nullptr )
 			{
-				return scanNtfs( devicePath, outCandidates, outError );
+				libbfio_handle_free( &probeBfioHandle, nullptr );
 			}
+		}
+		if( probeError != nullptr )
+		{
+			libfsntfs_error_free( &probeError );
+		}
+		bad_sector_log_free( &probeBadLog );
+
+		if( isNtfs )
+		{
+			return scanNtfs( devicePath, outCandidates, outError );
 		}
 	}
 	{
@@ -277,7 +305,19 @@ bool ScanWorker::scanVssOffline( const QString &imagePath, int storeIndex, QVect
 		item.fsType = CandidateFsType::Ntfs;
 		item.name = QString::fromUtf8( result.candidates[ i ].name );
 		item.directoryPath = QString::fromUtf8( ancestorPath );
-		item.hasSize = false;
+		/* 2026-11-14（L3）：undelete_candidate_t新增file_size/has_file_size
+		 * 字段后，候选项如果成功读到了大小就填进去；has_file_size为0（读取
+		 * 失败）时维持hasSize=false，不编造一个可能是错的0，和candidate_item.h
+		 * 的既有契约一致。 */
+		if( result.candidates[ i ].has_file_size )
+		{
+			item.hasSize = true;
+			item.size = result.candidates[ i ].file_size;
+		}
+		else
+		{
+			item.hasSize = false;
+		}
 		item.mftIndex = result.candidates[ i ].mft_entry_index;
 		outCandidates.append( item );
 	}
@@ -459,7 +499,19 @@ bool ScanWorker::scanBitLockerWithSession( const ScanSource &source, QVector<Can
 		item.fsType = CandidateFsType::Ntfs;
 		item.name = QString::fromUtf8( result.candidates[ i ].name );
 		item.directoryPath = QString::fromUtf8( ancestorPath );
-		item.hasSize = false;
+		/* 2026-11-14（L3）：undelete_candidate_t新增file_size/has_file_size
+		 * 字段后，候选项如果成功读到了大小就填进去；has_file_size为0（读取
+		 * 失败）时维持hasSize=false，不编造一个可能是错的0，和candidate_item.h
+		 * 的既有契约一致。 */
+		if( result.candidates[ i ].has_file_size )
+		{
+			item.hasSize = true;
+			item.size = result.candidates[ i ].file_size;
+		}
+		else
+		{
+			item.hasSize = false;
+		}
 		item.mftIndex = result.candidates[ i ].mft_entry_index;
 		outCandidates.append( item );
 	}
@@ -563,7 +615,19 @@ bool ScanWorker::scanNtfs( const QString &devicePath, QVector<CandidateItem> &ou
 		item.fsType = CandidateFsType::Ntfs;
 		item.name = QString::fromUtf8( result.candidates[ i ].name );
 		item.directoryPath = QString::fromUtf8( ancestorPath );
-		item.hasSize = false;
+		/* 2026-11-14（L3）：undelete_candidate_t新增file_size/has_file_size
+		 * 字段后，候选项如果成功读到了大小就填进去；has_file_size为0（读取
+		 * 失败）时维持hasSize=false，不编造一个可能是错的0，和candidate_item.h
+		 * 的既有契约一致。 */
+		if( result.candidates[ i ].has_file_size )
+		{
+			item.hasSize = true;
+			item.size = result.candidates[ i ].file_size;
+		}
+		else
+		{
+			item.hasSize = false;
+		}
 		item.mftIndex = result.candidates[ i ].mft_entry_index;
 		outCandidates.append( item );
 	}
@@ -841,7 +905,7 @@ bool ScanWorker::recoverVssOffline( const QString &imagePath, int storeIndex, co
 		outError = QStringLiteral( "找不到 MFT 索引 %1" ).arg( item.mftIndex );
 		goto cleanup;
 	}
-	if( file_writer_write_entry_content( fileEntry, outputUtf8.constData(), &error ) != 1 )
+	if( file_writer_write_entry_content( fileEntry, nullptr, outputUtf8.constData(), &error ) != 1 )
 	{
 		outError = QStringLiteral( "写出内容失败" );
 		goto cleanup;
@@ -930,7 +994,7 @@ bool ScanWorker::recoverBitLocker( const ScanSource &source, const CandidateItem
 		outError = QStringLiteral( "找不到 MFT 索引 %1" ).arg( item.mftIndex );
 		goto cleanup;
 	}
-	if( file_writer_write_entry_content( fileEntry, outputUtf8.constData(), &error ) != 1 )
+	if( file_writer_write_entry_content( fileEntry, nullptr, outputUtf8.constData(), &error ) != 1 )
 	{
 		outError = QStringLiteral( "写出内容失败" );
 		goto cleanup;
@@ -1068,7 +1132,7 @@ bool ScanWorker::recoverNtfs( const QString &devicePath, const CandidateItem &it
 		outError = QStringLiteral( "找不到 MFT 索引 %1" ).arg( item.mftIndex );
 		goto cleanup;
 	}
-	if( file_writer_write_entry_content( fileEntry, outputUtf8.constData(), &error ) != 1 )
+	if( file_writer_write_entry_content( fileEntry, nullptr, outputUtf8.constData(), &error ) != 1 )
 	{
 		outError = QStringLiteral( "写出内容失败" );
 		goto cleanup;
