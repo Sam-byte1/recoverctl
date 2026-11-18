@@ -34,6 +34,8 @@
 |---|---|---|---|
 | Qt 6（Core / Gui / Widgets / Multimedia + Multimedia-WMF 后端） | MSYS2 CLANGARM64 子系统官方预编译包（`pacman -S mingw-w64-clang-aarch64-qt6-base mingw-w64-clang-aarch64-qt6-multimedia mingw-w64-clang-aarch64-qt6-multimedia-wmf`），**不**克隆 Qt 源码到本仓库 | 6.12.0（2026-11-05 实测核实该版本在 CLANGARM64 仓库可用） | P6 Windows GUI 产品壳层（窗口/控件/图片缩略图解码/视频首帧缩略图） |
 
+**[2026-11-18 x86_64 双架构支持]**：同一来源（MSYS2 官方预编译包）的 `CLANG64` 子系统版 `mingw-w64-clang-x86_64-qt6-base`（实测同样是 6.12.0）补装完成，用于构建 x86_64 目标的 GUI。许可证分类/集成方式结论对两个架构同样成立——都是官方从 Qt 官方 LGPL 源码构建的预编译动态库，只是目标 CPU 架构不同，不构成新的许可证核实对象。
+
 **和 libyal 系列的关键区别**：libyal 各库是本项目自己 clone 源码、自己交叉编译；Qt 这里直接消费 MSYS2 项目官方从 Qt 官方 LGPL 开源源码构建好的预编译动态库，不在本仓库保留 Qt 源码副本，也不自己编译 Qt。集成方式仍按 lgpl-dynamic 规则执行：只用动态链接（`.dll` 运行时加载，随安装包用 `windeployqt` 收集依赖），不修改 Qt 源码，分发时附 Qt 的 LGPLv3 许可证全文 + 指向 Qt 官方开源下载页的源码获取方式说明。**只使用 Core/Gui/Widgets/Multimedia 这几个核心模块**，明确不使用 Qt 的 GPL-only / 商用双授权附加模块（例如 Qt Charts 是 GPL 或商业授权，不在 LGPL 范围内，不得用）。视频缩略图固定使用 `qt6-multimedia-wmf`（Windows Media Foundation 后端，调用的是 Windows 系统自带解码器），**不装** `qt6-multimedia-ffmpeg`，避免引入 FFmpeg 这个需要单独走一轮许可证分类的新依赖（FFmpeg 按编译选项不同可能落在 LGPL 或 GPL，没有必要为了缩略图这个次要功能新开一条许可证排查战线）。
 
 **待核实事项，不是已验证结论（2026-11-05 记录，留给 G5 打包阶段动手前核实）**：`pacman -Si mingw-w64-clang-aarch64-qt6-base` 的 `Licenses` 字段是一行聚合 SPDX 表达式（`LGPL-3.0-only WITH Qt-GPL-exception-1.0 AND AFL-2.1 AND Apache-2.0 AND ... AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND custom`），这是整个 Qt 源码打包（含内部工具/测试/文档/示例等各种许可证的文件）的汇总，**不等于**我们实际要分发的 `Qt6Core.dll`/`Qt6Gui.dll`/`Qt6Widgets.dll`/`Qt6Multimedia.dll` 这几个运行时库本身是 GPL——这和 `cpl-modular/sleuthkit` "仓库混有 GPL 标注文件，只能用非 GPL 标注部分" 是同一类风险形态。目前的裁决依据是业界长期公认的惯例（QtCore/Gui/Widgets/Multimedia 等核心模块走 LGPL-3.0 路线，这是大量闭源商业 Windows 桌面软件使用 Qt 的标准方式），**不是本项目自己逐文件核实过的结论**。正式打包分发前，必须去 Qt 官方每个模块的 LICENSE 文件 / 官方许可证说明页逐一核实我们实际链接和分发的具体 DLL 确实落在 LGPL-3.0 范围内，不能只凭 pacman 这一行聚合字符串就当作已验证完毕。另外 `qt6-base` 会动态依赖 `openssl`（Apache-2.0，宽松许可，暂不构成合规风险，但如果最终产品不需要 QtNetwork/TLS 相关功能，G5 打包时可以评估是否能从分发清单里裁掉这个 DLL）。
@@ -69,7 +71,7 @@
 
 - **分阶段的合规义务**：
   - **用于内部技术验证的绿色版压缩包（不对外公开）**：以上这些许可证的义务都是"对外分发给真实终端用户时"才触发，内部验证阶段**不需要**先补许可证全文/NOTICE 文件就可以直接打包使用。
-  - **以后要真正对外公开分发时，还缺的具体合规动作**（留给 G5b 或者正式对外发布前处理，现在先记下来）：① 新建一个 `THIRD_PARTY_LICENSES.txt` 汇总上表每个库的许可证全文（含 LGPL-3.0/LGPL-2.1/MIT/BSD-3-Clause/zlib/bzip2-1.0.6/PCRE2 等各自完整文本）；② **FreeType 的信用声明是强制项，必须单独确认写进去**；③ Qt 的 LGPL-3.0"告知用户使用了 LGPL 组件"这条义务要体现在产品"关于"页面这类用户能看到的地方，不能只塞进一个没人会打开的 txt 文件里；④ 对三选一/双选的库（graphite2/zstd/freetype/libb2），`THIRD_PARTY_LICENSES.txt` 里要明确写清楚本项目实际选择的是哪一个许可证，不能含糊写"多选一"。
+  - **[2026-11-17 全部完成，G5b 真正打包发布阶段落地]**：① `third_party/THIRD_PARTY_LICENSES.txt` 已汇总上表每个库的许可证全文（含 LGPL-3.0/LGPL-2.1/MIT/BSD-3-Clause/zlib/bzip2-1.0.6/PCRE2 等各自完整文本，LGPL-2.1/bzip2/PCRE2附加条款/LLVM例外条款这四处此前标注"待补全文"的占位，这次从本项目实际使用的 MSYS2 CLANGARM64 工具链 `/clangarm64/share/licenses/` 目录下对应包自带的官方许可证文件原样复制补全）；② **FreeType 的信用声明**已写入 GUI"关于"页面（`gui/main_window.cpp` `onAboutClicked()`）原文；③ Qt 的 LGPL-3.0"告知用户使用了 LGPL 组件"义务同样已体现在该"关于"页面；④ 三选一/双选的库（graphite2/zstd/freetype/libb2）在 `THIRD_PARTY_LICENSES.txt` 里均已明确写清楚本项目实际选择的是哪一个许可证。绿色版 zip 和 Inno Setup 安装包均随附 `THIRD_PARTY_LICENSES.txt`，详见 `docs/开发日志.md` 2026-11-17 打包发布记录。
 
 ---
 
@@ -111,5 +113,5 @@
 ## 待办
 
 - [ ] 商用发布前，将本清单交给熟悉 FOSS 许可的律师做一次正式审查（尤其是 CPL 模块的"模块化组合"边界判定）
-- [ ] 为 D 类 GPL 工具的分发包准备独立的 `THIRD_PARTY_NOTICES.txt`，附许可证全文
+- [x] **[2026-11-17 完成]** 为 D 类 GPL 工具的分发包准备独立的 `THIRD_PARTY_NOTICES.txt`，附许可证全文——实际落地为 `third_party/THIRD_PARTY_LICENSES.txt` 第二节（GPL-2.0，PhotoRec/testdisk），已包含许可证全文、版权头保留说明、commit f9e57dc 对应的源码获取链接，没有另开一份重复文件，随绿色版/安装包一起分发
 - [ ] 跟踪各仓库上游版本更新，定期（建议每季度）重新拉取并复核 diff

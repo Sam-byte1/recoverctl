@@ -52,3 +52,8 @@ engine/tests/unit/test_*
 # 工作簿，不是产品源码，项目里好几个目录下都有（根目录/gui/cli/
 # third_party下面），不分路径统一忽略
 .tokenize/
+
+# 2026-11-17/18打包发布：VM上构建产出的绿色版zip/安装包exe本地留档，
+# 几十MB量级的二进制产物，随时能从 gui/build_windows.ps1 /
+# installer/build_installer.ps1 重新构建出来，不属于源码，不进版本库
+dist/

@@ -124,7 +124,24 @@ for src in $C_SOURCES; do
 done
 echo "c compile done"
 
-clang++ $OBJS \
+# Embed app.manifest (requestedExecutionLevel=requireAdministrator) as the
+# exe's primary manifest resource (resource ID 1, type 24 = RT_MANIFEST).
+# 2026-11-17 packaging decision (see the devlog): core scan/recover paths
+# open \\.\PhysicalDriveN / VSS shadow device objects / BitLocker-locked
+# raw volumes, all of which require Administrator rights at the Win32 API
+# level no matter how the process was launched -- so the exe itself
+# declares requireAdministrator, and a plain double-click (green package
+# or Start Menu shortcut from the installer) already triggers the UAC
+# consent prompt and relaunches elevated, instead of requiring the user
+# to know to right-click "Run as administrator" themselves. windres.exe
+# is not on the default MSYS2 PATH (same situation as moc.exe above --
+# it only lives under /clangarm64/bin, not /usr/bin), so call it by full
+# path. Verified with llvm-objdump -f that this produces a coff-arm64
+# object, matching the aarch64 target of every other .o in this build.
+/clangarm64/bin/windres.exe "$GUI_DIR/app.rc" -O coff -o "$OBJ_DIR/app_manifest.o"
+echo "manifest resource compiled"
+
+clang++ $OBJS "$OBJ_DIR/app_manifest.o" \
   -L "$LIBFSNTFS_DIR/libfsntfs/.libs" \
   -lfsntfs \
   -L "$LIBVSHADOW_DIR/libvshadow/.libs" \
@@ -307,6 +324,21 @@ Copy-Item "C:\dev\gui\recoverctl_gui.exe" $packageDir
 Get-ChildItem "C:\dev\gui\*.dll" | Copy-Item -Destination $packageDir
 if (Test-Path "C:\dev\gui\photorec.exe") {
     Copy-Item "C:\dev\gui\photorec.exe" $packageDir
+}
+
+# 2026-11-17: this is now a real redistribution package (not just an
+# internal verification zip), so the third-party license disclosure file
+# ships right next to the exe -- see MainWindow::onAboutClicked() in
+# main_window.cpp for the in-app notice that points users here, and
+# third_party/THIRD_PARTY_LICENSES.txt / MANIFEST.md for why this exact
+# file is the one that discharges the LGPL/GPL/FreeType distribution
+# obligations.
+if (Test-Path "\\Mac\devproject\third_party\THIRD_PARTY_LICENSES.txt") {
+    Copy-Item "\\Mac\devproject\third_party\THIRD_PARTY_LICENSES.txt" $packageDir
+} elseif (Test-Path "C:\dev\THIRD_PARTY_LICENSES.txt") {
+    Copy-Item "C:\dev\THIRD_PARTY_LICENSES.txt" $packageDir
+} else {
+    Write-Host "WARNING: THIRD_PARTY_LICENSES.txt not found -- real distribution package is missing a required license disclosure file"
 }
 foreach ($pluginDir in @("imageformats", "platforms", "styles", "terminfo")) {
     $src = "C:\dev\gui\$pluginDir"

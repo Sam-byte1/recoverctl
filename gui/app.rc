@@ -1,0 +1,7 @@
+// Embeds app.manifest as the primary application manifest resource
+// (resource ID 1, resource type 24 = RT_MANIFEST). Windows reads this
+// exact resource name/type combination from the main executable to
+// decide the process's requested execution level (requireAdministrator)
+// and other manifest-declared settings -- see app.manifest and the
+// project devlog, 2026-11-17 packaging entry, for why.
+1 24 "app.manifest"

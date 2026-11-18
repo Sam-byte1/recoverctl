@@ -876,9 +876,28 @@ void MainWindow::onCarveRunningChanged( bool running )
 
 void MainWindow::onAboutClicked()
 {
+	/* 2026-11-17 打包发布前合规补充：third_party/THIRD_PARTY_LICENSES.txt
+	 * 一直明确记着"Qt的LGPL-3.0'告知用户使用了LGPL组件'这条义务、
+	 * FreeType的强制信用声明，都要体现在产品'关于'页面这类用户能看到
+	 * 的地方，不能只塞进一个没人会打开的txt文件里"——这次是第一次真
+	 * 正对外分发（绿色版+安装包都会装到真实用户机器上），这条待办到
+	 * 了必须兑现的时候，不是顺手加的装饰性文案。 */
 	QMessageBox::about( this, QStringLiteral( "关于 DataRecoveryStudio" ),
-	     QStringLiteral( "DataRecoveryStudio\n内部验证版\n\n一个磁盘数据恢复工具：直接扫描、历史版本找回、"
-	                      "BitLocker 加密磁盘解锁、深度查找。" ) );
+	     QStringLiteral(
+	         "DataRecoveryStudio\n版本 V0.2\n\n"
+	         "一个磁盘数据恢复工具：直接扫描、历史版本找回、"
+	         "BitLocker 加密磁盘解锁、深度查找（PhotoRec 文件雕刻兜底）。\n\n"
+	         "本软件直接访问物理磁盘/卷影副本/加密磁盘，需要以管理员身份运行，"
+	         "双击启动时会自动弹出 UAC 提权确认。\n\n"
+	         "本软件使用了 Qt 6（LGPL-3.0，以动态库形式链接，未修改 Qt 源码，"
+	         "用户可自行替换安装目录内的 Qt 动态库）、libfsntfs/libvshadow/libbde/"
+	         "libvsmbr/libvsgpt（LGPL-3.0）等第三方开源组件，并以独立子进程方式"
+	         "调用 PhotoRec/TestDisk（GPL-2.0，未拷贝其源码，仅调用独立编译的可"
+	         "执行文件）。\n\n"
+	         "Portions of this software are copyright (C) The FreeType Project "
+	         "(www.freetype.org). All rights reserved.\n\n"
+	         "完整的第三方组件清单与许可证全文，见安装目录下的 "
+	         "THIRD_PARTY_LICENSES.txt。" ) );
 }
 
 void MainWindow::scanWithSource( const ScanSource &source, const QString &sourceTitle )

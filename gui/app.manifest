@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  <assemblyIdentity
+    version="1.0.0.0"
+    processorArchitecture="*"
+    name="RecoverCtlGui"
+    type="win32"
+  />
+  <description>Windows Data Recovery Tool</description>
+  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">
+    <security>
+      <requestedPrivileges>
+        <!-- Core scan/recover paths open PhysicalDriveN device objects,
+             VSS shadow copy devices, and BitLocker-locked raw volumes,
+             all of which require Administrator rights at the Win32 API
+             level regardless of how the process itself was launched.
+             Declaring requireAdministrator here means a plain
+             double-click already triggers the UAC consent prompt and
+             launches elevated, so the user never has to know to
+             right-click and choose Run as administrator themselves.
+             See the project devlog, 2026-11-17 packaging entry, for the
+             decision record. -->
+      <requestedExecutionLevel level="requireAdministrator" uiAccess="false" />
+    </requestedPrivileges>
+  </security>
+  </trustInfo>
+  <compatibility xmlns="urn:schemas-microsoft-com:compatibility.v1">
+    <application>
+      <!-- Windows Vista/7/8/8.1/10/11 compatibility GUIDs, standard
+           boilerplate recommended by Microsoft so modern Windows
+           versions do not apply compatibility shims. -->
+      <supportedOS Id="{e2011457-1546-43c5-a5fe-008deee3d3f0}" />
+      <supportedOS Id="{35138b9a-5d96-4fbd-8e2d-a2440225f93a}" />
+      <supportedOS Id="{4a2f28e3-53b9-4441-ba9c-d69d4a4a6e38}" />
+      <supportedOS Id="{1f676c76-80e1-4239-95bb-83d0f6d0da78}" />
+      <supportedOS Id="{8e0f7a12-bfb3-4fe8-b9a5-48fd50a15a9a}" />
+    </application>
+  </compatibility>
+</assembly>
